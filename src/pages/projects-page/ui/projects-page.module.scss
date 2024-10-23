@@ -67,6 +67,16 @@
 	&__filterButton {
 		display: none;
 	}
+	&__subtitle {
+		margin-top: 20px;
+		color: $--Foreground-default;
+		font-family: $--open-sans-font;
+		font-size: 20px;
+		font-weight: 700;
+		line-height: 32px;
+		letter-spacing: -0.28px;
+
+	}
 }
 @media screen and (max-width: 1199px) {
 	.projects {
@@ -86,6 +96,7 @@
 			max-height: 40px;
 			display: flex;
 			justify-content: space-between;
+			gap: 20px;
 		}
 		&__filterButton {
 			width: 40px;
@@ -101,4 +112,44 @@
 	.filterContainer {
 		display: none;
 	}
+}
+.inputContainer {
+	padding: 0;
+	margin: 0;
+	position: relative;
+}
+
+.input {
+	width: 100%;
+	display: block;
+	padding: 12px 12px 12px 44px;
+	margin: 0;
+	border-radius: 12px;
+	box-sizing: border-box;
+	border: 1px solid $--border-default;
+	font-family: $--open-sans-font;
+	color: $--Foreground-default;
+	background-color: $--bg-primary;
+	font-size: 16px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 24px;
+	letter-spacing: 0.25px;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+
+	&::placeholder {
+		color: $--Foreground-subtitle;
+	}
+
+	&:disabled {
+		opacity: 0.5;
+	}
+}
+
+.icon {
+	position: absolute;
+	top: 14px;
+	left: 12px;
 }
