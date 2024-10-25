@@ -5,11 +5,13 @@ import { LEVEL } from '@/utils/constants';
 import { Option } from '@/shared/types/option';
 import { SpecialityCardProps } from './types';
 import { TProfession, TSkills } from '@/shared/types/specialty';
-import { Counter, Input, MainButton, Toggler } from '@/shared/ui';
+import { Counter, MainButton, Toggler } from '@/shared/ui';
 import { MultiSelectInput } from '@/shared/ui/multi-select-input/multi-select-input';
 import SelectWithSearch from '@/shared/ui/select-search/select-search';
 import { SkillsList } from '@/shared/ui/skills-list/skills-list';
 import { Edit, Trash2 } from 'lucide-react';
+import { useDispatch } from 'react-redux';
+import { addProjectSpecialist } from '@/store/reducers/ProjectSpecialist';
 
 export const ProjectSpecialitCard: FC<SpecialityCardProps> = ({
 	data,
@@ -17,21 +19,35 @@ export const ProjectSpecialitCard: FC<SpecialityCardProps> = ({
 	allSkills,
 	isLoadingChangeSpecialty,
 	isSuccessСhangeSpecialty,
+	isLoadingDeleteSpecialty,
 	handleSubmitChangeSpecialty,
 	handleDeleteSpecialty,
-	isLoadingDeleteSpecialty,
 }) => {
 	const [isShowViewEdit, setIsShowViewEdit] = useState<boolean>(false);
+
 	const [recruitmentIsOpen, setRecruitmentIsOpen] = useState<boolean>(false);
 	const [profession, setProfession] = useState<TProfession>(data.profession);
 	const [selectedLevel, setSelectedLevel] = useState<number>(data.level);
 	const [skills, setSkills] = useState<TSkills[]>(data.skills);
+	const [count, setCount] = useState<number>(1);
+
+	const dispatch = useDispatch();
 
 	useEffect(() => {
 		if (isSuccessСhangeSpecialty) {
 			setIsShowViewEdit(false);
 		}
 	}, [isSuccessСhangeSpecialty]);
+
+	const toNum = (skills: TSkills[]) => {
+		const nums = skills.map((skill) => skill.id);
+
+		return nums;
+	};
+
+	const updateCounter = (num: number) => {
+		setCount(num);
+	};
 
 	const transformProfessions = (profList: TProfession[]) => {
 		return profList.map(({ id, specialization }) => ({
@@ -80,20 +96,16 @@ export const ProjectSpecialitCard: FC<SpecialityCardProps> = ({
 		);
 	};
 
-	// const getSkillsforSubmit = (dataSkills: TSkills[]) => {
-	// 	return dataSkills.map((dataSkill) => dataSkill.id);
-	// };
-
 	const isSkillsNotAdded = () => {
 		return skills.length === 0;
 	};
-//	 ========================  possible bug 
-const handleSubmit = () => {
+
+	const handleSubmit = () => {
 		handleSubmitChangeSpecialty({
+			id: data.id,
 			level: selectedLevel,
 			profession: profession,
 			skills: skills,
-			id: data.id,
 		});
 	};
 
@@ -101,11 +113,16 @@ const handleSubmit = () => {
 		handleDeleteSpecialty(data.id as number);
 	};
 
-	const serialize = (skills: TSkills[]) => {
-		const nums = skills.map((skill) => skill.id);
-
-		return nums.toString();
-	};
+	dispatch(
+		addProjectSpecialist({
+			profession: profession.id,
+			skills: toNum(skills),
+			count,
+			level: selectedLevel,
+			// eslint-disable-next-line camelcase
+			is_required: recruitmentIsOpen,
+		})
+	);
 
 	return (
 		<div className={styles.specialityCard__wrapper}>
@@ -121,46 +138,22 @@ const handleSubmit = () => {
 						<Edit />
 					</button>
 					<h3 className={styles.specialityCard__title}>
-						{profession.specialization}, {getLevelName(selectedLevel)}
+						{profession.specialization} / {profession.specialty} ,{' '}
+						{getLevelName(selectedLevel)}
 					</h3>
 					<SkillsList skills={skills} />
 					<div className={styles.config}>
-						<Counter
-							id={data.id as number}
-							disabled={!recruitmentIsOpen}
-							
-						/>
+						<Counter state={updateCounter} disabled={!recruitmentIsOpen} />
 						<div className={styles.config_toggle}>
 							<span>Набор {recruitmentIsOpen ? 'открыт' : 'закрыт'}</span>
 							<Toggler
 								checked={recruitmentIsOpen as boolean}
-								name={`project_specialists[${data.id}].is_required`}
 								onChange={(evt) => setRecruitmentIsOpen(evt.target.checked)}
 							/>
 						</div>
 					</div>
 
- {/* we shall try to cahnge the data in the value change, or something instead of onSubmit */}
-
-					<Input
-						labelName=""
-						name={`project_specialists[${data.id}].profession`}
-						value={profession.id}
-						className={styles.invicible}
-					/>
-
-					<Input
-						labelName=""
-						name={`project_specialists[${data.id}].level`}
-						value={selectedLevel}
-						style={{ display: 'none' }}
-					/>
-					<Input
-						labelName=""
-						name={`project_specialists[${data.id}].skills`}
-						value={serialize(skills)}
-						style={{ display: 'none' }}
-					/>
+					{/* we shall try to cahnge the data in the value change, or something instead of onSubmit */}
 				</div>
 			) : (
 				<div className={styles.specialityCard}>

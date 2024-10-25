@@ -9,15 +9,9 @@ import { toaster } from '@/widgets/notification-toast';
 import styles from './form-project-specialists.module.scss';
 import { Loader } from '@/shared/ui';
 import { AddProjectSpeciality } from '@/entities/add-proejct-specialists/add-project-speciality';
-import { ProjectSpecialitCard } from '@/entities/speciality-card/speciality-card';
-import { Control } from 'react-hook-form';
+import { ProjectSpecialitCard } from '@/entities/speciality-card/project-speciality-card';
 
-export const FormProjectSpecialists = ({
-	control,
-}: {
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	control: Control<any>;
-}) => {
+export const FormProjectSpecialists = () => {
 	const { data: professions, isLoading: isLoadingProf } =
 		useGetProfessionsQuery([]);
 
@@ -25,7 +19,6 @@ export const FormProjectSpecialists = ({
 
 	const [specialties, setSpecialties] = useState<TSpeciality[]>([]);
 
-//	 ========================  possible bug 
 	const handleAddSpecialty = ({ profession, level, skills }: TSpeciality) => {
 		setSpecialties((prevSpecialties) => [
 			{
@@ -47,19 +40,13 @@ export const FormProjectSpecialists = ({
 		level,
 		skills,
 	}: TSpeciality) => {
-		setSpecialties(() => [
-			{
-				id,
-				profession,
-				level,
-				skills,
-			},
-		]);
-
-		toaster({
-			status: 'success',
-			title: 'Специальность успешно изменена',
-		});
+		setSpecialties(
+			specialties.map((specilist) =>
+				specilist.id === id
+					? { ...specilist, profession, level, skills }
+					: specilist
+			)
+		);
 	};
 	const handleDelete = (id: number) => {
 		setSpecialties(specialties.filter((item) => item.id !== id));
@@ -79,7 +66,6 @@ export const FormProjectSpecialists = ({
 							<li key={specialist.id}>
 								<ProjectSpecialitCard
 									data={specialist}
-									control={control}
 									professions={professions}
 									allSkills={allSkills}
 									isLoadingChangeSpecialty={false}

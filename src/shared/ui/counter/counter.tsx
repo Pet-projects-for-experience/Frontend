@@ -8,21 +8,20 @@ import {
 	IconPlusDisabled,
 } from '@/shared/assets';
 import styles from './counter.module.scss';
-import { Input } from '../input/input';
 import clsx from 'clsx';
 
 export const Counter = ({
-	id,
 	disabled,
+	state
 }: {
-	id: number;
+	state:  (num: number) => void
 	disabled: boolean;
 }) => {
 	const [isNumber, SetIsNumber] = useState(1);
-	console.log(id);
 	const increment = () => {
 		if (isNumber <= 14) {
 			SetIsNumber(isNumber + 1);
+			state(isNumber + 1)
 		}
 	};
 	const decrement = () => {
@@ -30,6 +29,8 @@ export const Counter = ({
 			return;
 		}
 		SetIsNumber(isNumber - 1 || 1);
+		state(isNumber - 1 || 1)
+
 	};
 
 	return (
@@ -48,13 +49,7 @@ export const Counter = ({
 				</button>
 			</div>
 			<div className={styles.buttonWrapper}>
-				<Input
-					name={`counter`}
-					labelName=""
-					className={clsx(styles.dismiss, styles.count)}
-					value={'isNumber'}
-					disabled={true}
-				/>
+				<div className={clsx(styles.dismiss, styles.count)}> {isNumber}</div>
 			</div>
 			<div className={styles.buttonWrapper}>
 				<button
