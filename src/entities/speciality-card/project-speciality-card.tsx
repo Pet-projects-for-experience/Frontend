@@ -15,14 +15,16 @@ import { addProjectSpecialist } from '@/store/reducers/ProjectSpecialist';
 
 export const ProjectSpecialitCard: FC<SpecialityCardProps> = ({
 	data,
+	index,
 	professions,
 	allSkills,
-	isLoadingChangeSpecialty,
 	isSuccessСhangeSpecialty,
 	isLoadingDeleteSpecialty,
 	handleSubmitChangeSpecialty,
 	handleDeleteSpecialty,
 }) => {
+	console.log(index);
+
 	const [isShowViewEdit, setIsShowViewEdit] = useState<boolean>(false);
 
 	const [recruitmentIsOpen, setRecruitmentIsOpen] = useState<boolean>(false);
@@ -102,27 +104,38 @@ export const ProjectSpecialitCard: FC<SpecialityCardProps> = ({
 
 	const handleSubmit = () => {
 		handleSubmitChangeSpecialty({
-			id: data.id,
+			id: index,
 			level: selectedLevel,
 			profession: profession,
 			skills: skills,
 		});
+
+		setIsShowViewEdit(!isShowViewEdit);
 	};
 
 	const handleDelete = () => {
-		handleDeleteSpecialty(data.id as number);
+		handleDeleteSpecialty(index);
 	};
 
-	dispatch(
-		addProjectSpecialist({
-			profession: profession.id,
-			skills: toNum(skills),
-			count,
-			level: selectedLevel,
-			// eslint-disable-next-line camelcase
-			is_required: recruitmentIsOpen,
-		})
-	);
+	useEffect(() => {
+		dispatch(
+			addProjectSpecialist({
+				profession: profession.id,
+				skills: toNum(skills),
+				count,
+				level: selectedLevel,
+				// eslint-disable-next-line camelcase
+				is_required: recruitmentIsOpen,
+			})
+		);
+	}, [
+		count,
+		dispatch,
+		profession.id,
+		recruitmentIsOpen,
+		selectedLevel,
+		skills,
+	]);
 
 	return (
 		<div className={styles.specialityCard__wrapper}>
@@ -152,8 +165,6 @@ export const ProjectSpecialitCard: FC<SpecialityCardProps> = ({
 							/>
 						</div>
 					</div>
-
-					{/* we shall try to cahnge the data in the value change, or something instead of onSubmit */}
 				</div>
 			) : (
 				<div className={styles.specialityCard}>
@@ -168,7 +179,8 @@ export const ProjectSpecialitCard: FC<SpecialityCardProps> = ({
 						<Trash2 color="red" />
 					</button>
 					<h3 className={styles.specialityCard__title}>
-						{data.profession.specialization}, {getLevelName(selectedLevel)}
+						{profession.specialization} / {profession.specialty} ,{' '}
+						{getLevelName(selectedLevel)}
 					</h3>
 
 					<SelectWithSearch
@@ -203,7 +215,7 @@ export const ProjectSpecialitCard: FC<SpecialityCardProps> = ({
 						width="regular"
 						type="button"
 						onClick={handleSubmit}
-						disabled={isSkillsNotAdded() || isLoadingChangeSpecialty}>
+						disabled={isSkillsNotAdded()}>
 						Сохранить
 					</MainButton>
 				</div>

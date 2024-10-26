@@ -1,7 +1,7 @@
 import { TProfession, TSkills, TSpeciality } from '@/shared/types/specialty';
 
 export type SpecialityCardProps = {
-	// id: number;
+	index: number;
 	data: TSpeciality;
 	professions: TProfession[];
 	allSkills: TSkills[];

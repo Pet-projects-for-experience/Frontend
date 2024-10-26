@@ -22,11 +22,6 @@ export const AddProjectSpeciality: React.FC<AddSpecialtyProps> = ({
 }) => {
 	const { control, handleSubmit, reset, watch } = useForm({
 		mode: 'onChange',
-		defaultValues: {
-			profession: null,
-			level: null,
-			skills: [],
-		},
 	});
 
 	// Watching form fields for real-time values
@@ -44,6 +39,11 @@ export const AddProjectSpeciality: React.FC<AddSpecialtyProps> = ({
 			level,
 			skills,
 		});
+		reset({
+			profession: null,
+			level: null,
+			skills: [],
+		});
 	};
 
 	const handleResetForm = () => {
@@ -59,7 +59,7 @@ export const AddProjectSpeciality: React.FC<AddSpecialtyProps> = ({
 		return (
 			selectedProfession === null ||
 			selectedLevel === null ||
-			selectedSkills.length === 0
+			selectedSkills?.length === 0
 		);
 	};
 

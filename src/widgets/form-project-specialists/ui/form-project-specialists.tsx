@@ -20,13 +20,13 @@ export const FormProjectSpecialists = () => {
 	const [specialties, setSpecialties] = useState<TSpeciality[]>([]);
 
 	const handleAddSpecialty = ({ profession, level, skills }: TSpeciality) => {
-		setSpecialties((prevSpecialties) => [
+		setSpecialties(() => [
+			...specialties,
 			{
 				profession,
 				level,
 				skills,
 			},
-			...prevSpecialties,
 		]);
 
 		toaster({
@@ -49,7 +49,7 @@ export const FormProjectSpecialists = () => {
 		);
 	};
 	const handleDelete = (id: number) => {
-		setSpecialties(specialties.filter((item) => item.id !== id));
+		setSpecialties((sp) => sp.filter((_, specId) => specId !== id));
 	};
 
 	return (
@@ -62,9 +62,10 @@ export const FormProjectSpecialists = () => {
 				<>
 					<h3 className={styles.specialityList__title}>Специальность</h3>
 					<ul className={styles.specialityList__contentList}>
-						{specialties.map((specialist) => (
-							<li key={specialist.id}>
+						{specialties.map((specialist, index) => (
+							<li key={index}>
 								<ProjectSpecialitCard
+									index={index}
 									data={specialist}
 									professions={professions}
 									allSkills={allSkills}

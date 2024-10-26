@@ -10,7 +10,7 @@ export const transformProfessions = (profList: TProfession[]) => {
 };
 
 export const getSkills = (skills: TSkills[]) => {
-    return skills.map(({ id, name }) => ({
+    return skills?.map(({ id, name }) => ({
         label: name,
         value: id,
     }));
