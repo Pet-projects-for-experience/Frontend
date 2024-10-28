@@ -4,6 +4,7 @@ import 'react-quill-new/dist/quill.snow.css';
 import styles from './text-editor.module.scss';
 import dynamic from 'next/dynamic';
 const ReactQuill = dynamic(() => import('react-quill-new'), { ssr: false });
+import Quill from 'react-quill-new';
 
 export const TextEditor: FC<TextEditorProps> = ({
 	labelName,
@@ -41,7 +42,7 @@ export const TextEditor: FC<TextEditorProps> = ({
 				['bold', 'italic', 'underline'], // toggled buttons
 				[{ list: 'ordered' }, { list: 'bullet' }],
 				[{ size: ['small', false, 'large', 'huge'] }], // custom dropdown
-				[{ background: [] }], // dropdown with defaults from theme
+				[{ color: [] }], // dropdown with defaults from theme
 				[{ align: [] }],
 			],
 		},

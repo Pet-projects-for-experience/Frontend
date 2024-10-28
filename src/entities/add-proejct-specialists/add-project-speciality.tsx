@@ -13,7 +13,10 @@ import {
 import { MainButton } from '@/shared/ui';
 import { MultiSelectInput } from '@/shared/ui/multi-select-input/multi-select-input';
 
-import { useForm, Controller } from 'react-hook-form';
+import {
+	useForm,
+	Controller,
+} from 'react-hook-form';
 
 export const AddProjectSpeciality: React.FC<AddSpecialtyProps> = ({
 	professions,
@@ -28,7 +31,8 @@ export const AddProjectSpeciality: React.FC<AddSpecialtyProps> = ({
 	const selectedProfession = watch('profession');
 	const selectedLevel = watch('level');
 	const selectedSkills = watch('skills');
-	const onSubmit = (data: {
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	const onSubmit: any = (data: {
 		profession: TProfession;
 		level: number;
 		skills: TSkills[];
@@ -62,6 +66,11 @@ export const AddProjectSpeciality: React.FC<AddSpecialtyProps> = ({
 			selectedSkills?.length === 0
 		);
 	};
+
+	interface MultiSelectItem {
+		label: string;
+		value: number; // Adjust based on your actual value type
+	}
 
 	return (
 		<div className={styles.addSpecialty}>
@@ -115,7 +124,7 @@ export const AddProjectSpeciality: React.FC<AddSpecialtyProps> = ({
 						isSearchable
 						options={getSkills(allSkills)}
 						values={getSkills(field.value)}
-						onChange={(item) =>
+						onChange={(item: MultiSelectItem[]) =>
 							field.onChange(
 								item.map(({ label, value }) => ({
 									name: label,

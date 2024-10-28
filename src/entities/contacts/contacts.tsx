@@ -1,12 +1,19 @@
 import { Input, MainButton } from '@/shared/ui';
 import { Plus } from 'lucide-react';
-import React, { useState } from 'react';
+import React, {
+	ComponentType,
+	HTMLAttributes,
+	useEffect,
+	useState,
+} from 'react';
 import styles from './contacts.module.scss';
 import { CONTACTS } from '@/utils/constants';
 import { ContactsList } from '../contact-list/contact-list';
 import { TContact } from '@/shared/ui/contact-card/types';
 import { TOption } from '../form-profile-edit/ui/types';
 import { generalEmailRegex, phoneRegex } from '@/utils/regex-consts';
+import { useDispatch } from 'react-redux';
+import { updateContact } from '@/store/reducers/ProjectOptionalReducer';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const Contacts = () => {
@@ -23,6 +30,8 @@ export const Contacts = () => {
 	const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setInputValueContact(event.target.value);
 	};
+
+	const dispatch = useDispatch();
 
 	const handleAddContact = () => {
 		if (selectedOptionContactType && inputValueContact) {
@@ -71,14 +80,31 @@ export const Contacts = () => {
 		}
 	};
 
+	useEffect(() => {
+		if (contacts.length > 0) {
+			// eslint-disable-next-line prefer-destructuring, camelcase
+			const { email, telegram_nick, phone_number } = contacts[0];
+
+			dispatch(
+				updateContact({
+					email,
+					// eslint-disable-next-line camelcase
+					telegram_nick,
+					// eslint-disable-next-line camelcase
+					phone_number,
+				})
+			);
+		}
+	}, [contacts, dispatch]);
+
 	return (
 		<>
 			<span className={styles.contactsTitle}>Контакты для связи</span>
 			<ContactsList contacts={contacts} setContacts={setContacts} />
-			<div className={styles.addContactWrapper}>
-				<label className={styles.addContactTypeWrapper}>
+			<div className={styles.fields__addContactWrapper}>
+				<label className={styles.fields__addContactTypeWrapper}>
 					<select
-						className={styles.addContactType}
+						className={styles.fields__addContactType}
 						value={selectedOptionContactType?.value || ''}
 						onChange={(event) =>
 							handleOptionSelect(
@@ -89,21 +115,21 @@ export const Contacts = () => {
 						}>
 						{CONTACTS.map((option) => (
 							<option
-								className={styles.addContactTypeListItem}
+								className={styles.fields__addContactTypeListItem}
 								key={option.value}
 								value={option.value}>
 								{option.label}
 							</option>
 						))}
 					</select>
-					<span className={styles.addContactTypeLabel}>
+					<span className={styles.fields__addContactTypeLabel}>
 						Выберите ресурс
 					</span>
 				</label>
 				{selectedOptionContactType?.value === 'phone_number' ? (
 					<Input
 						placeholder="+7XXXXXXXXXX"
-						className={styles.addContactTextValue}
+						className={styles.fields__addContactTextValue}
 						name="inputValueContact"
 						labelName=""
 						// type="text"
@@ -114,7 +140,7 @@ export const Contacts = () => {
 					/>
 				) : (
 					<Input
-						className={styles.addContactTextValue}
+						className={styles.fields__addContactTextValue}
 						name="inputValueContact"
 						labelName=""
 						// type="text"
@@ -130,7 +156,9 @@ export const Contacts = () => {
 				onClick={handleAddContact}
 				variant="secondary"
 				width="regular"
-				IconLeft={Plus}>
+				IconLeft={
+					Plus as ComponentType<HTMLAttributes<HTMLElement>> | undefined
+				}>
 				Добавить
 			</MainButton>
 		</>

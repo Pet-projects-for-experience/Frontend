@@ -6,7 +6,11 @@ import { LEVEL } from '@/utils/constants';
 import { TProfession, TSkills } from '@/shared/types/specialty';
 import { Option } from '@/shared/types/option';
 import IconPlus from '@/shared/assets/icons/plus-large.svg';
-import { getLevelName, getSkills, transformProfessions } from '../../utils/specialists-functions';
+import {
+	getLevelName,
+	getSkills,
+	transformProfessions,
+} from '../../utils/specialists-functions';
 import { AddSpecialtyProps } from './types';
 import { MainButton } from '@/shared/ui';
 
@@ -89,8 +93,8 @@ export const AddSpecialty: React.FC<AddSpecialtyProps> = ({
 				isSearchable
 				options={getSkills(allSkills)}
 				values={getSkills(skills)}
-				onChange={(item) => {
-					editSkills(item as Option[]);
+				onChange={(item: Option[]) => {
+					editSkills(item);
 				}}
 			/>
 			<div className={styles.addSpecialty__buttons}>

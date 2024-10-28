@@ -10,56 +10,67 @@
 	line-height: 24px; /* 150% */
 	letter-spacing: 0.25px;
 }
-.addContactWrapper {
-	width: 100%;
-	display: flex;
-	flex-direction: row;
-	gap: 8px;
-	@media screen and (max-width: 779px) {
+.fields {
+	&__contactsTitle {
+		color: $--Foreground-default;
+		font-family: $--open-sans-font;
+		font-size: 16px;
+		font-style: normal;
+		font-weight: 400;
+		line-height: 24px; /* 150% */
+		letter-spacing: 0.25px;
+	}
+	&__addContactWrapper {
+		width: 100%;
+		display: flex;
+		flex-direction: row;
+		gap: 8px;
+		@media screen and (max-width: 779px) {
+			flex-direction: column;
+		}
+	}
+	&__addContactType {
+		width: 228px;
+		height: 40px;
+		border-radius: 8px;
+		border: 1px solid $--border-default;
+		background: $--bg-primary;
+		padding: 8px 12px;
+		color: $--Foreground-default;
+		font-feature-settings:
+			'liga' off,
+			'clig' off;
+		font-family: $--open-sans-font;
+		font-size: 16px;
+		font-style: normal;
+		font-weight: 400;
+		line-height: 24px; /* 150% */
+		letter-spacing: 0.25px;
+		@media screen and (max-width: 779px) {
+			width: 100%;
+		}
+	}
+
+	&__addContactTypeWrapper {
+		display: flex;
 		flex-direction: column;
 	}
-}
-.addContactType {
-	width: 228px;
-	height: 40px;
-	border-radius: 8px;
-	border: 1px solid $--border-default;
-	background: $--bg-primary;
-	padding: 8px 12px;
-	color: $--Foreground-default;
-	font-feature-settings:
-		'liga' off,
-		'clig' off;
-	font-family: $--open-sans-font;
-	font-size: 16px;
-	font-style: normal;
-	font-weight: 400;
-	line-height: 24px; /* 150% */
-	letter-spacing: 0.25px;
-	@media screen and (max-width: 779px) {
+
+	&__addContactTextValue {
+		min-height: 40px;
 		width: 100%;
 	}
-}
 
-.addContactTypeWrapper {
-	display: flex;
-	flex-direction: column;
-}
-
-.addContactTextValue {
-	min-height: 40px;
-	width: 100%;
-}
-
-.addContactTypeLabel {
-	color: $--Foreground-subtitle;
-	font-feature-settings:
-		'liga' off,
-		'clig' off;
-	font-family: $--open-sans-font;
-	font-size: 14px;
-	font-style: normal;
-	font-weight: 400;
-	line-height: 19px; /* 135.714% */
-	letter-spacing: 0.25px;
+	&__addContactTypeLabel {
+		color: $--Foreground-subtitle;
+		font-feature-settings:
+			'liga' off,
+			'clig' off;
+		font-family: $--open-sans-font;
+		font-size: 14px;
+		font-style: normal;
+		font-weight: 400;
+		line-height: 19px; /* 135.714% */
+		letter-spacing: 0.25px;
+	}
 }

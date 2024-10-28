@@ -1,16 +1,16 @@
 'use client';
 import React from 'react';
 import styles from './form-project.module.scss';
-import { CheckboxAndRadio,  Input, MainButton } from '@/shared/ui';
+import { CheckboxAndRadio, Input, MainButton } from '@/shared/ui';
 import { TextEditor } from '@/shared/ui/text-editor/text-editor';
 import { DEVELOPING, EMPLOYMENT } from '@/utils/constants';
 import { DatePickerRHF } from '@/shared/ui/date-picker-rhf/date-picker-rhf';
-import { Control } from 'react-hook-form';
+import { Control, Controller } from 'react-hook-form';
 import { Contacts } from '@/entities/contacts/contacts';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const FormProject = ({ control }: { control: Control<any> }) => {
-	
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.specialists}>
@@ -21,13 +21,18 @@ export const FormProject = ({ control }: { control: Control<any> }) => {
 						labelName="Название проекта"
 						className={styles.input_extra}
 					/>
-					<TextEditor
-						labelName={'Описание проекта'}
-						name={'description'}
-						desc={
-							'Расскажите о проекте и его цели используя не более 750 символов'
-						}
+					<Controller
+						name="description"
 						control={control}
+						rules={{ required: true }}
+						render={({ field: { onChange, value } }) => (
+							<TextEditor
+								labelName="Описание проекта"
+								desc="Расскажите о проекте и его цели используя не более 750 символов"
+								currentText={value}
+								setCurrentText={(value) => onChange(value)}
+							/>
+						)}
 					/>
 				</div>
 

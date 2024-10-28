@@ -10,6 +10,8 @@ import styles from './form-project-specialists.module.scss';
 import { Loader } from '@/shared/ui';
 import { AddProjectSpeciality } from '@/entities/add-proejct-specialists/add-project-speciality';
 import { ProjectSpecialitCard } from '@/entities/speciality-card/project-speciality-card';
+import { useDispatch } from 'react-redux';
+import { addProjectSpecialist } from '@/store/reducers/ProjectSpecialist';
 
 export const FormProjectSpecialists = () => {
 	const { data: professions, isLoading: isLoadingProf } =
@@ -18,6 +20,8 @@ export const FormProjectSpecialists = () => {
 	const { data: allSkills, isLoading: isLoadingSkills } = useGetSkillsQuery([]);
 
 	const [specialties, setSpecialties] = useState<TSpeciality[]>([]);
+
+	const dispatch = useDispatch();
 
 	const handleAddSpecialty = ({ profession, level, skills }: TSpeciality) => {
 		setSpecialties(() => [
@@ -33,7 +37,19 @@ export const FormProjectSpecialists = () => {
 			status: 'success',
 			title: 'Специальность успешно добавлена',
 		});
+
+		dispatch(
+			addProjectSpecialist({
+				profession: profession.id,
+				skills: skills.map((v) => v.id),
+				count: 1,
+				level: level,
+				// eslint-disable-next-line camelcase
+				is_required: true,
+			})
+		);
 	};
+
 	const handleChangeSpecialty = ({
 		id,
 		profession,
@@ -69,9 +85,7 @@ export const FormProjectSpecialists = () => {
 									data={specialist}
 									professions={professions}
 									allSkills={allSkills}
-									isLoadingChangeSpecialty={false}
-									isSuccessСhangeSpecialty={false}
-									isLoadingDeleteSpecialty={false}
+
 									handleSubmitChangeSpecialty={handleChangeSpecialty}
 									handleDeleteSpecialty={handleDelete}
 								/>

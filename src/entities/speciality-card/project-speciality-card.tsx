@@ -11,15 +11,13 @@ import SelectWithSearch from '@/shared/ui/select-search/select-search';
 import { SkillsList } from '@/shared/ui/skills-list/skills-list';
 import { Edit, Trash2 } from 'lucide-react';
 import { useDispatch } from 'react-redux';
-import { addProjectSpecialist } from '@/store/reducers/ProjectSpecialist';
+import { updateProjectSpecialist } from '@/store/reducers/ProjectSpecialist';
 
 export const ProjectSpecialitCard: FC<SpecialityCardProps> = ({
 	data,
 	index,
 	professions,
 	allSkills,
-	isSuccessСhangeSpecialty,
-	isLoadingDeleteSpecialty,
 	handleSubmitChangeSpecialty,
 	handleDeleteSpecialty,
 }) => {
@@ -27,19 +25,13 @@ export const ProjectSpecialitCard: FC<SpecialityCardProps> = ({
 
 	const [isShowViewEdit, setIsShowViewEdit] = useState<boolean>(false);
 
-	const [recruitmentIsOpen, setRecruitmentIsOpen] = useState<boolean>(false);
+	const [recruitmentIsOpen, setRecruitmentIsOpen] = useState<boolean>(true);
 	const [profession, setProfession] = useState<TProfession>(data.profession);
 	const [selectedLevel, setSelectedLevel] = useState<number>(data.level);
 	const [skills, setSkills] = useState<TSkills[]>(data.skills);
 	const [count, setCount] = useState<number>(1);
 
 	const dispatch = useDispatch();
-
-	useEffect(() => {
-		if (isSuccessСhangeSpecialty) {
-			setIsShowViewEdit(false);
-		}
-	}, [isSuccessСhangeSpecialty]);
 
 	const toNum = (skills: TSkills[]) => {
 		const nums = skills.map((skill) => skill.id);
@@ -119,16 +111,20 @@ export const ProjectSpecialitCard: FC<SpecialityCardProps> = ({
 
 	useEffect(() => {
 		dispatch(
-			addProjectSpecialist({
-				profession: profession.id,
-				skills: toNum(skills),
-				count,
-				level: selectedLevel,
-				// eslint-disable-next-line camelcase
-				is_required: recruitmentIsOpen,
+			updateProjectSpecialist({
+				index: index,
+				specialist: {
+					profession: profession.id,
+					skills: toNum(skills),
+					count,
+					level: selectedLevel,
+					// eslint-disable-next-line camelcase
+					is_required: recruitmentIsOpen,
+				},
 			})
 		);
 	}, [
+		index,
 		count,
 		dispatch,
 		profession.id,
@@ -170,7 +166,6 @@ export const ProjectSpecialitCard: FC<SpecialityCardProps> = ({
 				<div className={styles.specialityCard}>
 					<button
 						type="button"
-						disabled={isLoadingDeleteSpecialty}
 						className={clsx(
 							styles.specialityCard__button,
 							styles.specialityCard__button_delete
@@ -205,8 +200,8 @@ export const ProjectSpecialitCard: FC<SpecialityCardProps> = ({
 							isSearchable
 							options={getSkills(allSkills)}
 							values={getSkills(skills)}
-							onChange={(item) => {
-								editSkills(item as Option[]);
+							onChange={(item: Option[]) => {
+								editSkills(item);
 							}}
 						/>
 					</div>
