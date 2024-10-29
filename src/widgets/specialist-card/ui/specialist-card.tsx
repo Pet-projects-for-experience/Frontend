@@ -1,12 +1,12 @@
 import React, { FC } from 'react';
+import clsx from 'clsx';
 import { SpecialistCardType } from './type';
-import { LikeButtonFeature } from '@/features';
-import styles from './specialist-card.module.scss';
 import Link from 'next/link';
 import { InviteSpecialist } from '@/widgets/invite-specialist';
 import { AvatarImage } from '@/entities/_avatar-image';
-import clsx from 'clsx';
 import { ActivityIcon, ActivityIconRed } from '@/shared/assets';
+import { SpecialistsToFavoritesFeature } from '@/features';
+import styles from './specialist-card.module.scss';
 
 export const SpecialistCard: FC<SpecialistCardType> = ({
 	userId,
@@ -47,7 +47,7 @@ export const SpecialistCard: FC<SpecialistCardType> = ({
 							<p className={styles.info__nickname}>@{userName}</p>
 						</div>
 						<div className={styles.info__likeContainer}>
-							<LikeButtonFeature variant="secondary" />
+						<SpecialistsToFavoritesFeature />
 						</div>
 					</div>
 

@@ -4,7 +4,7 @@ import Link from 'next/link';
 import clsx from 'clsx';
 import parse from 'html-react-parser';
 import { /*IconLeft,*/ ActivityIcon, CalendarIcon } from '@/shared/assets';
-import { LikeButtonFeature } from '@/features';
+import { ProjectsToFavoritesFeature } from '@/features';
 import { Person, VacancyCard } from '@/shared/ui';
 import { getColorTag } from '@/shared/utils';
 import { NounsDeclension } from '@/utils/declension/declension';
@@ -18,7 +18,6 @@ export const ProjectCardDetailed: FC<ProjectCardDetailType> = ({
 	description,
 	directions,
 	busyness,
-	phone_number,
 	link,
 	owner,
 	started,
@@ -27,6 +26,10 @@ export const ProjectCardDetailed: FC<ProjectCardDetailType> = ({
 	project_specialists,
 	unique_project_participants_skills,
 	project_participants,
+	phone_number,
+	telegram_nick,
+	email,
+	is_favorite,
 }) => {
 	const startDate = getStartDate(started);
 	const endDate = getEndDate(ended);
@@ -49,7 +52,23 @@ export const ProjectCardDetailed: FC<ProjectCardDetailType> = ({
 						</div>
 					</div>
 					<div className={styles.like}>
-						<LikeButtonFeature variant="secondary" />
+						<ProjectsToFavoritesFeature
+							variant="secondary"
+							id={idProject as never}
+							name={name}
+							description={description}
+							started={started}
+							ended={ended}
+							busyness={busyness as number}
+							directions={directions}
+							link={link}
+							phone_number={phone_number}
+							telegram_nick={telegram_nick}
+							email={email}
+							project_specialists={project_specialists}
+							status={status}
+							favorite={is_favorite}
+						/>
 					</div>
 				</div>
 				<div className={styles.calendarContainer}>
@@ -103,13 +122,14 @@ export const ProjectCardDetailed: FC<ProjectCardDetailType> = ({
 								avatar={owner?.avatar}
 								id={owner?.id}
 								visible_status={owner?.visible_status}
-	
 							/>
 						</div>
 					</div>
 					<div className={styles.subtitleWrapper}>
-						{ project_participants?.length > 0 ? <h3 className={styles.subtitle}>Команда проекта</h3> : null}
-						
+						{project_participants?.length > 0 ? (
+							<h3 className={styles.subtitle}>Команда проекта</h3>
+						) : null}
+
 						<ul className={styles.personList}>
 							{project_participants?.map((person) => {
 								return (
@@ -153,7 +173,7 @@ export const ProjectCardDetailed: FC<ProjectCardDetailType> = ({
 								key={item.id}
 								title={`${item.profession.specialization} / ${item.profession.specialty} / ${item.level}`}
 								skills={item.skills}
-								count={item.count}
+								count={item.count as number}
 								projectId={idProject}
 								specialists={item.profession}
 								idSpecialty={item.id}

@@ -1,0 +1,20 @@
+@import '@/shared/style/variables';
+.linksContainer {
+    display: flex;
+}
+.link {
+    display: block;
+    padding: 8px 16px;
+    text-decoration: none;
+    align-items: center;
+    font-family: $--open-sans-font;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: 0.25px;
+    font-size: 16px;
+    color: $--Foreground-subtitle
+}
+.linkActive {
+    border-bottom: 3px solid $--Foreground-default;
+    color: $--Foreground-default;
+}

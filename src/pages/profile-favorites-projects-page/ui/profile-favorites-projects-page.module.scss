@@ -1,0 +1,46 @@
+@import '@/shared/style/variables';
+
+.favoritesProjects {
+	display: flex;
+	flex-direction: column;
+	gap: 24px;
+}
+.textContainer {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+}
+.text {
+	color: $--Foreground-default;
+	font-family: $--open-sans-font;
+	font-size: 16px;
+	font-style: normal;
+	font-weight: 700;
+	line-height: normal;
+	letter-spacing: 0.25px;
+	margin: 60px 0 0 0;
+}
+.subtitle {
+	margin: 0;
+	color: $--Foreground-default;
+	font-family: $--open-sans-font;
+	font-size: 16px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: normal;
+	letter-spacing: 0.25px;
+}
+.inputSearch {
+	width: 396px;
+}
+.input {
+	width: 396px;
+}
+@media screen and (max-width: 490px) {
+	.input {
+		width: 300px;
+	}
+	.inputSearch {
+		width: 300px;
+	}
+}

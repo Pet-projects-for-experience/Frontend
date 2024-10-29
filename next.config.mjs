@@ -1,9 +1,16 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-	//output: 'export',
 	images: { unoptimized: true },
 	// pageExtensions: ['page.tsx', 'page.ts', 'page.jsx', 'page.js'],
-
+	async redirects() {
+		return [
+			{
+				source: '/favorites',
+				destination: '/favorites/specialists',
+				permanent: true,
+			},
+		];
+	},
 	webpack(config) {
 		// Grab the existing rule that handles SVG imports
 		const fileLoaderRule = config.module.rules.find((rule) =>

@@ -52,7 +52,7 @@ export const MenuProfile = ({
 					</Link>
 				</li>
 				<li className={styles.menuProfile__item}>
-					<Link href="/selected-projects" className={styles.menuProfile__link}>
+					<Link href="/favorites/projects" className={styles.menuProfile__link}>
 						<Favorites className={styles.menuProfile__item_icon} />
 						Избранные проекты
 					</Link>

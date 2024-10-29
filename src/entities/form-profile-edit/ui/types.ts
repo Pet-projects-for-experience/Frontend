@@ -8,8 +8,6 @@ export type TDataErrorChangeProfile = {
 	portfolio_link?: string[];
 };
 
-
-
 export type FormProfileEditProps = {
 	handleSubmitForm: (data: IUser) => void;
 	userData: {
@@ -26,6 +24,7 @@ export type FormProfileEditProps = {
 		city?: string;
 		ready_to_participate?: boolean;
 		specialists?: TSpeciality[];
+		avatar?: string;
 	};
 	isLoadingChangeProfileSettings: boolean;
 	dataErrorChangeProfile: TDataErrorChangeProfile;
@@ -33,5 +32,5 @@ export type FormProfileEditProps = {
 export type TOption = {
 	label: string;
 	value: string;
-	id?:number;
+	id?: number;
 };

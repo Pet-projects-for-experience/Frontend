@@ -17,7 +17,6 @@ export const ProfileLayout = ({ children }: { children: React.ReactNode }) => {
 					<div className={styles.sideNav}>
 						<SideNav />
 					</div>
-
 					<div>{children}</div>
 				</div>
 			</div>

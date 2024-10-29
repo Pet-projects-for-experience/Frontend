@@ -1,6 +1,6 @@
 import { HTMLAttributes } from 'react';
 export type ProjectCardDetailType = HTMLAttributes<HTMLElement> & {
-	idProject: number;
+	idProject: number | never;
 	name: string;
 	description: string;
 	started: string;
@@ -13,6 +13,8 @@ export type ProjectCardDetailType = HTMLAttributes<HTMLElement> & {
 	];
 	busyness: number;
 	phone_number: string;
+	telegram_nick?: string;
+	email?: string;
 	link: string;
 	owner: {
 		avatar: string;
@@ -23,6 +25,7 @@ export type ProjectCardDetailType = HTMLAttributes<HTMLElement> & {
 	};
 	status: string;
 	recruitment_status?: string;
+	is_favorite: boolean;
 	project_specialists: [
 		{
 			id: number;
@@ -35,8 +38,9 @@ export type ProjectCardDetailType = HTMLAttributes<HTMLElement> & {
 				id: number;
 				name: string;
 			}[];
-			count: number;
-			level: string;
+			count?: number;
+				level?: number;
+				is_required?: boolean;	
 		},
 	];
 	unique_project_participants_skills: string[];

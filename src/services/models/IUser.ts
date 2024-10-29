@@ -19,4 +19,5 @@ export type IUser = {
 	visible_status_contacts?: number;
 	allow_notifications?: boolean;
 	subscribe_to_projects?: boolean;
+	avatar?: string;
 };

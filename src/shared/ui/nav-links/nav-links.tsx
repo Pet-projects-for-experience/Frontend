@@ -11,7 +11,7 @@ const links = [
 	{ name: 'Профиль', href: '/profile' },
 	{ name: 'Управление аккаунтом', href: '/settings' },
 	{ name: 'Мои проекты', href: '/my-projects' },
-	{ name: 'Избранные', href: '/selected-projects' },
+	{ name: 'Избранные', href: '/favorites'},
 	{ name: 'Заявки', href: '/application' },
 	{ name: 'Создать проект', href: '/create-project' },
 ];
@@ -27,7 +27,7 @@ export const NavLinks = () => {
 						key={link.name}
 						href={link.href}
 						className={clsx(styles.link, {
-							[styles.linkActive]: pathname === link.href,
+							[styles.linkActive]: pathname?.includes(link.href),
 						})}>
 						{link.name}
 						<IconRight className={styles.link__iconRight} />

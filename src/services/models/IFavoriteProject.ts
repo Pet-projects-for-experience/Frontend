@@ -1,11 +1,11 @@
 import { HTMLAttributes } from 'react';
-export type ProjectCardFullType = HTMLAttributes<HTMLElement> & {
+export type FavoriteProjectType = HTMLAttributes<HTMLElement> & {
 	id: number;
 	name: string;
 	description: string;
 	started: string;
-    ended: string;
-	busyness?: number;
+	ended: string;
+	busyness: number;
 	directions: [
 		{
 			id: number;
@@ -16,9 +16,6 @@ export type ProjectCardFullType = HTMLAttributes<HTMLElement> & {
 	phone_number?: string;
 	telegram_nick?: string;
 	email?: string;
-	status: string;
-	recruitment_status: string;
-	is_favorite: boolean;
 	project_specialists: [
 		{
 			id: number;
@@ -27,15 +24,14 @@ export type ProjectCardFullType = HTMLAttributes<HTMLElement> & {
 				specialization: string;
 				specialty: string;
 			};
-			skills: 
-				{
-					id: number;
-					name: string;
-				}[];
-				count?: number;
-				level?: number;
-				is_required?: boolean;	
+			skills: {
+				id: number;
+				name: string;
+			}[];
+			count?: number;
+			level?: number;
+			is_required?: boolean;
 		},
 	];
-
+	status: string;
 };

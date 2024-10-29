@@ -7,7 +7,7 @@ import { CalendarIcon, ActivityIcon } from '@/shared/assets'; // ,
 import { MainButton } from '@/shared/ui';
 import { useMediaQuery } from '@/shared/hooks';
 import { ProjectCardFullType } from './types';
-import { LikeButtonFeature } from '@/features';
+import { ProjectsToFavoritesFeature } from '@/features';
 import { getColorTag, getStartDate, getEndDate } from '@/shared/utils';
 import Link from 'next/link';
 import { InviteToProjectFeature } from '@/features';
@@ -24,6 +24,12 @@ export const ProjectCardFull: FC<ProjectCardFullType> = ({
 	status,
 	recruitment_status,
 	project_specialists,
+	busyness,
+	link,
+	phone_number,
+	telegram_nick,
+	email,
+	is_favorite,
 }) => {
 	const [isPopupOpen, setIsPopupOpen] = useState(false);
 	const isMobile = useMediaQuery('(max-width:779px)');
@@ -34,28 +40,49 @@ export const ProjectCardFull: FC<ProjectCardFullType> = ({
 
 	return (
 		<article className={styles.container}>
-			<Link
+			{/* <Link
 				href={`projects/${id}`}
 				target="_blank"
-				className={styles.linkProject}>
-				<div className={styles.topInfo}>
-					<div className={styles.activeStateContainer}>
-						<ActivityIcon
-							className={clsx(
-								styles.activeStateIcon,
-								status === 'Активен' && styles.activeStateIcon_type_active,
-								status === 'Завершен' && styles.activeStateIcon_type_inactive
-							)}
-						/>
-						<div className={styles.activeStateText}>
-							{status === 'Активен' ? 'активный' : 'завершенный'}
-						</div>
-					</div>
-					<div className={styles.like}>
-						<LikeButtonFeature variant="secondary" />
+				className={styles.linkProject}> */}
+				
+			<div className={styles.topInfo}>
+				<div className={styles.activeStateContainer}>
+					<ActivityIcon
+						className={clsx(
+							styles.activeStateIcon,
+							status === 'Активен' && styles.activeStateIcon_type_active,
+							status === 'Завершен' && styles.activeStateIcon_type_inactive
+						)}
+					/>
+					<div className={styles.activeStateText}>
+						{status === 'Активен' ? 'активный' : 'завершенный'}
 					</div>
 				</div>
-				<div>
+				<div className={styles.like}>
+					<ProjectsToFavoritesFeature
+						variant="secondary"
+						id={id}
+						name={name}
+						description={description}
+						started={started}
+						ended={ended}
+						busyness={busyness as number}
+						directions={directions}
+						link={link}
+						phone_number={phone_number}
+						telegram_nick={telegram_nick}
+						email={email}
+						project_specialists={project_specialists}
+						status={status}
+						favorite={is_favorite}
+					/>
+				</div>
+			</div>
+			<div>
+				<Link
+					href={`../projects/${id}`}
+					target="_blank"
+					className={styles.linkProject}>
 					<div className={styles.calendarContainer}>
 						<CalendarIcon className={styles.calendarIcon} />
 						<div
@@ -70,8 +97,10 @@ export const ProjectCardFull: FC<ProjectCardFullType> = ({
 						);
 					})}
 
-					{!isMobile && <p className={styles.mainText}>{parse(description)}</p>}
-					{project_specialists.length > 0 ? <p className={styles.groupName}>Специальности</p> : null}
+					{!isMobile && <span className={styles.mainText}>{parse(description)}</span>}
+					{project_specialists.length > 0 ? (
+						<p className={styles.groupName}>Специальности</p>
+					) : null}
 					<ul className={styles.professionsList}>
 						{project_specialists?.map((item) => (
 							<li
@@ -84,7 +113,9 @@ export const ProjectCardFull: FC<ProjectCardFullType> = ({
 							</li>
 						))}
 					</ul>
-					{project_specialists.length > 0 ? <p className={styles.groupName}>Навыки</p> : null}		
+					{project_specialists.length > 0 ? (
+						<p className={styles.groupName}>Навыки</p>
+					) : null}
 					<ul className={styles.skillsList}>
 						{project_specialists.map((item) =>
 							item.skills.map((skill) => (
@@ -94,8 +125,9 @@ export const ProjectCardFull: FC<ProjectCardFullType> = ({
 							))
 						)}
 					</ul>
-				</div>
-			</Link>
+				</Link>
+			</div>
+			{/* </Link>  */}
 			{recruitment_status === 'Набор открыт' && (
 				<div className={styles.buttonRespond}>
 					<MainButton
@@ -112,25 +144,31 @@ export const ProjectCardFull: FC<ProjectCardFullType> = ({
 					visible={isPopupOpen}
 					title={name}
 					onClose={() => setIsPopupOpen(false)}>
-					<InviteToProjectFeature projectId={id}
-						project_specialists={project_specialists}/>
+					<InviteToProjectFeature
+						projectId={id}
+						project_specialists={project_specialists}
+					/>
 				</PopUp>
 			) : (
 				<PopUp
 					visible={isPopupOpen}
 					title={'Вход в систему'}
 					onClose={() => setIsPopupOpen(false)}>
-					<span className={styles.popupSubtitle}>Чтобы совершить действие, необходимо войти в систему</span>
+					<span className={styles.popupSubtitle}>
+						Чтобы совершить действие, необходимо войти в систему
+					</span>
 					<div className={styles.popupButton}>
-					<MainButton
-						variant="primary"
-						width="regular"
-						type="button"
-						onClick={() => router.push('/login')}>
-						Авторизоваться
-					</MainButton>
+						<MainButton
+							variant="primary"
+							width="regular"
+							type="button"
+							onClick={(evt: React.MouseEvent | React.TouchEvent) => {
+								evt.preventDefault();
+								router.push('/login');
+							}}>
+							Авторизоваться
+						</MainButton>
 					</div>
-				
 				</PopUp>
 			)}
 		</article>

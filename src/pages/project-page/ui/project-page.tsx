@@ -30,6 +30,9 @@ export const Project = ({ id }: { id: number }) => {
 						project?.unique_project_participants_skills
 					}
 					project_participants={project?.project_participants}
+					telegram_nick={project.telegram_nick}
+					email={project.email}
+					is_favorite={project.is_favorite}
 				/>
 			)}
 		</>

@@ -1,11 +1,10 @@
 'use client';
 
 import React, { FC, useEffect, useState } from 'react';
-import { MainButton, Input, Form, PopUp } from '@/shared/ui';
+import { MainButton, Input, Form } from '@/shared/ui';
 import { ProfileLink } from '@/shared/ui/profile-link/profile-link';
 import { Toggler } from '@/shared/ui/toggler/toggler';
 import { TextEditor } from '@/shared/ui/text-editor/text-editor';
-import Edit from '@/shared/assets/icons/edit-icon.svg';
 import Plus from '@/shared/assets/icons/plus-large.svg';
 import styles from './form-profile-edit.module.scss';
 import {
@@ -26,6 +25,7 @@ import SelectWithSearch from '@/shared/ui/select-search/select-search';
 import { Calendar } from '@/shared/ui/calendar/calendar';
 import { IUser } from '@/services/models/IUser';
 import { ContactsList } from '@/entities/contact-list/contact-list';
+import { ProfileAvatarEditor } from '@/entities/profile-avatar-editor/ui/profile-avatar-editor';
 
 export const FormProfileEdit: FC<FormProfileEditProps> = ({
 	handleSubmitForm,
@@ -33,8 +33,6 @@ export const FormProfileEdit: FC<FormProfileEditProps> = ({
 	isLoadingChangeProfileSettings,
 	dataErrorChangeProfile,
 }) => {
-	const [isShowEditAvatarPopup, setIsShowEditAvatarPopup] =
-		useState<boolean>(false);
 	const [isParticipation, setIsParticipation] = useState<boolean>(
 		userData.ready_to_participate as boolean
 	);
@@ -53,18 +51,22 @@ export const FormProfileEdit: FC<FormProfileEditProps> = ({
 	const [country, setCountry] = useState<string | undefined>(userData.country);
 	const [city, setCity] = useState<string | undefined>(userData.city);
 	const [contacts, setContacts] = useState<TContact[]>([]);
-	const [selectedOptionContactType, setSelectedOptionContactType] =
-		useState<TOption | null>(null);
+	const [
+		selectedOptionContactType,
+		setSelectedOptionContactType,
+	] = useState<TOption | null>(null);
 	const [inputValueContact, setInputValueContact] = useState<string>('');
 
 	const [nickNameErrorText, setNickNameErrorText] = useState<string>();
 	const [nameErrorText, setNameErrorText] = useState<string>();
-	const [portfolioLinkErrorText, setPortfolioLinkErrorText] =
-		useState<string>();
+	const [portfolioLinkErrorText, setPortfolioLinkErrorText] = useState<
+		string
+	>();
 	const [isNameValid, setIsNameValid] = useState<boolean>(true);
 	const [isNickNameValid, setIsNickNameValid] = useState<boolean>(true);
-	const [isPortfolioLinkValid, setIsPortfolioLinkValid] =
-		useState<boolean>(true);
+	const [isPortfolioLinkValid, setIsPortfolioLinkValid] = useState<boolean>(
+		true
+	);
 	const [isReadySubmit, setIsReadySubmit] = useState<boolean>(true);
 	const [addContactErrorText, setAddContactErrorText] = useState<string>('');
 
@@ -253,10 +255,6 @@ export const FormProfileEdit: FC<FormProfileEditProps> = ({
 		handleSubmitForm(userDataNew);
 	};
 
-	const saveAvatar = () => {
-		setIsShowEditAvatarPopup(false);
-	};
-
 	const handleOptionSelect = (option: TOption) => {
 		setSelectedOptionContactType(option);
 	};
@@ -322,30 +320,12 @@ export const FormProfileEdit: FC<FormProfileEditProps> = ({
 				<ProfileLink title="Профиль" />
 			</div>
 			<Form onSubmit={handleSubmit} className={styles.fields}>
-				<div className={styles.fields_photo}>
-					<div className={styles.fields_avatar}>
-						<div className={styles.fields_text}>A</div>
-					</div>
-					<button
-						type="button"
-						className={styles.fields_edit}
-						onClick={() => setIsShowEditAvatarPopup(true)}>
-						<Edit />
-					</button>
-					<PopUp
-						visible={isShowEditAvatarPopup}
-						title="Изменить фото"
-						onClose={() => setIsShowEditAvatarPopup(false)}>
-						<Input name="Foto" type="file" labelName="Изменить фото"></Input>
-						<MainButton variant="primary" width="regular" onClick={saveAvatar}>
-							Сохранить
-						</MainButton>
-					</PopUp>
-					<div className={styles.fields_photo_descr}>
-						Загрузите файл в формате: JPEG, PNG, размером не более 10 Мбайт
-					</div>
-				</div>
-
+				<ProfileAvatarEditor
+					image={userData.avatar || ''}
+					width={250}
+					height={250}
+					onSubmit={handleSubmitForm}
+				/>
 				<div className={styles.fields__nameWrapper}>
 					<Input
 						onBlurCapture={validateFields}
@@ -401,12 +381,14 @@ export const FormProfileEdit: FC<FormProfileEditProps> = ({
 										(contact) => contact.value === event.target.value
 									)!
 								)
-							}>
+							}
+						>
 							{CONTACTS.map((option) => (
 								<option
 									className={styles.fields__addContactTypeListItem}
 									key={option.value}
-									value={option.value}>
+									value={option.value}
+								>
 									{option.label}
 								</option>
 							))}
@@ -449,7 +431,8 @@ export const FormProfileEdit: FC<FormProfileEditProps> = ({
 					onClick={handleAddContact}
 					variant="secondary"
 					width="regular"
-					IconLeft={Plus}>
+					IconLeft={Plus}
+				>
 					Добавить
 				</MainButton>
 				<div className={styles.fields__datePickerWrapper}>
@@ -497,7 +480,8 @@ export const FormProfileEdit: FC<FormProfileEditProps> = ({
 						// type="button"
 						variant={'primary'}
 						width={'regular'}
-						disabled={!isReadySubmit}>
+						disabled={!isReadySubmit}
+					>
 						Сохранить
 					</MainButton>
 				</div>

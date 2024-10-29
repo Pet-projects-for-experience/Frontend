@@ -1,8 +1,8 @@
+'use client';
+import React, { FC } from 'react';
+import clsx from 'clsx';
 import { AvatarImage } from '@/entities/_avatar-image';
 import { DetailedSpecialistCardTypes } from './types';
-import styles from './detailed-specialist-card.module.scss';
-import React, { FC } from 'react';
-import { LikeButtonFeature } from '@/features';
 import {
 	ActivityIcon,
 	ActivityIconRed,
@@ -10,9 +10,10 @@ import {
 	MobileIcon,
 	TelegramIcon,
 } from '@/shared/assets';
-import clsx from 'clsx';
 import { InviteSpecialist } from '@/widgets/invite-specialist';
 import { BlankCard } from '@/shared/ui/blank-card/blank-card';
+import { SpecialistsToFavoritesFeature } from '@/features';
+import styles from './detailed-specialist-card.module.scss';
 
 export const DetailedSpecialistCard: FC<DetailedSpecialistCardTypes> = ({
 	avatar,
@@ -77,7 +78,7 @@ export const DetailedSpecialistCard: FC<DetailedSpecialistCardTypes> = ({
 						</div>
 					</div>
 					<div className={styles.info__likeContainer}>
-						<LikeButtonFeature variant="secondary" />
+						<SpecialistsToFavoritesFeature />
 					</div>
 				</div>
 
@@ -144,13 +145,13 @@ export const DetailedSpecialistCard: FC<DetailedSpecialistCardTypes> = ({
 								<a
 									className={styles.info__contacts}
 									href={`https://mailto:${email}`}>
-							{`${properyCheck(email)}`}
-							</a>
+									{`${properyCheck(email)}`}
+								</a>
 							</div>
 							<div className={styles.info__contacs__wrapper}>
 								<MobileIcon className={styles.info__icons} />
 								<a className={styles.info__contacts} href={phoneNumber}>
-								{`${properyCheck(phoneNumber)}`}
+									{`${properyCheck(phoneNumber)}`}
 								</a>
 							</div>
 
@@ -160,14 +161,17 @@ export const DetailedSpecialistCard: FC<DetailedSpecialistCardTypes> = ({
 								<a
 									className={styles.info__contacts}
 									href={`https://t.me/${telegramNick}`}>
-							{`${properyCheck(telegramNick)}`}
-							</a>
+									{`${properyCheck(telegramNick)}`}
+								</a>
 							</div>
 						</div>
 					</div>
 					<div className={styles.info__wrapper}>
 						<h3 className={styles.info__title}>Дата рождения</h3>
-						<p className={styles.info__sideText}>{`${properyCheck(birthday)}`}</p>
+						<p
+							className={
+								styles.info__sideText
+							}>{`${properyCheck(birthday)}`}</p>
 					</div>
 					<div className={styles.info__wrapper}>
 						<h3 className={styles.info__title}>Регион</h3>
