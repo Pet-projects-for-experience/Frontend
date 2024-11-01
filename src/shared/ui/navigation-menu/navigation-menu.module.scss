@@ -1,6 +1,7 @@
 @import '@/shared/style/variables';
 .linksContainer {
     display: flex;
+    border-bottom: 1px solid $--border-default;
 }
 .link {
     display: block;
