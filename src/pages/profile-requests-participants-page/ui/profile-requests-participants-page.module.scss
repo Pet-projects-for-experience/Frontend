@@ -1,0 +1,19 @@
+.requests {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+.buttons {
+    display: flex;
+    gap: 8px;
+}
+
+.inputSearch {
+    max-width: 396px;
+}
+.cards {
+    display: flex;
+    flex-direction: column;
+    gap: 24px
+}

@@ -42,6 +42,12 @@ export const projectsApi = createApi({
 				method: 'GET',
 			}),
 		}),
+		getRequestsParticipation: builder.query({
+			query: () => ({
+				url: `/projects/requests/`,
+				method: 'GET',
+			}),
+		}),
 		requestParticipationInProjects: builder.mutation<IProjectsRequests,IProjectsRequests>({
 			query: (projects) => ({
 				url: `/projects/requests/`,
@@ -71,6 +77,7 @@ export const {
 	useGetProjectsPreviewMainQuery,
 	useGetAllProjectsQuery,
 	useGetProjectByIdQuery,
+	useGetRequestsParticipationQuery,
 	useRequestParticipationInProjectsMutation,
 	useAddFavoriteProjectMutation,
 	useDeleteFavoriteProjectMutation,

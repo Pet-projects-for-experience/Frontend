@@ -9,7 +9,7 @@ import { Person, VacancyCard } from '@/shared/ui';
 import { getColorTag } from '@/shared/utils';
 import { NounsDeclension } from '@/utils/declension/declension';
 import { ProjectCardDetailType } from './types';
-import { getStartDate, getEndDate } from '@/shared/utils';
+import { getDate } from '@/shared/utils';
 import styles from './project-card-detailed.module.scss';
 
 export const ProjectCardDetailed: FC<ProjectCardDetailType> = ({
@@ -22,7 +22,7 @@ export const ProjectCardDetailed: FC<ProjectCardDetailType> = ({
 	owner,
 	started,
 	ended,
-	status,
+	project_status,
 	project_specialists,
 	unique_project_participants_skills,
 	project_participants,
@@ -31,8 +31,8 @@ export const ProjectCardDetailed: FC<ProjectCardDetailType> = ({
 	email,
 	is_favorite,
 }) => {
-	const startDate = getStartDate(started);
-	const endDate = getEndDate(ended);
+	const startDate = getDate(started);
+	const endDate = getDate(ended);
 
 	return (
 		<section className={styles.projectsCard}>
@@ -42,13 +42,13 @@ export const ProjectCardDetailed: FC<ProjectCardDetailType> = ({
 						<ActivityIcon
 							className={clsx(
 								styles.activeStateIcon,
-								status === 'Активен' && styles.activeStateIcon_type_active,
-								status === 'Завершен' && styles.activeStateIcon_type_inactive
+								project_status === 'Активен' && styles.activeStateIcon_type_active,
+								project_status === 'Завершен' && styles.activeStateIcon_type_inactive
 							)}
 						/>
 						<div className={styles.activeStateText}>
-							{status === 'Активен' ? 'активный' : ' '}
-							{status === 'Завершен' ? 'завершенный' : ' '}
+							{project_status === 'Активен' ? 'активный' : ' '}
+							{project_status === 'Завершен' ? 'завершенный' : ' '}
 						</div>
 					</div>
 					<div className={styles.like}>

@@ -8,7 +8,7 @@ import { MainButton } from '@/shared/ui';
 import { useMediaQuery } from '@/shared/hooks';
 import { ProjectCardFullType } from './types';
 import { ProjectsToFavoritesFeature } from '@/features';
-import { getColorTag, getStartDate, getEndDate } from '@/shared/utils';
+import { getColorTag, getDate } from '@/shared/utils';
 import Link from 'next/link';
 import { InviteToProjectFeature } from '@/features';
 import { PopUp } from '@/shared/ui';
@@ -21,7 +21,7 @@ export const ProjectCardFull: FC<ProjectCardFullType> = ({
 	ended,
 	name,
 	directions,
-	status,
+	project_status,
 	recruitment_status,
 	project_specialists,
 	busyness,
@@ -33,8 +33,8 @@ export const ProjectCardFull: FC<ProjectCardFullType> = ({
 }) => {
 	const [isPopupOpen, setIsPopupOpen] = useState(false);
 	const isMobile = useMediaQuery('(max-width:779px)');
-	const startDate = getStartDate(started);
-	const endDate = getEndDate(ended);
+	const startDate = getDate(started);
+	const endDate = getDate(ended);
 	const token = localStorage.getItem('token');
 	const router = useRouter();
 
@@ -44,18 +44,20 @@ export const ProjectCardFull: FC<ProjectCardFullType> = ({
 				href={`projects/${id}`}
 				target="_blank"
 				className={styles.linkProject}> */}
-				
+
 			<div className={styles.topInfo}>
 				<div className={styles.activeStateContainer}>
 					<ActivityIcon
 						className={clsx(
 							styles.activeStateIcon,
-							status === 'Активен' && styles.activeStateIcon_type_active,
-							status === 'Завершен' && styles.activeStateIcon_type_inactive
+							project_status === 'Активен' &&
+								styles.activeStateIcon_type_active,
+							project_status === 'Завершен' &&
+								styles.activeStateIcon_type_inactive
 						)}
 					/>
 					<div className={styles.activeStateText}>
-						{status === 'Активен' ? 'активный' : 'завершенный'}
+						{project_status === 'Активен' ? 'активный' : 'завершенный'}
 					</div>
 				</div>
 				<div className={styles.like}>
@@ -97,7 +99,9 @@ export const ProjectCardFull: FC<ProjectCardFullType> = ({
 						);
 					})}
 
-					{!isMobile && <span className={styles.mainText}>{parse(description)}</span>}
+					{!isMobile && (
+						<span className={styles.mainText}>{parse(description)}</span>
+					)}
 					{project_specialists.length > 0 ? (
 						<p className={styles.groupName}>Специальности</p>
 					) : null}

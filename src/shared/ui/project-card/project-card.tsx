@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { CardProps } from './types';
 import CalendarIcon from '@/shared/assets/icons/calender.svg';
-import { getColorTag, getStartDate, getEndDate } from '@/shared/utils';
+import { getColorTag, getDate } from '@/shared/utils';
 import { MainButton } from '../main-button/main-button';
 import { InviteToProjectFeature } from '@/features';
 import { PopUp } from '@/shared/ui';
@@ -21,8 +21,8 @@ export const ProjectCard: FC<CardProps> = ({
 	id,
 }) => {
 	const [isPopupOpen, setIsPopupOpen] = useState(false);
-	const startDate = getStartDate(started);
-	const endDate = getEndDate(ended);
+	const startDate = getDate(started);
+	const endDate = getDate(ended);
 	const token = localStorage.getItem('token');
 	const router = useRouter();
 	return (

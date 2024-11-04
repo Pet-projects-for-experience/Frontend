@@ -23,7 +23,7 @@ export type ProjectCardDetailType = HTMLAttributes<HTMLElement> & {
 		username: string;
 		visible_status: number;
 	};
-	status: string;
+	project_status: string;
 	recruitment_status?: string;
 	is_favorite: boolean;
 	project_specialists: [
