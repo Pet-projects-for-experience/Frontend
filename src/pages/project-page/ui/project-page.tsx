@@ -24,7 +24,7 @@ export const Project = ({ id }: { id: number }) => {
 					owner={project?.owner}
 					started={project?.started}
 					ended={project?.ended}
-					status={project?.status}
+					project_status={project?.project_status}
 					project_specialists={project?.project_specialists}
 					unique_project_participants_skills={
 						project?.unique_project_participants_skills

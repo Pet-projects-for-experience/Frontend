@@ -19,7 +19,7 @@ export const ProjectsToFavoritesFeature: FC<LikeButtonType> = ({
 	telegram_nick,
 	email,
 	project_specialists,
-	status,
+	project_status,
 	variant,
 	disabled,
 	favorite,
@@ -50,7 +50,7 @@ export const ProjectsToFavoritesFeature: FC<LikeButtonType> = ({
 					telegram_nick,
 					email,
 					project_specialists,
-					status,
+					project_status,
 				})
 					.unwrap()
 					.then(() => {

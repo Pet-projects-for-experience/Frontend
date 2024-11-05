@@ -8,7 +8,7 @@ export type SpecialistInfoQueryType = {
 			id: number;
 			profession: {
 				id: number;
-				specialty: string;
+				speciality: string;
 				specialization: string;
 			};
 			level: number;
@@ -18,7 +18,7 @@ export type SpecialistInfoQueryType = {
 			id: number;
 			profession: {
 				id: number;
-				specialty: string;
+				speciality: string;
 				specialization: string;
 			};
 			level: number;

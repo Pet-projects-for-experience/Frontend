@@ -23,7 +23,7 @@ export type ProjectCardDetailType = HTMLAttributes<HTMLElement> & {
 		username: string;
 		visible_status: number;
 	};
-	status: string;
+	project_status: string;
 	recruitment_status?: string;
 	is_favorite: boolean;
 	project_specialists: [
@@ -32,7 +32,7 @@ export type ProjectCardDetailType = HTMLAttributes<HTMLElement> & {
 			profession: {
 				id: number;
 				specialization: string;
-				specialty: string;
+				speciality: string;
 			};
 			skills: {
 				id: number;
@@ -51,7 +51,7 @@ export type ProjectCardDetailType = HTMLAttributes<HTMLElement> & {
 			avatar: string;
 			profession: {
 				id: number;
-				specialty: string;
+				speciality: string;
 				specialization: string;
 				visible_status: number;
 			};

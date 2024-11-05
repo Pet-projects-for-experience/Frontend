@@ -212,7 +212,7 @@ export const Projects = () => {
 										started={project.started as string}
 										name={project.name}
 										directions={project.directions}
-										status={project.status}
+										project_status={project.project_status}
 										key={project.id}
 										recruitment_status={project.recruitment_status}
 										project_specialists={project.project_specialists}

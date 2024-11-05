@@ -22,7 +22,7 @@ export type FavoriteProjectType = HTMLAttributes<HTMLElement> & {
 			profession: {
 				id: number;
 				specialization: string;
-				specialty: string;
+				speciality: string;
 			};
 			skills: {
 				id: number;
@@ -33,5 +33,5 @@ export type FavoriteProjectType = HTMLAttributes<HTMLElement> & {
 			is_required?: boolean;
 		},
 	];
-	status: string;
+	project_status: string;
 };

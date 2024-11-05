@@ -16,7 +16,7 @@ export type ProjectCardFullType = HTMLAttributes<HTMLElement> & {
 	phone_number?: string;
 	telegram_nick?: string;
 	email?: string;
-	status: string;
+	project_status: string;
 	recruitment_status: string;
 	is_favorite: boolean;
 	project_specialists: [
@@ -25,7 +25,7 @@ export type ProjectCardFullType = HTMLAttributes<HTMLElement> & {
 			profession: {
 				id: number;
 				specialization: string;
-				specialty: string;
+				speciality: string;
 			};
 			skills: 
 				{
