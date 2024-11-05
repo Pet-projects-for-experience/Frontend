@@ -8,6 +8,6 @@ export type VacancyCardType = {
 	specialists: {
 		id: number;
 		specialization: string;
-		specialty: string;
+		speciality: string;
 	};
 }

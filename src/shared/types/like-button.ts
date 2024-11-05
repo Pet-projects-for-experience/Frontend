@@ -21,7 +21,7 @@ export type LikeButtonType = {
 			profession: {
 				id: number;
 				specialization: string;
-				specialty: string;
+				speciality: string;
 			};
 
 			skills: {
@@ -34,7 +34,7 @@ export type LikeButtonType = {
 			is_required?: boolean;
 		},
 	];
-	status: string;
+	project_status: string;
 	variant: 'primary' | 'secondary' | 'trivial';
 	disabled?: boolean;
 	favorite: boolean;

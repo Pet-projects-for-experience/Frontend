@@ -75,7 +75,7 @@ export const ProjectCardFull: FC<ProjectCardFullType> = ({
 						telegram_nick={telegram_nick}
 						email={email}
 						project_specialists={project_specialists}
-						status={status}
+						project_status={project_status}
 						favorite={is_favorite}
 					/>
 				</div>
@@ -110,7 +110,7 @@ export const ProjectCardFull: FC<ProjectCardFullType> = ({
 							<li
 								className={styles.profession}
 								style={{
-									backgroundColor: `${getColorTag(item.profession.specialty)}`,
+									backgroundColor: `${getColorTag(item.profession.speciality)}`,
 								}}
 								key={item.id}>
 								{item.profession?.specialization}

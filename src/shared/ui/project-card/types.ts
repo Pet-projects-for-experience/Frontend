@@ -17,7 +17,7 @@ export type CardProps = HTMLAttributes<HTMLElement> & {
 			profession: {
 				id: number;
 				specialization: string;
-				specialty: string;
+				speciality: string;
 			};
 		},
 	];

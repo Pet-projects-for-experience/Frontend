@@ -44,7 +44,7 @@ export const DetailedSpecialistCard: FC<DetailedSpecialistCardTypes> = ({
 			return 'Пусто';
 		}
 	}
-
+	
 	return (
 		<BlankCard>
 			<div className={styles.specialist__info}>
@@ -86,12 +86,12 @@ export const DetailedSpecialistCard: FC<DetailedSpecialistCardTypes> = ({
 					<div className={styles.info__wrapper}>
 						<h3 className={styles.info__title}>О себе</h3>
 						<p className={styles.info__sideText}>{`${properyCheck(about)}`}</p>
+						
 					</div>
 					<div className={styles.info__title}>
 						<div>
 							{specialists[0] &&
-								`${specialists[0].profession.specialization} \t`}
-							{specialists[0] && `${specialists[0].profession.specialty},`}
+								`${specialists[0].profession.specialization} \t /`}
 							{clsx(
 								specialists[0] && specialists[0].level === 1 && '\t Junior',
 								specialists[0] && specialists[0].level === 2 && '\t Middle',
@@ -112,8 +112,7 @@ export const DetailedSpecialistCard: FC<DetailedSpecialistCardTypes> = ({
 					<div className={styles.info__title}>
 						<div>
 							{specialists[1] &&
-								`${specialists[1].profession.specialization} \t`}
-							{specialists[1] && `${specialists[1].profession.specialty},`}
+								`${specialists[1].profession.specialization} \t /`}
 							{clsx(
 								specialists[1] && specialists[1].level === 1 && '\t Junior',
 								specialists[1] && specialists[1].level === 2 && '\t Middle',

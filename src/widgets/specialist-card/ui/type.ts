@@ -9,7 +9,7 @@ export type SpecialistCardType = {
 			id: number;
 			profession: {
 				id: number;
-				specialty: string;
+				speciality: string;
 				specialization: string;
 			};
 			level: number;
@@ -19,7 +19,7 @@ export type SpecialistCardType = {
 			id?: number;
 			profession?: {
 				id?: number;
-				specialty?: string;
+				speciality?: string;
 				specialization?: string;
 			};
 			level?: number;
