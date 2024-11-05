@@ -34,7 +34,7 @@ export const Input: FC<InputProps> = ({
 
 	return (
 		<label className={clsx(className, styles.label)}>
-			{labelName}
+			<span>{labelName}</span>
 			<div className={styles.inputContainer}>
 				<input
 					{...register(`${name}`, { shouldUnregister: true })}

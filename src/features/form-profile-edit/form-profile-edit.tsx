@@ -170,12 +170,12 @@ export const FormProfileEditFeature: FC = () => {
 						allSkills={allSkills}
 						specialists={specialties}
 						handleSubmitChangeSpecialty={handleSubmitChangeSpecialty}
+						handleDeleteSpecialty={handleDeleteSpecialty}
+						handleAddSpecialty={handleAddSpecialty}
 						isLoadingChangeSpecialty={isLoadingChangeSpecialty}
 						isSuccessСhangeSpecialty={isSuccessСhangeSpecialty}
-						handleDeleteSpecialty={handleDeleteSpecialty}
 						isSuccessDeleteSpecialty={isSuccessDeleteSpecialty}
 						isLoadingDeleteSpecialty={isLoadingDeleteSpecialty}
-						handleAddSpecialty={handleAddSpecialty}
 						isLoadingAddSpecialty={isLoadingAddSpecialty}
 						isSuccessAddSpecialty={isSuccessAddSpecialty}
 					/>

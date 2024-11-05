@@ -17,6 +17,12 @@ export const EMPLOYMENT = [
 	},
 ];
 
+export const DEVELOPING = [
+	{ id: 1, field: 'Desktop' },
+	{ id: 2, field: 'Mobile' },
+	{ id: 3, field: 'Web' },
+];
+
 export const LEVEL = [
 	{
 		label: 'Junior',

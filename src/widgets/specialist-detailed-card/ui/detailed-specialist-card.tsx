@@ -121,7 +121,7 @@ export const DetailedSpecialistCard: FC<DetailedSpecialistCardTypes> = ({
 							)}
 						</div>
 					</div>
-					<ul className={styles.info__skillsList}>
+					{specialists[1] && <ul className={styles.info__skillsList}>
 						{specialists[1]?.skills.map((skill) => {
 							return (
 								<li className={styles.info__skill} key={skill.id}>
@@ -130,7 +130,7 @@ export const DetailedSpecialistCard: FC<DetailedSpecialistCardTypes> = ({
 							);
 						})}
 					</ul>
-					<div className={styles.info__wrapper}>
+					}<div className={styles.info__wrapper}>
 						<h3 className={styles.info__title}>Ссылка на портфолио</h3>
 						<a className={styles.info__contacts} href={portfolioLink}>
 							{`${properyCheck(portfolioLink)}`}

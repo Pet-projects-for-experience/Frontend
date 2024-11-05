@@ -32,6 +32,11 @@
 		background-color: $--bg-secondary;
 	}
 }
+
+.dismiss {
+	all: unset; 
+}
+
 .count {
 	display: flex;
 	justify-content: center;
@@ -48,13 +53,7 @@
 	border: none;
 	padding: 6px;
 	background-color: transparent;
-	&:hover {
-		background-color: $--bg-card-hover;
-	}
-	&:active {
-		background-color: $--bg-accent-default;
-		color: $--bg-primary;
-	}
+
 	&:disabled {
 		background-color: $--bg-primary;
 		color: $--Foreground-subtitle;

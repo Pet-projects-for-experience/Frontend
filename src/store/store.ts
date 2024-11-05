@@ -4,11 +4,16 @@ import { generalApi } from '@/services/GeneralService';
 import { projectsApi } from '@/services/ProjectService';
 import { specilistsApi } from '@/services/SpecialistService';
 
+import projectSpecialistsReducer from './reducers/ProjectSpecialist';
+import projectUtility from './reducers/ProjectOptionalReducer';
+
 const rootReducer = combineReducers({
 	[userApi.reducerPath]: userApi.reducer,
 	[specilistsApi.reducerPath]: specilistsApi.reducer,
 	[generalApi.reducerPath]: generalApi.reducer,
 	[projectsApi.reducerPath]: projectsApi.reducer,
+	projectSpecialists: projectSpecialistsReducer,
+	projectUtility: projectUtility,
 });
 
 export const store = configureStore({

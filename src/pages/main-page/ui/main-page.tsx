@@ -10,7 +10,6 @@ import styles from './main-page.module.scss';
 import { useRouter } from 'next/navigation';
 
 export const MainPage = () => {
-	// const { isSuccess: isLoggedIn } = useGetUserMeQuery(null);
 	const [isLoggedIn, setIsLoggedIn] = useState(false);
 	const router = useRouter();
 

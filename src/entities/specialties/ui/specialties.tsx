@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import styles from './specialties.module.scss';
 import { SpecialityCard } from '@/shared/ui/speciality-card/speciality-card';
 import { TSpecialties } from './types';
-import { AddSpecialty } from '@/shared/ui/add-specialty/add-specialty';
+import { AddSpecialty } from '@/entities/add-specialists/add-specialty';
 
 export const Specialties: FC<TSpecialties> = ({
 	professions,

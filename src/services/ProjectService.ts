@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { ProjectService } from './models/IProject';
 import { IProjectsRequests } from './models/IProjectsRequests';
 import { FavoriteProjectType } from './models/IFavoriteProject';
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
@@ -42,6 +43,14 @@ export const projectsApi = createApi({
 				method: 'GET',
 			}),
 		}),
+
+		postProject: builder.mutation<ProjectService, ProjectService>({
+			query: (body) => ({
+				url: `/projects/`,
+				method: 'POST',
+				body: body,
+			}),
+		}),
 		requestParticipationInProjects: builder.mutation<IProjectsRequests,IProjectsRequests>({
 			query: (projects) => ({
 				url: `/projects/requests/`,
@@ -71,6 +80,7 @@ export const {
 	useGetProjectsPreviewMainQuery,
 	useGetAllProjectsQuery,
 	useGetProjectByIdQuery,
+	usePostProjectMutation,
 	useRequestParticipationInProjectsMutation,
 	useAddFavoriteProjectMutation,
 	useDeleteFavoriteProjectMutation,

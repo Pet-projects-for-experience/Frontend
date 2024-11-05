@@ -1,13 +1,18 @@
 import React, { FormEvent, useEffect, useState } from 'react';
 import styles from './add-specialty.module.scss';
-import SelectWithSearch from '../select-search/select-search';
-import { MultiSelectInput } from '../multi-select-input/multi-select-input';
+import SelectWithSearch from '@/shared/ui/select-search/select-search';
+import { MultiSelectInput } from '@/shared/ui/multi-select-input/multi-select-input';
 import { LEVEL } from '@/utils/constants';
 import { TProfession, TSkills } from '@/shared/types/specialty';
-import { AddSpecialtyProps } from './types';
 import { Option } from '@/shared/types/option';
-import { MainButton } from '../main-button/main-button';
 import IconPlus from '@/shared/assets/icons/plus-large.svg';
+import {
+	getLevelName,
+	getSkills,
+	transformProfessions,
+} from '../../utils/specialists-functions';
+import { AddSpecialtyProps } from './types';
+import { MainButton } from '@/shared/ui';
 
 export const AddSpecialty: React.FC<AddSpecialtyProps> = ({
 	professions,
@@ -20,13 +25,6 @@ export const AddSpecialty: React.FC<AddSpecialtyProps> = ({
 	const [selectedLevel, setSelectedLevel] = useState<number | null>(null);
 	const [skills, setSkills] = useState<TSkills[]>([]);
 
-	const transformProfessions = (profList: TProfession[]) => {
-		return profList?.map(({ id, specialization }) => ({
-			label: specialization,
-			value: specialization,
-			id,
-		}));
-	};
 	const handleProfessionChange = (value: string) => {
 		setProfession(
 			professions.find(
@@ -39,14 +37,6 @@ export const AddSpecialty: React.FC<AddSpecialtyProps> = ({
 			LEVEL.find((element) => element.value === value)?.level as number
 		); // обновляем состояние выбранного значения
 	};
-
-	const getSkills = (skills: TSkills[]) => {
-		return skills.map(({ id, name }) => ({
-			label: name,
-			value: id,
-		}));
-	};
-
 	const editSkills = (skills: Option[]) => {
 		setSkills(
 			skills.map(({ label, value }) => ({
@@ -54,11 +44,6 @@ export const AddSpecialty: React.FC<AddSpecialtyProps> = ({
 				id: value,
 			}))
 		);
-	};
-	const getLevelName = (level: number) => {
-		if (level > 0 && level < 5) {
-			return LEVEL[level - 1].value;
-		} else return '';
 	};
 
 	const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
@@ -76,7 +61,7 @@ export const AddSpecialty: React.FC<AddSpecialtyProps> = ({
 		setSelectedLevel(null);
 	};
 	const isFieldsNotFill = () => {
-		return (profession === null || selectedLevel === null || skills.length === 0);
+		return profession === null || selectedLevel === null || skills.length === 0;
 	};
 	useEffect(() => {
 		if (isSuccessAddSpecialty) handleResetForm();
@@ -108,8 +93,8 @@ export const AddSpecialty: React.FC<AddSpecialtyProps> = ({
 				isSearchable
 				options={getSkills(allSkills)}
 				values={getSkills(skills)}
-				onChange={(item) => {
-					editSkills(item as Option[]);
+				onChange={(item: Option[]) => {
+					editSkills(item);
 				}}
 			/>
 			<div className={styles.addSpecialty__buttons}>

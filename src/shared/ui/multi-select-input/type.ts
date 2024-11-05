@@ -4,7 +4,8 @@ export type MultiSelectInputProps = {
 	name: string;
 	options: Option[];
 	values: Option[];
-	onChange: (options: (string | object)[]) => void;
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	onChange: any;
 	selectedAll?: boolean;
 	maxSelections?: number;
 	width?: string;

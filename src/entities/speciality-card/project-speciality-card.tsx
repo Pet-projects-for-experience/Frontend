@@ -2,34 +2,46 @@ import React, { FC, useEffect, useState } from 'react';
 import clsx from 'clsx';
 import styles from './speciality-card.module.scss';
 import { LEVEL } from '@/utils/constants';
-import SelectWithSearch from '../select-search/select-search';
-import { SkillsList } from '../skills-list/skills-list';
-import { MainButton } from '../main-button/main-button';
-import { MultiSelectInput } from '../multi-select-input/multi-select-input';
 import { Option } from '@/shared/types/option';
 import { SpecialityCardProps } from './types';
 import { TProfession, TSkills } from '@/shared/types/specialty';
+import { Counter, MainButton, Toggler } from '@/shared/ui';
+import { MultiSelectInput } from '@/shared/ui/multi-select-input/multi-select-input';
+import SelectWithSearch from '@/shared/ui/select-search/select-search';
+import { SkillsList } from '@/shared/ui/skills-list/skills-list';
+import { Edit, Trash2 } from 'lucide-react';
+import { useDispatch } from 'react-redux';
+import { updateProjectSpecialist } from '@/store/reducers/ProjectSpecialist';
 
-export const SpecialityCard: FC<SpecialityCardProps> = ({
+export const ProjectSpecialitCard: FC<SpecialityCardProps> = ({
 	data,
+	index,
 	professions,
 	allSkills,
 	handleSubmitChangeSpecialty,
-	isLoadingChangeSpecialty,
-	isSuccessСhangeSpecialty,
 	handleDeleteSpecialty,
-	isLoadingDeleteSpecialty,
 }) => {
+	console.log(index);
+
 	const [isShowViewEdit, setIsShowViewEdit] = useState<boolean>(false);
+
+	const [recruitmentIsOpen, setRecruitmentIsOpen] = useState<boolean>(true);
 	const [profession, setProfession] = useState<TProfession>(data.profession);
 	const [selectedLevel, setSelectedLevel] = useState<number>(data.level);
 	const [skills, setSkills] = useState<TSkills[]>(data.skills);
+	const [count, setCount] = useState<number>(1);
 
-	useEffect(() => {
-		if (isSuccessСhangeSpecialty) {
-			setIsShowViewEdit(false);
-		}
-	}, [isSuccessСhangeSpecialty]);
+	const dispatch = useDispatch();
+
+	const toNum = (skills: TSkills[]) => {
+		const nums = skills.map((skill) => skill.id);
+
+		return nums;
+	};
+
+	const updateCounter = (num: number) => {
+		setCount(num);
+	};
 
 	const transformProfessions = (profList: TProfession[]) => {
 		return profList.map(({ id, specialization }) => ({
@@ -78,26 +90,48 @@ export const SpecialityCard: FC<SpecialityCardProps> = ({
 		);
 	};
 
-	const getSkillsforSubmit = (dataSkills: TSkills[]) => {
-		return dataSkills.map((dataSkill) => dataSkill.id);
-	};
-
 	const isSkillsNotAdded = () => {
 		return skills.length === 0;
 	};
 
 	const handleSubmit = () => {
 		handleSubmitChangeSpecialty({
+			id: index,
 			level: selectedLevel,
-			profession: profession.id,
-			skills: getSkillsforSubmit(skills),
-			id: data.id,
+			profession: profession,
+			skills: skills,
 		});
+
+		setIsShowViewEdit(!isShowViewEdit);
 	};
 
 	const handleDelete = () => {
-		handleDeleteSpecialty(data.id as number);
+		handleDeleteSpecialty(index);
 	};
+
+	useEffect(() => {
+		dispatch(
+			updateProjectSpecialist({
+				index: index,
+				specialist: {
+					profession: profession.id,
+					skills: toNum(skills),
+					count,
+					level: selectedLevel,
+					// eslint-disable-next-line camelcase
+					is_required: recruitmentIsOpen,
+				},
+			})
+		);
+	}, [
+		index,
+		count,
+		dispatch,
+		profession.id,
+		recruitmentIsOpen,
+		selectedLevel,
+		skills,
+	]);
 
 	return (
 		<div className={styles.specialityCard__wrapper}>
@@ -109,26 +143,39 @@ export const SpecialityCard: FC<SpecialityCardProps> = ({
 							styles.specialityCard__button,
 							styles.specialityCard__button_edit
 						)}
-						onClick={changeViewforEdit}
-					/>
+						onClick={changeViewforEdit}>
+						<Edit />
+					</button>
 					<h3 className={styles.specialityCard__title}>
-						{profession.specialization}, {getLevelName(selectedLevel)}
+						{profession.specialization} / {profession.specialty} ,{' '}
+						{getLevelName(selectedLevel)}
 					</h3>
 					<SkillsList skills={skills} />
+					<div className={styles.config}>
+						<Counter state={updateCounter} disabled={!recruitmentIsOpen} />
+						<div className={styles.config_toggle}>
+							<span>Набор {recruitmentIsOpen ? 'открыт' : 'закрыт'}</span>
+							<Toggler
+								checked={recruitmentIsOpen as boolean}
+								onChange={(evt) => setRecruitmentIsOpen(evt.target.checked)}
+							/>
+						</div>
+					</div>
 				</div>
 			) : (
 				<div className={styles.specialityCard}>
 					<button
 						type="button"
-						disabled={isLoadingDeleteSpecialty}
 						className={clsx(
 							styles.specialityCard__button,
 							styles.specialityCard__button_delete
 						)}
-						onClick={handleDelete}
-					/>
+						onClick={handleDelete}>
+						<Trash2 color="red" />
+					</button>
 					<h3 className={styles.specialityCard__title}>
-						{data.profession.specialization}, {getLevelName(selectedLevel)}
+						{profession.specialization} / {profession.specialty} ,{' '}
+						{getLevelName(selectedLevel)}
 					</h3>
 
 					<SelectWithSearch
@@ -154,7 +201,7 @@ export const SpecialityCard: FC<SpecialityCardProps> = ({
 							options={getSkills(allSkills)}
 							values={getSkills(skills)}
 							onChange={(item: Option[]) => {
-								editSkills(item );
+								editSkills(item);
 							}}
 						/>
 					</div>
@@ -163,7 +210,7 @@ export const SpecialityCard: FC<SpecialityCardProps> = ({
 						width="regular"
 						type="button"
 						onClick={handleSubmit}
-						disabled={isSkillsNotAdded() || isLoadingChangeSpecialty}>
+						disabled={isSkillsNotAdded()}>
 						Сохранить
 					</MainButton>
 				</div>

@@ -1,0 +1,40 @@
+@import '../../../shared/style/variables.scss';
+
+.specialityList {
+	display: flex;
+	// width: 816px;
+	padding: 32px;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 24px;
+	border-radius: 12px;
+	border: 1px solid $--border-default;
+	background: $--bg-primary;
+	@media screen and (max-width: 779px) {
+		border: none;
+	}
+	&__title {
+		margin: 0;
+		color: $--Foreground-default;
+		font-feature-settings:
+			'liga' off,
+			'clig' off;
+
+		/* Header/H5 */
+		font-family: $--open-sans-font;
+		font-size: 24px;
+		font-style: normal;
+		font-weight: 600;
+		line-height: 30px; /* 125% */
+	}
+
+	&__contentList {
+		width: 100%;
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		display: flex;
+		flex-direction: column;
+		gap: 24px;
+	}
+}
