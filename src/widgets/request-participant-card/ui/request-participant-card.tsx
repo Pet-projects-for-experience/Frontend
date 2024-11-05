@@ -4,6 +4,7 @@ import {CalendarIcon, ActivityIcon } from '@/shared/assets';
 import clsx from 'clsx';
 import { RequestParticipantCardType } from './types';
 import { getDate } from '@/shared/utils';
+
 import styles from './request-participant-card.module.scss';
 
 export const RequestParticipantCard: FC<RequestParticipantCardType> = ({
@@ -35,12 +36,15 @@ export const RequestParticipantCard: FC<RequestParticipantCardType> = ({
 								: 'заявка отклонена'}
 					</div>
 				</div>
+				<button type='button' className={styles.topInfoButton}/>
+
 			</div>
             <div className={styles.calendarContainer}>
 						<CalendarIcon className={styles.calendarIcon} />
 						<div
 							className={styles.calendarText}>{`${startDate}-${endDate}`}</div>
 					</div>
+					<h2 className={styles.title}>{project.name}</h2>
 		</article>
 	);
 };

@@ -68,6 +68,9 @@
 		font-weight: 600;
 		line-height: 30px;
 	}
+	&__icon {
+		fill: $--Colors-Pastel-Green;
+	}
 	&__nickname {
 		@extend %secondaryText;
 		font-size: 16px;

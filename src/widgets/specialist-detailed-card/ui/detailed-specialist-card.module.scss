@@ -45,6 +45,9 @@
 		height: 16px;
 		color: $--Colors-Pastel-Green;
 	}
+	&__icon {
+		fill:  $--Colors-Pastel-Green;
+	}
 	&__statusTitle {
 		@extend %baseText;
 		color: $--foreground-muted;
@@ -153,6 +156,7 @@
 		justify-content: center;
 		align-items: center;
 	}
+	
 }
 
 @media screen and (max-width: 1199px) {

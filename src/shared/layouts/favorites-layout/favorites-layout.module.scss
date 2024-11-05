@@ -6,17 +6,16 @@
     width: 816px;
     min-height: 100vh;
     gap: 24px;
+    @media screen and (max-width: 1199px) {
+		box-sizing: border-box;
+		padding: 0 16px 32px;
+		width: 780px;
+	}
 }
 
-@media screen and (max-width: 1199px) {
-    .favorites {
-        width: 780px;
-    }
-}
 @media screen and (max-width: 779px) {
     .favorites {
         max-width: 100%;
-        padding: 0 16px 32px;
     }
    
 }

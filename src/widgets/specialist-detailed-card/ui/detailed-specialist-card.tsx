@@ -62,7 +62,7 @@ export const DetailedSpecialistCard: FC<DetailedSpecialistCardTypes> = ({
 						<div className={styles.info__personStatus}>
 							{readyToParticipate ? (
 								<>
-									<ActivityIcon />
+									<ActivityIcon className={styles.info__icon}/>
 									<p className={styles.info__statusTitle}>
 										готов(а) к участию в проекте
 									</p>

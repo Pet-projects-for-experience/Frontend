@@ -4,5 +4,6 @@ export type RequestParticipantCardType = HTMLAttributes<HTMLElement> & {
 	project: {
 		started: string;
 		ended: string;
+		name: string;
 	};
 };
