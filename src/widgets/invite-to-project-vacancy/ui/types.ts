@@ -6,7 +6,7 @@ export type InviteToProjectVacancyType = {
 	project_specialists:  {
 		id: number;
 		specialization: string;
-		specialty: string;
+		speciality: string;
 	};
 
 };

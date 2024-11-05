@@ -21,7 +21,7 @@ export const ProjectCardFull: FC<ProjectCardFullType> = ({
 	ended,
 	name,
 	directions,
-	status,
+	project_status,
 	recruitment_status,
 	project_specialists,
 	busyness,
@@ -50,12 +50,12 @@ export const ProjectCardFull: FC<ProjectCardFullType> = ({
 					<ActivityIcon
 						className={clsx(
 							styles.activeStateIcon,
-							status === 'Активен' && styles.activeStateIcon_type_active,
-							status === 'Завершен' && styles.activeStateIcon_type_inactive
+							project_status === 'Активен' && styles.activeStateIcon_type_active,
+							project_status === 'Завершен' && styles.activeStateIcon_type_inactive
 						)}
 					/>
 					<div className={styles.activeStateText}>
-						{status === 'Активен' ? 'активный' : 'завершенный'}
+						{project_status === 'Активен' ? 'активный' : 'завершенный'}
 					</div>
 				</div>
 				<div className={styles.like}>
@@ -73,7 +73,7 @@ export const ProjectCardFull: FC<ProjectCardFullType> = ({
 						telegram_nick={telegram_nick}
 						email={email}
 						project_specialists={project_specialists}
-						status={status}
+						project_status={project_status}
 						favorite={is_favorite}
 					/>
 				</div>
@@ -106,7 +106,7 @@ export const ProjectCardFull: FC<ProjectCardFullType> = ({
 							<li
 								className={styles.profession}
 								style={{
-									backgroundColor: `${getColorTag(item.profession.specialty)}`,
+									backgroundColor: `${getColorTag(item.profession.speciality)}`,
 								}}
 								key={item.id}>
 								{item.profession?.specialization}

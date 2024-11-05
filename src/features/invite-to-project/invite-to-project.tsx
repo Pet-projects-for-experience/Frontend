@@ -17,7 +17,7 @@ export const InviteToProjectFeature = ({
 			profession: {
 				id: number;
 				specialization: string;
-				specialty: string;
+				speciality: string;
 			};
 		}
 	] 

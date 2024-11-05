@@ -22,7 +22,7 @@ export const ProjectCardDetailed: FC<ProjectCardDetailType> = ({
 	owner,
 	started,
 	ended,
-	status,
+	project_status,
 	project_specialists,
 	unique_project_participants_skills,
 	project_participants,
@@ -42,13 +42,13 @@ export const ProjectCardDetailed: FC<ProjectCardDetailType> = ({
 						<ActivityIcon
 							className={clsx(
 								styles.activeStateIcon,
-								status === 'Активен' && styles.activeStateIcon_type_active,
-								status === 'Завершен' && styles.activeStateIcon_type_inactive
+								project_status === 'Активен' && styles.activeStateIcon_type_active,
+								project_status === 'Завершен' && styles.activeStateIcon_type_inactive
 							)}
 						/>
 						<div className={styles.activeStateText}>
-							{status === 'Активен' ? 'активный' : ' '}
-							{status === 'Завершен' ? 'завершенный' : ' '}
+							{project_status === 'Активен' ? 'активный' : ' '}
+							{project_status === 'Завершен' ? 'завершенный' : ' '}
 						</div>
 					</div>
 					<div className={styles.like}>
@@ -66,7 +66,7 @@ export const ProjectCardDetailed: FC<ProjectCardDetailType> = ({
 							telegram_nick={telegram_nick}
 							email={email}
 							project_specialists={project_specialists}
-							status={status}
+							project_status={project_status}
 							favorite={is_favorite}
 						/>
 					</div>
@@ -135,7 +135,7 @@ export const ProjectCardDetailed: FC<ProjectCardDetailType> = ({
 								return (
 									<Person
 										title={person.profession.specialization}
-										color={getColorTag(person.profession.specialty)}
+										color={getColorTag(person.profession.speciality)}
 										key={person.id}
 										id={person.user_id}
 										avatar={person.avatar}
@@ -171,7 +171,7 @@ export const ProjectCardDetailed: FC<ProjectCardDetailType> = ({
 							<VacancyCard
 								name={name}
 								key={item.id}
-								title={`${item.profession.specialization} / ${item.profession.specialty} / ${item.level}`}
+								title={`${item.profession.specialization} / ${item.level}`}
 								skills={item.skills}
 								count={item.count as number}
 								projectId={idProject}

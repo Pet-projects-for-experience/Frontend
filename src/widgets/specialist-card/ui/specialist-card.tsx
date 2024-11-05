@@ -55,7 +55,6 @@ export const SpecialistCard: FC<SpecialistCardType> = ({
 						<div>
 							{specialists[0] &&
 								`${specialists[0].profession.specialization} \t/\t`}
-							{specialists[0] && `${specialists[0].profession.specialty},`}
 							{clsx(
 								specialists[0] && specialists[0].level === 1 && '\t Junior',
 								specialists[0] && specialists[0].level === 2 && '\t Middle',
@@ -77,7 +76,6 @@ export const SpecialistCard: FC<SpecialistCardType> = ({
 						<div>
 							{specialists[1] &&
 								`${specialists[1]?.profession?.specialization} \t/\t`}
-							{specialists[1] && `${specialists[1]?.profession?.specialty},`}
 							{clsx(
 								specialists[1] && specialists[1].level === 1 && '\t Junior',
 								specialists[1] && specialists[1].level === 2 && '\t Middle',
