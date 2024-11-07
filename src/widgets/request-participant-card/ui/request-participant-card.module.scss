@@ -43,6 +43,7 @@
 	letter-spacing: 0%;
 	padding-top: 22px;
 	margin: 0;
+	font-family: $--open-sans-font;
 
 	@media screen and (max-width: 779px) {
 		font-size: 20px;
@@ -51,6 +52,32 @@
 		letter-spacing: 0.25px;
 		padding-top: 27px;
 	}
+}
+.titleCover {
+	font-size: 16px;
+	font-weight: 700;
+	line-height: normal;
+	letter-spacing: 0.25px;
+	margin: 0;
+	font-family: $--open-sans-font;
+}
+.subtitle {
+	font-size: 14px;
+	font-weight: 400;
+	line-height: 19px;
+	letter-spacing: 0.25px;
+	margin: 0;
+	padding-top: 8px;
+	font-family: $--open-sans-font;
+}
+.subtitlePosition {
+	font-size: 20px;
+	font-weight: 400;
+	line-height: 30px;
+	letter-spacing: 0.25px;
+	margin: 0;
+	padding-top: 16px;
+	font-family: $--open-sans-font;
 }
 .activeStateIcon {
 	padding-right: 14px;
@@ -99,4 +126,37 @@
 	letter-spacing: 0.25px;
 	color: $--foreground-muted;
 	font-family: $--open-sans-font;
+}
+.menu {
+	display: flex;
+	flex-direction: column;
+}
+.menuTitle {
+	margin-top: 16px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+.menuCover {
+	display: none;
+	padding: 0;
+
+	&_visible {
+		display: flex;
+	}
+	&__text {
+		display: flex;
+		align-items: center;
+		font-size: 16px;
+		font-weight: 400;
+		line-height: 24pxpx;
+		letter-spacing: 0.25px;
+		margin: 0;
+		font-family: $--open-sans-font;
+	}
+}
+.menuIcon {
+	width: 24px;
+	height: 24px;
+	cursor: pointer;
 }

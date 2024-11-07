@@ -10,6 +10,7 @@ export const MainButton: FC<MainButtonProps> = ({
 	IconRight,
 	variant,
 	width,
+	isActive,
 	...props
 }) => {
 	const getClassnameForType = (
@@ -19,7 +20,7 @@ export const MainButton: FC<MainButtonProps> = ({
 			case 'primary':
 				return styles.buttonPrimary;
 			case 'secondary':
-				return styles.buttonSecondary;
+				return clsx(styles.buttonSecondary, {[styles.buttonSecondary_type_active] : isActive});
 			case 'trivial':
 				return styles.buttonTrivial;
 			case 'inverse':

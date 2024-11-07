@@ -59,6 +59,10 @@
 		color: rgb(166, 166, 166);
 		box-shadow: none;
 	}
+	&_type_active {
+		border:  1px solid #8caaff;
+		
+	}
 }
 
 .buttonTrivial {

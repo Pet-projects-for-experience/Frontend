@@ -1,17 +1,22 @@
 /* eslint-disable camelcase */
-import React, { FC } from 'react';
-import {CalendarIcon, ActivityIcon } from '@/shared/assets';
+import React, { FC, useState } from 'react';
+import { CalendarIcon, ActivityIcon } from '@/shared/assets';
+import IconUp from '@/shared/assets/icons/chevron-up.svg';
+import IconDown from '@/shared/assets/icons/chevron-down.svg';
 import clsx from 'clsx';
 import { RequestParticipantCardType } from './types';
 import { getDate } from '@/shared/utils';
-
+import parse from 'html-react-parser';
 import styles from './request-participant-card.module.scss';
 
 export const RequestParticipantCard: FC<RequestParticipantCardType> = ({
 	request_status,
-    project,
+	project,
+	position,
+	cover_letter,
 }) => {
-    const startDate = getDate(project.started);
+	const [isOpenMenu, setIsOpenMenu] = useState(false);
+	const startDate = getDate(project.started);
 	const endDate = getDate(project.ended);
 	return (
 		<article className={styles.cardContainer}>
@@ -36,15 +41,37 @@ export const RequestParticipantCard: FC<RequestParticipantCardType> = ({
 								: 'заявка отклонена'}
 					</div>
 				</div>
-				<button type='button' className={styles.topInfoButton}/>
-
+				<button type="button" className={styles.topInfoButton} />
 			</div>
-            <div className={styles.calendarContainer}>
-						<CalendarIcon className={styles.calendarIcon} />
-						<div
-							className={styles.calendarText}>{`${startDate}-${endDate}`}</div>
-					</div>
-					<h2 className={styles.title}>{project.name}</h2>
+			<div className={styles.calendarContainer}>
+				<CalendarIcon className={styles.calendarIcon} />
+				<div className={styles.calendarText}>{`${startDate}-${endDate}`}</div>
+			</div>
+			<h2 className={styles.title}>{project.name}</h2>
+			<p className={styles.subtitle}>{project.directions[0].name}</p>
+			<p className={styles.subtitlePosition}>{position}</p>
+			<div className={styles.menu}>
+				<div
+					className={styles.menuTitle}
+					onClick={() => {
+						setIsOpenMenu(!isOpenMenu);
+					}}>
+					<h3 className={styles.titleCover}>Сопроводительное письмо</h3>
+					{isOpenMenu ? (
+						<IconUp className={styles.menuIcon} />
+					) : (
+						<IconDown className={styles.menuIcon} />
+					)}
+				</div>
+				<div
+					className={clsx(styles.menuCover, {
+						[styles.menuCover_visible]: isOpenMenu,
+					})}>
+					<h4 className={styles.menuCover__text}>
+						{parse(parse(cover_letter) as string)}
+					</h4>
+				</div>
+			</div>
 		</article>
 	);
 };

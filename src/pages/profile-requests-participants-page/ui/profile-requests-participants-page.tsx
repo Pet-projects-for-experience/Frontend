@@ -29,14 +29,16 @@ export const ProfileRequestsParticipants = () => {
 					type="button"
 					variant="secondary"
 					width="regular"
-					onClick={handleClickConsiderationRequests}>
+					onClick={handleClickConsiderationRequests}
+					isActive={isUnderConsiderationRequests}>
 					На рассмотрении
 				</MainButton>
 				<MainButton
 					type="button"
 					variant="secondary"
 					width="regular"
-					onClick={handleClickRejectedRequests}>
+					onClick={handleClickRejectedRequests}
+					isActive={isRejectedRequests}>
 					Отклонены
 				</MainButton>
 			</div>
@@ -57,6 +59,8 @@ export const ProfileRequestsParticipants = () => {
 								key={card.id}
 								request_status={card.request_status}
 								project={card.project}
+								position={card.position}
+								cover_letter={card.cover_letter}
 							/>
 						)
 					)
