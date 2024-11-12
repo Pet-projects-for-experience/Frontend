@@ -68,7 +68,7 @@ export const RequestParticipantCard: FC<RequestParticipantCardType> = ({
 						[styles.menuCover_visible]: isOpenMenu,
 					})}>
 					<h4 className={styles.menuCover__text}>
-						{parse(parse(cover_letter) as string)}
+						{cover_letter === null ? ' ' : parse(cover_letter)}
 					</h4>
 				</div>
 			</div>

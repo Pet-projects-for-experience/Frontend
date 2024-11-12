@@ -13,6 +13,7 @@ import {
 import { InviteSpecialist } from '@/widgets/invite-specialist';
 import { BlankCard } from '@/shared/ui/blank-card/blank-card';
 import { SpecialistsToFavoritesFeature } from '@/features';
+import parse from 'html-react-parser';
 import styles from './detailed-specialist-card.module.scss';
 
 export const DetailedSpecialistCard: FC<DetailedSpecialistCardTypes> = ({
@@ -85,7 +86,11 @@ export const DetailedSpecialistCard: FC<DetailedSpecialistCardTypes> = ({
 				<div className={styles.specialist__info}>
 					<div className={styles.info__wrapper}>
 						<h3 className={styles.info__title}>О себе</h3>
-						<p className={styles.info__sideText}>{`${properyCheck(about)}`}</p>
+						<h4 className={styles.info__sideText}>{
+							// about.includes('&lt') ? parse((parse(about) as string)) : parse(about)}
+							parse(about) 
+						}
+							</h4>
 						
 					</div>
 					<div className={styles.info__title}>

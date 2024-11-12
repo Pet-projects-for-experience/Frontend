@@ -42,9 +42,15 @@ export const projectsApi = createApi({
 				method: 'GET',
 			}),
 		}),
-		getRequestsParticipation: builder.query({
-			query: () => ({
-				url: `/projects/requests/`,
+		getAllRequestsParticipation: builder.query({
+			query: ({role, currentPage, query}) => ({
+				url: `/projects/requests/?role=${role}&page=${currentPage}&search=${query}`,  
+				method: 'GET',
+			}),
+		}),
+		getFilterRequestsParticipation: builder.query({
+			query: ({roleStatus, page, queryValue, statusNumber}) => ({  
+				url: `/projects/requests/?role=${roleStatus}&page=${page}&search=${queryValue}&request_status=${statusNumber}`,  
 				method: 'GET',
 			}),
 		}),
@@ -77,7 +83,8 @@ export const {
 	useGetProjectsPreviewMainQuery,
 	useGetAllProjectsQuery,
 	useGetProjectByIdQuery,
-	useGetRequestsParticipationQuery,
+	useGetAllRequestsParticipationQuery,
+	useGetFilterRequestsParticipationQuery,
 	useRequestParticipationInProjectsMutation,
 	useAddFavoriteProjectMutation,
 	useDeleteFavoriteProjectMutation,
