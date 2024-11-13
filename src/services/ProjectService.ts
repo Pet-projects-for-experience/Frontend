@@ -43,14 +43,14 @@ export const projectsApi = createApi({
 			}),
 		}),
 		getAllRequestsParticipation: builder.query({
-			query: ({role, currentPage, query}) => ({
-				url: `/projects/requests/?role=${role}&page=${currentPage}&search=${query}`,  
+			query: ({role, currentPage}) => ({
+				url: `/projects/requests/?role=${role}&page=${currentPage}`,  
 				method: 'GET',
 			}),
 		}),
 		getFilterRequestsParticipation: builder.query({
-			query: ({roleStatus, page, queryValue, statusNumber}) => ({  
-				url: `/projects/requests/?role=${roleStatus}&page=${page}&search=${queryValue}&request_status=${statusNumber}`,  
+			query: ({roleStatus, page, statusNumber}) => ({  
+				url: `/projects/requests/?role=${roleStatus}&page=${page}&request_status=${statusNumber}`,  
 				method: 'GET',
 			}),
 		}),

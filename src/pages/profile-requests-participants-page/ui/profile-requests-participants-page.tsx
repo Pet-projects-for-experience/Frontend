@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useState /*useEffect*/ } from 'react';
 import {
 	useGetAllRequestsParticipationQuery,
 	useGetFilterRequestsParticipationQuery,
@@ -19,13 +19,11 @@ export const ProfileRequestsParticipants = () => {
 	const [isRejectedRequests, setIsRejectedRequests] = useState(false);
 	const [currentSettingsAllRequests, setCurrentSettingsAllRequests] = useState({
 		currentPage: 1,
-		query: '',
 		role: 'participation',
 	});
 	const [currentSettingsFilterRequests, setCurrentSettingsFilterRequests] =
 		useState({
 			page: 1,
-			queryValue: '',
 			roleStatus: 'participation',
 			statusNumber: 1,
 		});
@@ -39,7 +37,6 @@ export const ProfileRequestsParticipants = () => {
 	const { data: requestsAcceptedParticipation } =
 		useGetFilterRequestsParticipationQuery({
 			page: 1,
-			queryValue: '',
 			roleStatus: 'participation',
 			statusNumber: 2,
 		});
@@ -47,7 +44,6 @@ export const ProfileRequestsParticipants = () => {
 	const { data: requestsRejectedParticipation } =
 		useGetFilterRequestsParticipationQuery({
 			page: 1,
-			queryValue: '',
 			roleStatus: 'participation',
 			statusNumber: 3,
 		});
@@ -63,7 +59,8 @@ export const ProfileRequestsParticipants = () => {
 					onClick={() =>
 						setIsUnderConsiderationRequests(!isUnderConsiderationRequests)
 					}
-					isActive={isUnderConsiderationRequests}>
+					isActive={isUnderConsiderationRequests}
+					disabled={isAcceptedRequests === true || isRejectedRequests === true}>
 					На рассмотрении
 				</MainButton>
 				<MainButton
@@ -71,7 +68,10 @@ export const ProfileRequestsParticipants = () => {
 					variant="secondary"
 					width="regular"
 					onClick={() => setIsAcceptedRequests(!isAcceptedRequests)}
-					isActive={isAcceptedRequests}>
+					isActive={isAcceptedRequests}
+					disabled={
+						isRejectedRequests === true || isUnderConsiderationRequests === true
+					}>
 					Приняты
 				</MainButton>
 				<MainButton
@@ -79,11 +79,12 @@ export const ProfileRequestsParticipants = () => {
 					variant="secondary"
 					width="regular"
 					onClick={() => setIsRejectedRequests(!isRejectedRequests)}
-					isActive={isRejectedRequests}>
+					isActive={isRejectedRequests}
+					disabled={
+						isAcceptedRequests === true || isUnderConsiderationRequests === true
+					}>
 					Отклонены
 				</MainButton>
-			</div>
-			<div className={styles.inputSearch}>
 			</div>
 			<div className={styles.cards}>
 				{isLoading ? (
@@ -143,7 +144,6 @@ export const ProfileRequestsParticipants = () => {
 					onPageChange={(page) =>
 						setCurrentSettingsFilterRequests({
 							page: Number(page),
-							queryValue: currentSettingsFilterRequests.queryValue,
 							roleStatus: currentSettingsFilterRequests.roleStatus,
 							statusNumber: currentSettingsFilterRequests.statusNumber,
 						})
@@ -160,7 +160,6 @@ export const ProfileRequestsParticipants = () => {
 					onPageChange={(page) =>
 						setCurrentSettingsFilterRequests({
 							page: Number(page),
-							queryValue: currentSettingsFilterRequests.queryValue,
 							roleStatus: currentSettingsFilterRequests.roleStatus,
 							statusNumber: currentSettingsFilterRequests.statusNumber,
 						})
@@ -176,7 +175,6 @@ export const ProfileRequestsParticipants = () => {
 					onPageChange={(page) =>
 						setCurrentSettingsFilterRequests({
 							page: Number(page),
-							queryValue: currentSettingsFilterRequests.queryValue,
 							roleStatus: currentSettingsFilterRequests.roleStatus,
 							statusNumber: currentSettingsFilterRequests.statusNumber,
 						})
@@ -192,7 +190,6 @@ export const ProfileRequestsParticipants = () => {
 					onPageChange={(page) =>
 						setCurrentSettingsAllRequests({
 							currentPage: Number(page),
-							query: currentSettingsAllRequests.query,
 							role: currentSettingsAllRequests.role,
 						})
 					}

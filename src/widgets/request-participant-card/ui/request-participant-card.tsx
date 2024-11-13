@@ -7,6 +7,7 @@ import clsx from 'clsx';
 import { RequestParticipantCardType } from './types';
 import { getDate } from '@/shared/utils';
 import parse from 'html-react-parser';
+import { MainButton, PopUp } from '@/shared/ui';
 import styles from './request-participant-card.module.scss';
 
 export const RequestParticipantCard: FC<RequestParticipantCardType> = ({
@@ -18,6 +19,7 @@ export const RequestParticipantCard: FC<RequestParticipantCardType> = ({
 	const [isOpenMenu, setIsOpenMenu] = useState(false);
 	const startDate = getDate(project.started);
 	const endDate = getDate(project.ended);
+	const [isPopupOpen, setIsPopupOpen] = useState(false);
 	return (
 		<article className={styles.cardContainer}>
 			<div className={styles.topInfo}>
@@ -41,7 +43,12 @@ export const RequestParticipantCard: FC<RequestParticipantCardType> = ({
 								: 'заявка отклонена'}
 					</div>
 				</div>
-				<button type="button" className={styles.topInfoButton} />
+				<button
+					name="delete-button"
+					type="button"
+					className={styles.topInfoButton}
+					onClick={() => setIsPopupOpen(true)}
+				/>
 			</div>
 			<div className={styles.calendarContainer}>
 				<CalendarIcon className={styles.calendarIcon} />
@@ -72,6 +79,22 @@ export const RequestParticipantCard: FC<RequestParticipantCardType> = ({
 					</h4>
 				</div>
 			</div>
+			<PopUp
+				visible={isPopupOpen}
+				title="Удаление заявки"
+				onClose={() => setIsPopupOpen(false)}>
+				<span>
+					Заявка на проект будет аннулирована и удалена у организатора
+				</span>
+				<div>
+					<MainButton variant="primary" width="regular" type="button">
+						Удалить
+					</MainButton>
+					<MainButton variant="secondary" width="regular" type="button">
+						Оставить
+					</MainButton>
+				</div>
+			</PopUp>
 		</article>
 	);
 };
