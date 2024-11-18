@@ -20,13 +20,7 @@
 	justify-content: space-between;
 	color: $--Neutral-Light-Grey-03;
 }
-.topInfoButton {
-	width: 24px;
-	height: 24px;
-	border: none;
-	background: url('../../../shared/assets/icons/delete-red.svg') center;
-	cursor: pointer;
-}
+
 .activeStateContainer {
 	display: flex;
 	align-items: center;

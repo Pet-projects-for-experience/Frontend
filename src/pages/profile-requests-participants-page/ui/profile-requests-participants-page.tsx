@@ -98,6 +98,7 @@ export const ProfileRequestsParticipants = () => {
 								project={card.project}
 								position={card.position}
 								cover_letter={card.cover_letter}
+								id={card.id}
 							/>
 						)
 					)
@@ -110,6 +111,7 @@ export const ProfileRequestsParticipants = () => {
 								project={card.project}
 								position={card.position}
 								cover_letter={card.cover_letter}
+								id={card.id}
 							/>
 						)
 					)
@@ -122,6 +124,7 @@ export const ProfileRequestsParticipants = () => {
 								project={card.project}
 								position={card.position}
 								cover_letter={card.cover_letter}
+								id={card.id}
 							/>
 						)
 					)
@@ -134,6 +137,7 @@ export const ProfileRequestsParticipants = () => {
 								project={card.project}
 								position={card.position}
 								cover_letter={card.cover_letter}
+								id={card.id}
 							/>
 						)
 					)

@@ -1,0 +1,23 @@
+@import '@/shared/style/variables.scss';
+.topInfoButton {
+	width: 24px;
+	height: 24px;
+	border: none;
+	background: url('../../../shared/assets/icons/delete-red.svg') center;
+	cursor: pointer;
+}
+.popupSubtitle {
+	font-family: $--open-sans-font;
+	font-size: 16px;
+	font-weight: 400;
+	line-height: 24px;
+	letter-spacing: 0.25px;
+	margin: 8px 0 0;
+	align-self: flex-start;
+}
+.popupButtons {
+	display: flex;
+	align-self: flex-start;
+	margin-top: 32px;
+	gap: 16px;
+}
