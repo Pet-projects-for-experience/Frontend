@@ -15,7 +15,7 @@ export const RequestParticipantCard: FC<RequestParticipantCardType> = ({
 	project,
 	position,
 	cover_letter,
-	id
+	id,
 }) => {
 	const [isOpenMenu, setIsOpenMenu] = useState(false);
 	const startDate = getDate(project.started);
@@ -43,7 +43,7 @@ export const RequestParticipantCard: FC<RequestParticipantCardType> = ({
 								: 'заявка отклонена'}
 					</div>
 				</div>
-				<DeleteRequestParticipantFeature id={id}/>
+				<DeleteRequestParticipantFeature id={Number(id)}/>
 			</div>
 			<div className={styles.calendarContainer}>
 				<CalendarIcon className={styles.calendarIcon} />

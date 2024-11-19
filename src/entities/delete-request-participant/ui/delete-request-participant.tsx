@@ -7,11 +7,19 @@ import styles from './delete-request-participant.module.scss';
 export const DeleteRequestParticipant = ({
     id,
 	handleDeleteButton,
+	
 }: {
     id: number,
 	handleDeleteButton: (id: number) => void;
+
 }) => {
 	const [isPopupOpen, setIsPopupOpen] = useState(false);
+
+	const handleDeleteRequestParticipant = () => {
+		handleDeleteButton(id);
+	    setIsPopupOpen(false);
+		
+	}
 
 	return (
 		<>
@@ -33,10 +41,7 @@ export const DeleteRequestParticipant = ({
 						variant="primary"
 						width="regular"
 						type="button"
-						onClick={() => {
-                            handleDeleteButton(id);
-                            setIsPopupOpen(false)
-                        }}>
+						onClick={handleDeleteRequestParticipant}>
 						Удалить
 					</MainButton>
 					<MainButton

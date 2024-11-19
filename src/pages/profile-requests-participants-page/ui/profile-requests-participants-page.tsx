@@ -4,11 +4,13 @@ import {
 	useGetAllRequestsParticipationQuery,
 	useGetFilterRequestsParticipationQuery,
 } from '@/services/ProjectService';
-import { RequestParticipantCard } from '@/widgets/request-participant-card';
+//import { RequestParticipantCard } from '@/widgets/request-participant-card';
 import { MainButton } from '@/shared/ui';
 import { Loader } from '@/shared/ui';
-import { RequestParticipantCardType } from '@/widgets/request-participant-card/ui/types';
+//import { RequestParticipantCardType } from '@/widgets/request-participant-card/ui/types';
 import { Pagination } from '@/entities';
+import { NotificationToastContainer } from '@/widgets/notification-toast';
+import { ListRequestsParticipants } from '@/widgets/list-requests-participants';
 import styles from './profile-requests-participants-page.module.scss';
 
 export const ProfileRequestsParticipants = () => {
@@ -90,57 +92,67 @@ export const ProfileRequestsParticipants = () => {
 				{isLoading ? (
 					<Loader />
 				) : isUnderConsiderationRequests ? (
-					requestsConsiderationParticipation?.results?.map(
-						(card: RequestParticipantCardType) => (
-							<RequestParticipantCard
-								key={card.id}
-								request_status={card.request_status}
-								project={card.project}
-								position={card.position}
-								cover_letter={card.cover_letter}
-								id={card.id}
-							/>
-						)
-					)
+					// requestsConsiderationParticipation?.results?.map(
+					// 	(card: RequestParticipantCardType) => (
+					// 		<RequestParticipantCard
+					// 			key={card.id}
+					// 			request_status={card.request_status}
+					// 			project={card.project}
+					// 			position={card.position}
+					// 			cover_letter={card.cover_letter}
+					// 			id={card.id}
+					// 		/>
+					// 	)
+					// )
+					<ListRequestsParticipants
+						array={requestsConsiderationParticipation?.results}
+					/>
 				) : isRejectedRequests ? (
-					requestsRejectedParticipation?.results?.map(
-						(card: RequestParticipantCardType) => (
-							<RequestParticipantCard
-								key={card.id}
-								request_status={card.request_status}
-								project={card.project}
-								position={card.position}
-								cover_letter={card.cover_letter}
-								id={card.id}
-							/>
-						)
-					)
+					// requestsRejectedParticipation?.results?.map(
+					// 	(card: RequestParticipantCardType) => (
+					// 		<RequestParticipantCard
+					// 			key={card.id}
+					// 			request_status={card.request_status}
+					// 			project={card.project}
+					// 			position={card.position}
+					// 			cover_letter={card.cover_letter}
+					// 			id={card.id}
+					// 		/>
+					// 	)
+					// )
+					<ListRequestsParticipants
+						array={requestsRejectedParticipation?.results}
+					/>
 				) : isAcceptedRequests ? (
-					requestsAcceptedParticipation?.results?.map(
-						(card: RequestParticipantCardType) => (
-							<RequestParticipantCard
-								key={card.id}
-								request_status={card.request_status}
-								project={card.project}
-								position={card.position}
-								cover_letter={card.cover_letter}
-								id={card.id}
-							/>
-						)
-					)
+					// requestsAcceptedParticipation?.results?.map(
+					// 	(card: RequestParticipantCardType) => (
+					// 		<RequestParticipantCard
+					// 			key={card.id}
+					// 			request_status={card.request_status}
+					// 			project={card.project}
+					// 			position={card.position}
+					// 			cover_letter={card.cover_letter}
+					// 			id={card.id}
+					// 		/>
+					// 	)
+					// )
+					<ListRequestsParticipants
+						array={requestsAcceptedParticipation?.results}
+					/>
 				) : (
-					requestsParticipation?.results?.map(
-						(card: RequestParticipantCardType) => (
-							<RequestParticipantCard
-								key={card.id}
-								request_status={card.request_status}
-								project={card.project}
-								position={card.position}
-								cover_letter={card.cover_letter}
-								id={card.id}
-							/>
-						)
-					)
+					// requestsParticipation?.results?.map(
+					// 	(card: RequestParticipantCardType) => (
+					// 		<RequestParticipantCard
+					// 			key={card.id}
+					// 			request_status={card.request_status}
+					// 			project={card.project}
+					// 			position={card.position}
+					// 			cover_letter={card.cover_letter}
+					// 			id={card.id}
+					// 		/>
+					// 	)
+					// )
+					<ListRequestsParticipants array={requestsParticipation?.results} />
 				)}
 			</div>
 			{isUnderConsiderationRequests ? (
@@ -202,6 +214,7 @@ export const ProfileRequestsParticipants = () => {
 					pageSize={pageSize}
 				/>
 			)}
+			<NotificationToastContainer />
 		</section>
 	);
 };
