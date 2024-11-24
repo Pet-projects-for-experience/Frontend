@@ -1,13 +1,11 @@
 'use client';
-import React, { useState /*useEffect*/ } from 'react';
+import React, { useState } from 'react';
 import {
 	useGetAllRequestsParticipationQuery,
 	useGetFilterRequestsParticipationQuery,
 } from '@/services/ProjectService';
-//import { RequestParticipantCard } from '@/widgets/request-participant-card';
 import { MainButton } from '@/shared/ui';
 import { Loader } from '@/shared/ui';
-//import { RequestParticipantCardType } from '@/widgets/request-participant-card/ui/types';
 import { Pagination } from '@/entities';
 import { NotificationToastContainer } from '@/widgets/notification-toast';
 import { ListRequestsParticipants } from '@/widgets/list-requests-participants';
@@ -15,8 +13,7 @@ import styles from './profile-requests-participants-page.module.scss';
 
 export const ProfileRequestsParticipants = () => {
 	const pageSize = 7;
-	const [isUnderConsiderationRequests, setIsUnderConsiderationRequests] =
-		useState(false);
+	const [isUnderConsiderationRequests, setIsUnderConsiderationRequests] = useState(false);
 	const [isAcceptedRequests, setIsAcceptedRequests] = useState(false);
 	const [isRejectedRequests, setIsRejectedRequests] = useState(false);
 	const [currentSettingsAllRequests, setCurrentSettingsAllRequests] = useState({
@@ -30,7 +27,7 @@ export const ProfileRequestsParticipants = () => {
 			statusNumber: 1,
 		});
 
-	const { data: requestsParticipation, isLoading } =
+	const { data: allRequestsParticipation, isLoading } =
 		useGetAllRequestsParticipationQuery(currentSettingsAllRequests);
 
 	const { data: requestsConsiderationParticipation } =
@@ -50,7 +47,7 @@ export const ProfileRequestsParticipants = () => {
 			statusNumber: 3,
 		});
 
-	//console.log(requestsParticipation);
+	//console.log(allRequestsParticipation);
 	return (
 		<section className={styles.requests}>
 			<div className={styles.buttons}>
@@ -92,67 +89,21 @@ export const ProfileRequestsParticipants = () => {
 				{isLoading ? (
 					<Loader />
 				) : isUnderConsiderationRequests ? (
-					// requestsConsiderationParticipation?.results?.map(
-					// 	(card: RequestParticipantCardType) => (
-					// 		<RequestParticipantCard
-					// 			key={card.id}
-					// 			request_status={card.request_status}
-					// 			project={card.project}
-					// 			position={card.position}
-					// 			cover_letter={card.cover_letter}
-					// 			id={card.id}
-					// 		/>
-					// 	)
-					// )
 					<ListRequestsParticipants
-						array={requestsConsiderationParticipation?.results}
+						arrayRequests={requestsConsiderationParticipation?.results}
 					/>
 				) : isRejectedRequests ? (
-					// requestsRejectedParticipation?.results?.map(
-					// 	(card: RequestParticipantCardType) => (
-					// 		<RequestParticipantCard
-					// 			key={card.id}
-					// 			request_status={card.request_status}
-					// 			project={card.project}
-					// 			position={card.position}
-					// 			cover_letter={card.cover_letter}
-					// 			id={card.id}
-					// 		/>
-					// 	)
-					// )
 					<ListRequestsParticipants
-						array={requestsRejectedParticipation?.results}
+						arrayRequests={requestsRejectedParticipation?.results}
 					/>
 				) : isAcceptedRequests ? (
-					// requestsAcceptedParticipation?.results?.map(
-					// 	(card: RequestParticipantCardType) => (
-					// 		<RequestParticipantCard
-					// 			key={card.id}
-					// 			request_status={card.request_status}
-					// 			project={card.project}
-					// 			position={card.position}
-					// 			cover_letter={card.cover_letter}
-					// 			id={card.id}
-					// 		/>
-					// 	)
-					// )
 					<ListRequestsParticipants
-						array={requestsAcceptedParticipation?.results}
+						arrayRequests={requestsAcceptedParticipation?.results}
 					/>
 				) : (
-					// requestsParticipation?.results?.map(
-					// 	(card: RequestParticipantCardType) => (
-					// 		<RequestParticipantCard
-					// 			key={card.id}
-					// 			request_status={card.request_status}
-					// 			project={card.project}
-					// 			position={card.position}
-					// 			cover_letter={card.cover_letter}
-					// 			id={card.id}
-					// 		/>
-					// 	)
-					// )
-					<ListRequestsParticipants array={requestsParticipation?.results} />
+					<ListRequestsParticipants
+						arrayRequests={allRequestsParticipation?.results}
+					/>
 				)}
 			</div>
 			{isUnderConsiderationRequests ? (
@@ -209,7 +160,7 @@ export const ProfileRequestsParticipants = () => {
 							role: currentSettingsAllRequests.role,
 						})
 					}
-					totalCount={requestsParticipation && requestsParticipation.count}
+					totalCount={allRequestsParticipation && allRequestsParticipation.count}
 					currentPage={currentSettingsAllRequests.currentPage}
 					pageSize={pageSize}
 				/>

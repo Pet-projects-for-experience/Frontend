@@ -43,7 +43,7 @@ export const RequestParticipantCard: FC<RequestParticipantCardType> = ({
 								: 'заявка отклонена'}
 					</div>
 				</div>
-				<DeleteRequestParticipantFeature id={Number(id)}/>
+				<DeleteRequestParticipantFeature id={Number(id)} />
 			</div>
 			<div className={styles.calendarContainer}>
 				<CalendarIcon className={styles.calendarIcon} />

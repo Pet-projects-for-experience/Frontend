@@ -5,7 +5,7 @@ const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 export const projectsApi = createApi({
 	reducerPath: 'projectsApi',
-	tagTypes: ['Projects'],
+	tagTypes: ['FavoritesProjects', 'RequestsParticipantsInProjects'],
 	baseQuery: fetchBaseQuery({
 		baseUrl: `https://${BASE_URL}/api/v1`,
 		prepareHeaders: async (headers) => {
@@ -34,7 +34,7 @@ export const projectsApi = createApi({
 				url: `/projects/?is_favorite=1&page=${currentPage}&search=${query}`,
 				method: 'GET',
 			}),
-			providesTags: ['Projects'],
+			providesTags: ['FavoritesProjects'],
 		}),
 		getProjectById: builder.query({
 			query: ({ id }) => ({
@@ -47,18 +47,24 @@ export const projectsApi = createApi({
 				url: `/projects/requests/?role=${role}&page=${currentPage}`,  
 				method: 'GET',
 			}),
+			keepUnusedDataFor: 0,
+			providesTags: ['RequestsParticipantsInProjects']
 		}),
 		getFilterRequestsParticipation: builder.query({
 			query: ({roleStatus, page, statusNumber}) => ({  
 				url: `/projects/requests/?role=${roleStatus}&page=${page}&request_status=${statusNumber}`,  
 				method: 'GET',
 			}),
+			keepUnusedDataFor: 0,
+			providesTags: ['RequestsParticipantsInProjects']
 		}),
 		deleteRequestsParticipation: builder.mutation({
 			query: (id) => ({  
 				url: `/projects/requests/${id}/`,  
 				method: 'DELETE',
 			}),
+			invalidatesTags: ['RequestsParticipantsInProjects'],
+			
 		}),
 		requestParticipationInProjects: builder.mutation<IProjectsRequests,IProjectsRequests>({
 			query: (projects) => ({
@@ -73,14 +79,14 @@ export const projectsApi = createApi({
 				method: 'POST',
 				body: project,
 			}),
-			invalidatesTags: ['Projects'],
+			invalidatesTags: ['FavoritesProjects'],
 		}),
 		deleteFavoriteProject: builder.mutation({
 			query: (id) => ({
 				url: `/projects/${id}/favorite/`,
 				method: 'DELETE',
 			}),
-			invalidatesTags: ['Projects'],
+			invalidatesTags: ['FavoritesProjects'],
 		}),
 	}),
 });
