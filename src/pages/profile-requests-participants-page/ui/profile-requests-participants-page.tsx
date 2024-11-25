@@ -13,39 +13,38 @@ import styles from './profile-requests-participants-page.module.scss';
 
 export const ProfileRequestsParticipants = () => {
 	const pageSize = 7;
-	const [isUnderConsiderationRequests, setIsUnderConsiderationRequests] = useState(false);
+	const [isUnderConsiderationRequests, setIsUnderConsiderationRequests] =
+		useState(false);
 	const [isAcceptedRequests, setIsAcceptedRequests] = useState(false);
 	const [isRejectedRequests, setIsRejectedRequests] = useState(false);
 	const [currentSettingsAllRequests, setCurrentSettingsAllRequests] = useState({
 		currentPage: 1,
 		role: 'participation',
 	});
-	const [currentSettingsFilterRequests, setCurrentSettingsFilterRequests] =
-		useState({
-			page: 1,
-			roleStatus: 'participation',
-			statusNumber: 1,
-		});
 
-	const { data: allRequestsParticipation, isLoading } =
-		useGetAllRequestsParticipationQuery(currentSettingsAllRequests);
+	const { data: allRequestsParticipation, isLoading } = useGetAllRequestsParticipationQuery(currentSettingsAllRequests);
 
-	const { data: requestsConsiderationParticipation } =
-		useGetFilterRequestsParticipationQuery(currentSettingsFilterRequests);
+	const [settingsConsiderationRequests, setSettingsConsiderationRequests] = useState({
+		page: 1,
+		roleStatus: 'participation',
+		statusNumber: 1,
+	});
 
-	const { data: requestsAcceptedParticipation } =
-		useGetFilterRequestsParticipationQuery({
-			page: 1,
-			roleStatus: 'participation',
-			statusNumber: 2,
-		});
+	const [settingsAcceptedRequests, setSettingsAcceptedRequests] = useState({
+		page: 1,
+		roleStatus: 'participation',
+		statusNumber: 2,
+	});
 
-	const { data: requestsRejectedParticipation } =
-		useGetFilterRequestsParticipationQuery({
-			page: 1,
-			roleStatus: 'participation',
-			statusNumber: 3,
-		});
+	const [settingsRejectedRequests, setSettingsRejectedRequests] = useState({
+		page: 1,
+		roleStatus: 'participation',
+		statusNumber: 3,
+	});
+
+	const { data: requestsConsiderationParticipation } = useGetFilterRequestsParticipationQuery(settingsConsiderationRequests);
+	const { data: requestsAcceptedParticipation } = useGetFilterRequestsParticipationQuery(settingsAcceptedRequests);
+	const { data: requestsRejectedParticipation } = useGetFilterRequestsParticipationQuery(settingsRejectedRequests);
 
 	//console.log(allRequestsParticipation);
 	return (
@@ -109,47 +108,47 @@ export const ProfileRequestsParticipants = () => {
 			{isUnderConsiderationRequests ? (
 				<Pagination
 					onPageChange={(page) =>
-						setCurrentSettingsFilterRequests({
+						setSettingsConsiderationRequests({
 							page: Number(page),
-							roleStatus: currentSettingsFilterRequests.roleStatus,
-							statusNumber: currentSettingsFilterRequests.statusNumber,
+							roleStatus: settingsConsiderationRequests.roleStatus,
+							statusNumber: settingsConsiderationRequests.statusNumber,
 						})
 					}
 					totalCount={
 						requestsConsiderationParticipation &&
 						requestsConsiderationParticipation.count
 					}
-					currentPage={currentSettingsFilterRequests.page}
+					currentPage={settingsConsiderationRequests.page}
 					pageSize={pageSize}
 				/>
 			) : isRejectedRequests ? (
 				<Pagination
 					onPageChange={(page) =>
-						setCurrentSettingsFilterRequests({
+						setSettingsRejectedRequests({
 							page: Number(page),
-							roleStatus: currentSettingsFilterRequests.roleStatus,
-							statusNumber: currentSettingsFilterRequests.statusNumber,
+							roleStatus: settingsRejectedRequests.roleStatus,
+							statusNumber: (settingsRejectedRequests.statusNumber = 2),
 						})
 					}
 					totalCount={
 						requestsRejectedParticipation && requestsRejectedParticipation.count
 					}
-					currentPage={currentSettingsFilterRequests.page}
+					currentPage={settingsRejectedRequests.page}
 					pageSize={pageSize}
 				/>
 			) : isAcceptedRequests ? (
 				<Pagination
 					onPageChange={(page) =>
-						setCurrentSettingsFilterRequests({
+						setSettingsAcceptedRequests({
 							page: Number(page),
-							roleStatus: currentSettingsFilterRequests.roleStatus,
-							statusNumber: currentSettingsFilterRequests.statusNumber,
+							roleStatus: settingsAcceptedRequests.roleStatus,
+							statusNumber: settingsAcceptedRequests.statusNumber,
 						})
 					}
 					totalCount={
 						requestsAcceptedParticipation && requestsAcceptedParticipation.count
 					}
-					currentPage={currentSettingsFilterRequests.page}
+					currentPage={settingsAcceptedRequests.page}
 					pageSize={pageSize}
 				/>
 			) : (
@@ -160,7 +159,9 @@ export const ProfileRequestsParticipants = () => {
 							role: currentSettingsAllRequests.role,
 						})
 					}
-					totalCount={allRequestsParticipation && allRequestsParticipation.count}
+					totalCount={
+						allRequestsParticipation && allRequestsParticipation.count
+					}
 					currentPage={currentSettingsAllRequests.currentPage}
 					pageSize={pageSize}
 				/>
