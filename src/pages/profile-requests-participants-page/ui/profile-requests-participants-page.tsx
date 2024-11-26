@@ -1,8 +1,9 @@
+/* eslint-disable prefer-arrow-callback */
 'use client';
 import React, { useState } from 'react';
 import {
 	useGetAllRequestsParticipationQuery,
-	useGetFilterRequestsParticipationQuery,
+	useLazyGetFilterRequestsParticipationQuery,
 } from '@/services/ProjectService';
 import { MainButton } from '@/shared/ui';
 import { Loader } from '@/shared/ui';
@@ -13,24 +14,24 @@ import styles from './profile-requests-participants-page.module.scss';
 
 export const ProfileRequestsParticipants = () => {
 	const pageSize = 7;
-	const [isUnderConsiderationRequests, setIsUnderConsiderationRequests] =
-		useState(false);
+
+	const [isConsiderationRequests, setIsConsiderationRequests] = useState(false);
 	const [isAcceptedRequests, setIsAcceptedRequests] = useState(false);
 	const [isRejectedRequests, setIsRejectedRequests] = useState(false);
+
 	const [currentSettingsAllRequests, setCurrentSettingsAllRequests] = useState({
 		currentPage: 1,
 		role: 'participation',
 	});
 
-	const { data: allRequestsParticipation, isLoading } = useGetAllRequestsParticipationQuery(currentSettingsAllRequests);
+	const [settingsConsiderationRequests, setSettingsConsiderationRequests] =
+		useState({
+			page: 1,
+			roleStatus: 'participation',
+			statusNumber: 1,
+		});
 
-	const [settingsConsiderationRequests, setSettingsConsiderationRequests] = useState({
-		page: 1,
-		roleStatus: 'participation',
-		statusNumber: 1,
-	});
-
-	const [settingsAcceptedRequests, setSettingsAcceptedRequests] = useState({
+	const [settingsAcceptedRequests, /*setSettingsAcceptedRequests*/] = useState({
 		page: 1,
 		roleStatus: 'participation',
 		statusNumber: 2,
@@ -42,11 +43,17 @@ export const ProfileRequestsParticipants = () => {
 		statusNumber: 3,
 	});
 
-	const { data: requestsConsiderationParticipation } = useGetFilterRequestsParticipationQuery(settingsConsiderationRequests);
-	const { data: requestsAcceptedParticipation } = useGetFilterRequestsParticipationQuery(settingsAcceptedRequests);
-	const { data: requestsRejectedParticipation } = useGetFilterRequestsParticipationQuery(settingsRejectedRequests);
+	const { data: allRequestsParticipation, isLoading } =
+		useGetAllRequestsParticipationQuery(currentSettingsAllRequests);
+	const [
+		handleClickConsiderationRequests,
+		{ data: requestsConsiderationParticipation },
+	] = useLazyGetFilterRequestsParticipationQuery();
+	const [handleClickAcceptedRequests, { data: requestsAcceptedParticipation }] =
+		useLazyGetFilterRequestsParticipationQuery();
+	const [handleClickRejectedRequests, { data: requestsRejectedParticipation }] =
+		useLazyGetFilterRequestsParticipationQuery();
 
-	//console.log(allRequestsParticipation);
 	return (
 		<section className={styles.requests}>
 			<div className={styles.buttons}>
@@ -54,10 +61,15 @@ export const ProfileRequestsParticipants = () => {
 					type="button"
 					variant="secondary"
 					width="regular"
-					onClick={() =>
-						setIsUnderConsiderationRequests(!isUnderConsiderationRequests)
-					}
-					isActive={isUnderConsiderationRequests}
+					onClick={() => {
+						if (!isConsiderationRequests) {
+							handleClickConsiderationRequests(settingsConsiderationRequests);
+							setIsConsiderationRequests(true);
+						} else {
+							setIsConsiderationRequests(false);
+						}
+					}}
+					isActive={isConsiderationRequests}
 					disabled={isAcceptedRequests === true || isRejectedRequests === true}>
 					На рассмотрении
 				</MainButton>
@@ -65,10 +77,17 @@ export const ProfileRequestsParticipants = () => {
 					type="button"
 					variant="secondary"
 					width="regular"
-					onClick={() => setIsAcceptedRequests(!isAcceptedRequests)}
+					onClick={() => {
+						if (!isAcceptedRequests) {
+							handleClickAcceptedRequests(settingsAcceptedRequests);
+							setIsAcceptedRequests(true);
+						} else {
+							setIsAcceptedRequests(false);
+						}
+					}}
 					isActive={isAcceptedRequests}
 					disabled={
-						isRejectedRequests === true || isUnderConsiderationRequests === true
+						isRejectedRequests === true || isConsiderationRequests === true
 					}>
 					Приняты
 				</MainButton>
@@ -76,10 +95,17 @@ export const ProfileRequestsParticipants = () => {
 					type="button"
 					variant="secondary"
 					width="regular"
-					onClick={() => setIsRejectedRequests(!isRejectedRequests)}
+					onClick={() => {
+						if (!isRejectedRequests) {
+							handleClickRejectedRequests(settingsRejectedRequests);
+							setIsRejectedRequests(true);
+						} else {
+							setIsRejectedRequests(false);
+						}
+					}}
 					isActive={isRejectedRequests}
 					disabled={
-						isAcceptedRequests === true || isUnderConsiderationRequests === true
+						isAcceptedRequests === true || isConsiderationRequests === true
 					}>
 					Отклонены
 				</MainButton>
@@ -87,7 +113,7 @@ export const ProfileRequestsParticipants = () => {
 			<div className={styles.cards}>
 				{isLoading ? (
 					<Loader />
-				) : isUnderConsiderationRequests ? (
+				) : isConsiderationRequests ? (
 					<ListRequestsParticipants
 						arrayRequests={requestsConsiderationParticipation?.results}
 					/>
@@ -105,7 +131,7 @@ export const ProfileRequestsParticipants = () => {
 					/>
 				)}
 			</div>
-			{isUnderConsiderationRequests ? (
+			{isConsiderationRequests ? (
 				<Pagination
 					onPageChange={(page) =>
 						setSettingsConsiderationRequests({
@@ -127,7 +153,7 @@ export const ProfileRequestsParticipants = () => {
 						setSettingsRejectedRequests({
 							page: Number(page),
 							roleStatus: settingsRejectedRequests.roleStatus,
-							statusNumber: (settingsRejectedRequests.statusNumber = 2),
+							statusNumber: settingsRejectedRequests.statusNumber,
 						})
 					}
 					totalCount={
@@ -139,10 +165,10 @@ export const ProfileRequestsParticipants = () => {
 			) : isAcceptedRequests ? (
 				<Pagination
 					onPageChange={(page) =>
-						setSettingsAcceptedRequests({
+						handleClickAcceptedRequests({
 							page: Number(page),
-							roleStatus: settingsAcceptedRequests.roleStatus,
-							statusNumber: settingsAcceptedRequests.statusNumber,
+							roleStatus: settingsRejectedRequests.roleStatus,
+							statusNumber: 2,
 						})
 					}
 					totalCount={

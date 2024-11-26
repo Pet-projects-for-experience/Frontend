@@ -14,4 +14,5 @@ export type RequestParticipantCardType = HTMLAttributes<HTMLElement> & {
 			}
 		]
 	};
+	handleDeleteCard: (arg: number) => void;
 };

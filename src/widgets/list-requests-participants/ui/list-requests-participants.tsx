@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { RequestParticipantCard } from '@/widgets/request-participant-card';
 import { RequestParticipantCardType } from '@/widgets/request-participant-card/ui/types';
 import styles from './list-requests-participants.module.scss';
@@ -6,12 +6,23 @@ import styles from './list-requests-participants.module.scss';
 export const ListRequestsParticipants = ({
 	arrayRequests,
 }: {
-	arrayRequests: [];
+	arrayRequests: RequestParticipantCardType[];
 }) => {
+	const [requests, setRequests] = useState<RequestParticipantCardType[]>([]);
+	useEffect(() => {
+		if (arrayRequests) {
+			setRequests(arrayRequests);
+		}
+	}, [arrayRequests]);
+
+	const handleDeleteCard = (id: number) => {
+		setRequests(requests.filter((item) => Number(item.id) !== id));
+	};
+
 	return (
 		<>
-			{arrayRequests?.length > 0 ? (
-				arrayRequests?.map((card: RequestParticipantCardType) => (
+			{requests?.length > 0 ? (
+				requests?.map((card: RequestParticipantCardType) => (
 					<RequestParticipantCard
 						key={card.id}
 						request_status={card.request_status}
@@ -19,6 +30,7 @@ export const ListRequestsParticipants = ({
 						position={card.position}
 						cover_letter={card.cover_letter}
 						id={card.id}
+						handleDeleteCard={handleDeleteCard}
 					/>
 				))
 			) : (

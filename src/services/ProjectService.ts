@@ -5,7 +5,7 @@ const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 export const projectsApi = createApi({
 	reducerPath: 'projectsApi',
-	tagTypes: ['FavoritesProjects', 'RequestsParticipantsInProjects'],
+	tagTypes: ['FavoritesProjects'],
 	baseQuery: fetchBaseQuery({
 		baseUrl: `https://${BASE_URL}/api/v1`,
 		prepareHeaders: async (headers) => {
@@ -47,23 +47,22 @@ export const projectsApi = createApi({
 				url: `/projects/requests/?role=${role}&page=${currentPage}`,  
 				method: 'GET',
 			}),
-			keepUnusedDataFor: 0,
-			providesTags: ['RequestsParticipantsInProjects']
+			keepUnusedDataFor: 1,
+			
 		}),
 		getFilterRequestsParticipation: builder.query({
 			query: ({roleStatus, page, statusNumber}) => ({  
 				url: `/projects/requests/?role=${roleStatus}&page=${page}&request_status=${statusNumber}`,  
 				method: 'GET',
 			}),
-			keepUnusedDataFor: 0,
-			providesTags: ['RequestsParticipantsInProjects']
+			keepUnusedDataFor: 1,
+			
 		}),
 		deleteRequestsParticipation: builder.mutation({
 			query: (id) => ({  
 				url: `/projects/requests/${id}/`,  
 				method: 'DELETE',
 			}),
-			invalidatesTags: ['RequestsParticipantsInProjects'],
 			
 		}),
 		requestParticipationInProjects: builder.mutation<IProjectsRequests,IProjectsRequests>({
@@ -96,7 +95,7 @@ export const {
 	useGetAllProjectsQuery,
 	useGetProjectByIdQuery,
 	useGetAllRequestsParticipationQuery,
-	useGetFilterRequestsParticipationQuery,
+	useLazyGetFilterRequestsParticipationQuery,
 	useDeleteRequestsParticipationMutation,
 	useRequestParticipationInProjectsMutation,
 	useAddFavoriteProjectMutation,
