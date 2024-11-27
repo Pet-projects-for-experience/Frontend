@@ -21,8 +21,6 @@ export const DeleteRequestParticipantFeature = ({
 					status: 'success',
 					title: 'Заявка удалена',
 				});
-
-				console.log('успех');
 			})
 			.catch((error) => {
 				toaster({

@@ -24,13 +24,13 @@ export const projectsApi = createApi({
 			}),
 		}),
 		getAllProjects: builder.query({
-			query: ({currentPage, query}) => ({
+			query: ({ currentPage, query }) => ({
 				url: `/projects/?page=${currentPage}&search=${query}`,
 				method: 'GET',
 			}),
 		}),
 		getFavoriteProjects: builder.query({
-			query: ({currentPage, query}) => ({
+			query: ({ currentPage, query }) => ({
 				url: `/projects/?is_favorite=1&page=${currentPage}&search=${query}`,
 				method: 'GET',
 			}),
@@ -43,27 +43,23 @@ export const projectsApi = createApi({
 			}),
 		}),
 		getAllRequestsParticipation: builder.query({
-			query: ({role, currentPage}) => ({
-				url: `/projects/requests/?role=${role}&page=${currentPage}`,  
-				method: 'GET',
-			}),
+			query: ({ role, currentPage, statusNumber }) =>
+				statusNumber === null
+					? {
+							url: `/projects/requests/?role=${role}&page=${currentPage}`,
+							method: 'GET',
+						}
+					: {
+							url: `/projects/requests/?role=${role}&page=${currentPage}&request_status=${statusNumber}`,
+							method: 'GET',
+						},
 			keepUnusedDataFor: 1,
-			
-		}),
-		getFilterRequestsParticipation: builder.query({
-			query: ({roleStatus, page, statusNumber}) => ({  
-				url: `/projects/requests/?role=${roleStatus}&page=${page}&request_status=${statusNumber}`,  
-				method: 'GET',
-			}),
-			keepUnusedDataFor: 1,
-			
 		}),
 		deleteRequestsParticipation: builder.mutation({
-			query: (id) => ({  
-				url: `/projects/requests/${id}/`,  
+			query: (id) => ({
+				url: `/projects/requests/${id}/`,
 				method: 'DELETE',
 			}),
-			
 		}),
 		requestParticipationInProjects: builder.mutation<IProjectsRequests,IProjectsRequests>({
 			query: (projects) => ({
@@ -72,7 +68,7 @@ export const projectsApi = createApi({
 				body: projects,
 			}),
 		}),
-		addFavoriteProject: builder.mutation<FavoriteProjectType, FavoriteProjectType>({
+		addFavoriteProject: builder.mutation<FavoriteProjectType,FavoriteProjectType>({
 			query: (project) => ({
 				url: `/projects/${project.id}/favorite/`,
 				method: 'POST',
@@ -95,7 +91,6 @@ export const {
 	useGetAllProjectsQuery,
 	useGetProjectByIdQuery,
 	useGetAllRequestsParticipationQuery,
-	useLazyGetFilterRequestsParticipationQuery,
 	useDeleteRequestsParticipationMutation,
 	useRequestParticipationInProjectsMutation,
 	useAddFavoriteProjectMutation,
