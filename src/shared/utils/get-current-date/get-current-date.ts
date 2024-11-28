@@ -12,10 +12,6 @@ const months = [
 	'ноября',
 	'декабря',
 ];
-export const getStartDate = (started: string) => {
-	return started ? `${started?.slice(-2)} ${months[new Date(started).getMonth()]}` : ' ';
-};
-
-export const getEndDate = (ended: string) => {
-	return ended ? `${ended?.slice(-2)} ${months[new Date(ended).getMonth()]}` : ' ';
+export const getDate = (date: string) => {
+	return date ? `${date?.slice(-2)} ${months[new Date(date).getMonth()]}` : ' ';
 };

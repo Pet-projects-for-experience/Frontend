@@ -9,7 +9,7 @@ import { Person, VacancyCard } from '@/shared/ui';
 import { getColorTag } from '@/shared/utils';
 import { NounsDeclension } from '@/utils/declension/declension';
 import { ProjectCardDetailType } from './types';
-import { getStartDate, getEndDate } from '@/shared/utils';
+import { getDate } from '@/shared/utils';
 import styles from './project-card-detailed.module.scss';
 
 export const ProjectCardDetailed: FC<ProjectCardDetailType> = ({
@@ -31,8 +31,8 @@ export const ProjectCardDetailed: FC<ProjectCardDetailType> = ({
 	email,
 	is_favorite,
 }) => {
-	const startDate = getStartDate(started);
-	const endDate = getEndDate(ended);
+	const startDate = getDate(started);
+	const endDate = getDate(ended);
 
 	return (
 		<section className={styles.projectsCard}>

@@ -28,6 +28,7 @@ import Fills from './icons/Vector-8.svg';
 import Capitals from './icons/Vector-9.svg';
 import PetIcon from './images/pet.png';
 import  Tooltip from './icons/tooltip-polygon.svg';
+import DeleteRedIcon from './icons/delete-red.svg';
 
 
 
@@ -61,5 +62,6 @@ export {
 	PersonIcon,
 	IconSpecialists,
 	PetIcon,
-	Tooltip
+	Tooltip,
+	DeleteRedIcon,
 };

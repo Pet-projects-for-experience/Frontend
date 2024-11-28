@@ -6,4 +6,5 @@ export type MainButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
 	width: 'regular' | 'max' | 'min';
 	IconLeft?: React.ComponentType<React.HTMLAttributes<HTMLElement>>;
 	IconRight?: React.ComponentType<React.HTMLAttributes<HTMLElement>>;
+	isActive?: boolean;
 };

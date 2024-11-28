@@ -1,0 +1,20 @@
+@import '@/shared/style/variables';
+.requests {
+	display: flex;
+	flex-direction: column;
+	//max-width: 816px;
+	width: 816px;
+	min-height: 100vh;
+	gap: 32px;
+	@media screen and (max-width: 1199px) {
+		box-sizing: border-box;
+		padding: 0 16px 32px;
+		width: 780px;
+	}
+}
+
+@media screen and (max-width: 779px) {
+	.requests {
+		max-width: 100%;
+	}
+}

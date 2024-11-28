@@ -1,0 +1,157 @@
+@import '@/shared/style/variables.scss';
+.cardContainer {
+	border: 1px solid $--border-default;
+	border-radius: 12px;
+	background: $--bg-primary;
+	padding: 24px 32px;
+	font-family: $--open-sans-font;
+	color: $--Foreground-default;
+	font-feature-settings:
+		'clig' off,
+		'liga' off;
+	@media screen and (max-width: 779px) {
+		padding: 16px;
+	}
+}
+
+.topInfo {
+	position: relative;
+	display: flex;
+	justify-content: space-between;
+	color: $--Neutral-Light-Grey-03;
+}
+
+.activeStateContainer {
+	display: flex;
+	align-items: center;
+	padding: 5px 0 0 5px;
+
+	@media screen and (max-width: 779px) {
+		padding: 3px 0 0 3px;
+	}
+}
+.title {
+	font-size: 24px;
+	font-weight: 600;
+	line-height: 30px;
+	letter-spacing: 0%;
+	padding-top: 22px;
+	margin: 0;
+	font-family: $--open-sans-font;
+
+	@media screen and (max-width: 779px) {
+		font-size: 20px;
+		font-weight: 700;
+		line-height: normal;
+		letter-spacing: 0.25px;
+		padding-top: 27px;
+	}
+}
+.titleCover {
+	font-size: 16px;
+	font-weight: 700;
+	line-height: normal;
+	letter-spacing: 0.25px;
+	margin: 0;
+	font-family: $--open-sans-font;
+}
+.subtitle {
+	font-size: 14px;
+	font-weight: 400;
+	line-height: 19px;
+	letter-spacing: 0.25px;
+	margin: 0;
+	padding-top: 8px;
+	font-family: $--open-sans-font;
+}
+.subtitlePosition {
+	font-size: 20px;
+	font-weight: 400;
+	line-height: 30px;
+	letter-spacing: 0.25px;
+	margin: 0;
+	padding-top: 16px;
+	font-family: $--open-sans-font;
+}
+.activeStateIcon {
+	padding-right: 14px;
+
+	&_type_active {
+		fill: $--Colors-Pastel-Green;
+	}
+
+	&_type_inactive {
+		fill: $--Neutral-Light-Grey-03;
+	}
+	&_type_progress {
+		fill: $--bg-status-draft;
+	}
+}
+
+.activeStateText {
+	font-size: 14px;
+	font-weight: 400;
+	line-height: 19px;
+	letter-spacing: 0.25px;
+	color: $--foreground-muted;
+	font-family: $--open-sans-font;
+}
+.calendarContainer {
+	display: flex;
+	align-items: center;
+	padding-top: 15px;
+
+	@media screen and (max-width: 779px) {
+		padding-top: 6px;
+	}
+}
+
+.calendarIcon {
+	padding-right: 13px;
+	width: 22px;
+	height: 22px;
+	color: $--Foreground-subtitle;
+}
+
+.calendarText {
+	font-size: 14px;
+	font-weight: 400;
+	line-height: 19px;
+	letter-spacing: 0.25px;
+	color: $--foreground-muted;
+	font-family: $--open-sans-font;
+}
+.menu {
+	display: flex;
+	flex-direction: column;
+}
+.menuTitle {
+	margin-top: 16px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+.menuCover {
+	display: none;
+	padding: 0;
+
+	&_visible {
+		display: flex;
+	}
+	&__text {
+		display: flex;
+		align-items: center;
+		font-size: 16px;
+		font-weight: 400;
+		line-height: 24pxpx;
+		letter-spacing: 0.25px;
+		margin: 0;
+		font-family: $--open-sans-font;
+		word-break: break-all;
+	}
+}
+.menuIcon {
+	width: 24px;
+	height: 24px;
+	cursor: pointer;
+}

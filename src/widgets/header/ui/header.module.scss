@@ -77,6 +77,7 @@
 			cursor: pointer;
 			border: none;
 			margin-left: 16px;
+			fill: #FDFDFD;
 		}
 		&__buttonBurgerIcon {
 			width: 24px;
@@ -137,6 +138,7 @@
 			background-image: url('../../../shared/assets/images/logo-mobile.png');
 			background-repeat: no-repeat;
 			background-size: cover;
+			margin: 0;
 		}
 		&__logo {
 			display: none;
@@ -148,7 +150,8 @@
 			background-image: url('../../../shared/assets/icons/icon-button-login.svg');
 		}
 		&__buttonBurger {
-			display: none;
+			fill: black;
+			margin: 0;
 		}
 	}
 }

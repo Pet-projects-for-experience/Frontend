@@ -9,6 +9,11 @@ const nextConfig = {
 				destination: '/favorites/specialists',
 				permanent: true,
 			},
+			{
+				source: '/requests',
+				destination: '/requests/participant',
+				permanent: true,
+			},
 		];
 	},
 	webpack(config) {
