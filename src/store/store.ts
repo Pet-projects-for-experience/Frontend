@@ -2,11 +2,11 @@ import { configureStore, combineReducers } from '@reduxjs/toolkit';
 import { userApi } from '@/services/UserService';
 import { generalApi } from '@/services/GeneralService';
 import { projectsApi } from '@/services/ProjectService';
-import { specilistsApi } from '@/services/SpecialistService';
+import { specialistsApi } from '@/services/SpecialistService';
 
 const rootReducer = combineReducers({
 	[userApi.reducerPath]: userApi.reducer,
-	[specilistsApi.reducerPath]: specilistsApi.reducer,
+	[specialistsApi.reducerPath]: specialistsApi.reducer,
 	[generalApi.reducerPath]: generalApi.reducer,
 	[projectsApi.reducerPath]: projectsApi.reducer,
 });
@@ -16,7 +16,7 @@ export const store = configureStore({
 	middleware: (getDefaultMiddleware) =>
 		getDefaultMiddleware().concat(
 			userApi.middleware,
-			specilistsApi.middleware,
+			specialistsApi.middleware,
 			generalApi.middleware,
 			projectsApi.middleware
 		),

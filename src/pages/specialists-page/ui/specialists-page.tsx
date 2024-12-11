@@ -20,39 +20,82 @@ import { SpecialistType } from './types';
 import { Loader } from '@/shared/ui';
 
 export const Specialists = () => {
+	type Filters = {
+		status?: boolean; // Статус специалиста
+		specialists?: number[]; // Уровень квалификации
+		specialty?: number[]; // Специальность
+		skills?: number[]; // Навыки
+	};
+
 	const pageSize = 7;
 
 	const [currentPage, setCurrentPage] = useState(1);
 
-	useEffect(() => {
-		window.scroll({
-			top: 0,
-			left: 0,
-		  });
-	}, [currentPage]);
-
 	const [isPopupOpen, setIsPopupOpen] = useState(false);
-	const handleStatusChange = (selectedOptions: (string | object)[]) => {
-		console.info('selected option: ', selectedOptions?.[0]);
-	};
-	const handleQualificationChange = (selectedItems: object) => {
-		console.info('selected options: ', selectedItems);
-	};
-	const handleSpecialtiesChange = (selectedItems: object) => {
-		console.info('selected options: ', selectedItems);
-	};
-	const handleSkillsChange = (selectedItems: object) => {
-		console.info('selected options: ', selectedItems);
-		console.log(currentData);
+
+	const [filters, setFilters] = useState<Filters>({
+		status: undefined,
+		specialists: undefined,
+		specialty: undefined,
+		skills: undefined,
+	});
+
+	const { data: specialistArray } = useGetAllSpecialistsDataQuery({
+		currentPage,
+		readyToParticipate: filters.status,
+		level: filters.specialists,
+		specialization: filters.specialty,
+		skills: filters.skills,
+	});
+
+	const handleStatusChange = (selectedOptions: (string | Option)[]) => {
+		if (selectedOptions || typeof selectedOptions?.[0] === 'object') {
+			const value = selectedOptions?.[0].value;
+			setFilters({ ...filters, status: value === 1 ? true : false });
+			console.info('selected status: ', value);
+		}
 	};
 
-	const { data: specialistArray } = useGetAllSpecialistsDataQuery(currentPage);
+	const handleQualificationChange = (selectedOptions: (string | Option)[]) => {
+		// console.info('selected options: ', selectedOptions);
+		if (selectedOptions) {
+			const values = selectedOptions.map((option) => option.value);
+			setFilters({ ...filters, specialists: values });
+			console.info('selected levels: ', values);
+			// selectedOptions.forEach((element) => {
+			// 	console.log('label: ', element.label, 'value: ', element.value);
+			// });
+		}
+	};
+
+	const handleSpecialtiesChange = (selectedOptions: (string | Option)[]) => {
+		if (selectedOptions) {
+			const values = selectedOptions.map((option) => option.value);
+			setFilters({ ...filters, specialty: values });
+			console.info('selected specializations: ', values);
+		}
+	};
+
+	const handleSkillsChange = (selectedOptions: (string | Option)[]) => {
+		if (selectedOptions) {
+			const values = selectedOptions.map((option) => option.value);
+			setFilters({ ...filters, skills: values });
+			console.info('selected skills: ', values);
+		}
+	};
 
 	const currentData = useMemo(() => {
 		return specialistArray && specialistArray.results;
 	}, [specialistArray]);
 
 	const isMobile = useMediaQuery('(max-width:779px)');
+
+	useEffect(() => {
+		window.scroll({
+			top: 0,
+			left: 0,
+		});
+	}, [currentPage]);
 
 	return (
 		<section className={styles.specialists}>
@@ -84,7 +127,7 @@ export const Specialists = () => {
 						name="select-status"
 						options={statusSpecialist}
 						buttonLabel="Статус специалиста"
-						//value={{ value: 'ready', label: 'Готов(а) к участию в проектах' }}
+						// value={{ value: 'ready', label: 'Готов(а) к участию в проектах' }}
 						onChange={handleStatusChange}
 					/>
 
@@ -103,17 +146,7 @@ export const Specialists = () => {
 							name="select-specialties"
 							caption="Специальность"
 							options={specialties}
-							values={[
-								{
-									value: 1,
-									label: 'Десктоп разработчик / Software Developer',
-								},
-								{
-									value: 2,
-									label:
-										'Инженер по нагрузочному тестированию / Performance Engineer',
-								},
-							]}
+							values={[]}
 							onChange={handleSpecialtiesChange}
 							maxSelections={2}
 							buttonWidth={207}
@@ -137,7 +170,7 @@ export const Specialists = () => {
 				</div>
 			</div>
 			<div className={styles.specialists__cards}>
-				{currentData ?
+				{currentData ? (
 					currentData.map((res: SpecialistType) => (
 						<SpecialistCard
 							key={res?.user_id}
@@ -148,7 +181,10 @@ export const Specialists = () => {
 							userName={res?.username}
 							readyToParticipate={res?.ready_to_participate}
 						/>
-					)) : <Loader />}
+					))
+				) : (
+					<Loader />
+				)}
 			</div>
 
 			<Pagination
