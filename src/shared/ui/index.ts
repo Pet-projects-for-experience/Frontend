@@ -19,4 +19,5 @@ export { ContactCard } from './contact-card/contact-card';
 export { InputSearch } from './input-search/input-search';
 export { NavigationMenu } from './navigation-menu/navigation-menu';
 export { ProfileLink } from './profile-link/profile-link';
+// export { TextEditor } from './text-editor/text-editor';
 

@@ -9,3 +9,4 @@ export { DeleteAccountFeature } from '@/features/delete-account/delete-account';
 export { InviteToProjectFeature } from '@/features/invite-to-project/invite-to-project';
 export { InviteToProjectVacancyFeature } from '@/features/invite-to-project-vacancy/invite-to-project-vacancy';
 export { SpecialistsToFavoritesFeature } from '@/features/specialists-to-favorites/specialists-to-favorites';
+export { CreateProjectFeature } from '@/features/create-project/create-project';
