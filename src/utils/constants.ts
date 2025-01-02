@@ -32,7 +32,6 @@ export const LEVEL = [
 		label: 'Senior',
 		value: 'Senior',
 		level: 3,
-
 	},
 	{
 		label: 'Lead',

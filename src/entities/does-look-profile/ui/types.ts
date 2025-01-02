@@ -1,3 +1,3 @@
 export type TDoesLookProfile = {
-  id: number;
-}
+	id: number;
+};

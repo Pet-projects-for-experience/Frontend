@@ -39,8 +39,8 @@ export type ProjectCardDetailType = HTMLAttributes<HTMLElement> & {
 				name: string;
 			}[];
 			count?: number;
-				level?: number;
-				is_required?: boolean;	
+			level?: number;
+			is_required?: boolean;
 		},
 	];
 	unique_project_participants_skills: string[];

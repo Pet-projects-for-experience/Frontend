@@ -1,7 +1,7 @@
 import { HTMLAttributes } from 'react';
 
 export type CardProps = HTMLAttributes<HTMLElement> & {
-	id: number,
+	id: number;
 	started: string;
 	ended: string;
 	name: string;

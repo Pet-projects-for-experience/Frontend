@@ -45,7 +45,7 @@ export const DetailedSpecialistCard: FC<DetailedSpecialistCardTypes> = ({
 			return 'Пусто';
 		}
 	}
-	
+
 	return (
 		<BlankCard>
 			<div className={styles.specialist__info}>
@@ -63,7 +63,7 @@ export const DetailedSpecialistCard: FC<DetailedSpecialistCardTypes> = ({
 						<div className={styles.info__personStatus}>
 							{readyToParticipate ? (
 								<>
-									<ActivityIcon className={styles.info__icon}/>
+									<ActivityIcon className={styles.info__icon} />
 									<p className={styles.info__statusTitle}>
 										готов(а) к участию в проекте
 									</p>
@@ -86,12 +86,12 @@ export const DetailedSpecialistCard: FC<DetailedSpecialistCardTypes> = ({
 				<div className={styles.specialist__info}>
 					<div className={styles.info__wrapper}>
 						<h3 className={styles.info__title}>О себе</h3>
-						<h4 className={styles.info__sideText}>{
-							// about.includes('&lt') ? parse((parse(about) as string)) : parse(about)}
-							parse(about) 
-						}
-							</h4>
-						
+						<h4 className={styles.info__sideText}>
+							{
+								// about.includes('&lt') ? parse((parse(about) as string)) : parse(about)}
+								parse(about)
+							}
+						</h4>
 					</div>
 					<div className={styles.info__title}>
 						<div>

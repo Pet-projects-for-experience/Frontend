@@ -1,1 +1,1 @@
-export {RequestParticipantCard} from './ui/request-participant-card';
+export { RequestParticipantCard } from './ui/request-participant-card';

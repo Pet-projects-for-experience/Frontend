@@ -1,6 +1,12 @@
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
-export const getAllProjects = ({ currentPage, query }: { currentPage: number, query: string }) => {
+export const getAllProjects = ({
+	currentPage,
+	query,
+}: {
+	currentPage: number;
+	query: string;
+}) => {
 	function setHeaders(headers: { 'Content-Type': string }) {
 		if (accessToken) {
 			return {

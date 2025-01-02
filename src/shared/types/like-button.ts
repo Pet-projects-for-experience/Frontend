@@ -1,5 +1,5 @@
 export type LikeButtonType = {
-    id: never;
+	id: never;
 	name: string;
 	description: string;
 	started: string;
@@ -38,4 +38,4 @@ export type LikeButtonType = {
 	variant: 'primary' | 'secondary' | 'trivial';
 	disabled?: boolean;
 	favorite: boolean;
-}
+};

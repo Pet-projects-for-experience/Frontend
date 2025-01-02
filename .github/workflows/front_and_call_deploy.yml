@@ -46,10 +46,10 @@ jobs:
     secrets: inherit
 
   deploy_uses_other_file_from_QA:
-      if: github.ref == 'refs/heads/QA'
-      uses: Pet-projects-CodePET/Backend/.github/workflows/deploy.yml@develop
-      needs:
-        - build_and_push_to_docker_hub_frontend
-      with:
-        environment: prod
-      secrets: inherit
+    if: github.ref == 'refs/heads/QA'
+    uses: Pet-projects-CodePET/Backend/.github/workflows/deploy.yml@develop
+    needs:
+      - build_and_push_to_docker_hub_frontend
+    with:
+      environment: prod
+    secrets: inherit

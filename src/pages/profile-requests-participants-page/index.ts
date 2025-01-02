@@ -1,1 +1,1 @@
-export {ProfileRequestsParticipants} from './ui/profile-requests-participants-page';
+export { ProfileRequestsParticipants } from './ui/profile-requests-participants-page';

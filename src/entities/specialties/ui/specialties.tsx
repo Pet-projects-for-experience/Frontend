@@ -16,7 +16,6 @@ export const Specialties: FC<TSpecialties> = ({
 	isLoadingAddSpecialty,
 	isSuccessAddSpecialty,
 	isLoadingDeleteSpecialty,
-
 }) => {
 	return (
 		<section className={styles.specialityList}>

@@ -35,7 +35,7 @@ export const InputSearch: FC<InputSearchProps> = ({
 				type={type}
 				onChange={handleChange}
 				{...props}
-				placeholder='Поиск'
+				placeholder="Поиск"
 			/>
 
 			<div className={styles.icon}>

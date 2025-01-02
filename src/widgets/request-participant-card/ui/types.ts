@@ -9,10 +9,10 @@ export type RequestParticipantCardType = HTMLAttributes<HTMLElement> & {
 		name: string;
 		directions: [
 			{
-				id: number,
-				name: string,
-			}
-		]
+				id: number;
+				name: string;
+			},
+		];
 	};
 	handleDeleteCard: (arg: number) => void;
 };

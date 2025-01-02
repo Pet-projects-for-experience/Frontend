@@ -4,11 +4,7 @@ import { ProfileLink } from '@/shared/ui/profile-link/profile-link';
 import { NavigationMenu } from '@/shared/ui';
 import styles from './requests-layout.module.scss';
 
-export const RequestsLayout = ({
-	children,
-}: {
-	children: React.ReactNode;
-}) => {
+export const RequestsLayout = ({ children }: { children: React.ReactNode }) => {
 	return (
 		<>
 			<ProfileLink title="Избранные" />

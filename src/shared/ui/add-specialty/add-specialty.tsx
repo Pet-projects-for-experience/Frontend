@@ -76,7 +76,7 @@ export const AddSpecialty: React.FC<AddSpecialtyProps> = ({
 		setSelectedLevel(null);
 	};
 	const isFieldsNotFill = () => {
-		return (profession === null || selectedLevel === null || skills.length === 0);
+		return profession === null || selectedLevel === null || skills.length === 0;
 	};
 	useEffect(() => {
 		if (isSuccessAddSpecialty) handleResetForm();

@@ -1,1 +1,1 @@
-export { Specialties } from './ui/specialties'
+export { Specialties } from './ui/specialties';

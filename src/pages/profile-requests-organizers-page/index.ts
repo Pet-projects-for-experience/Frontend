@@ -1,1 +1,1 @@
-export {ProfileRequestsOrganizers} from './ui/profile-requests-organizers-page';
+export { ProfileRequestsOrganizers } from './ui/profile-requests-organizers-page';

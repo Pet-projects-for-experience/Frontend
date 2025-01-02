@@ -19,8 +19,8 @@ export const InviteToProjectFeature = ({
 				specialization: string;
 				speciality: string;
 			};
-		}
-	] 
+		},
+	];
 }) => {
 	const specializationArray = project_specialists.map((item) => {
 		return {
@@ -29,8 +29,8 @@ export const InviteToProjectFeature = ({
 		};
 	});
 	const [selectedPosition, setSelectedPosition] = useState({
-		 //value: 0,
-		 //label: ' ',
+		//value: 0,
+		//label: ' ',
 		value: project_specialists[0].id,
 		label: project_specialists[0].profession.specialization,
 	} as SelectOption);

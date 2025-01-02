@@ -1,29 +1,29 @@
 .requests {
-    display: flex;
-    flex-direction: column;
-    gap: 32px;
-    @media screen and (max-width: 779px) {
-        gap: 24px;
-    }
+	display: flex;
+	flex-direction: column;
+	gap: 32px;
+	@media screen and (max-width: 779px) {
+		gap: 24px;
+	}
 }
 
 .buttons {
-    display: flex;
-    gap: 8px;
-    @media screen and (max-width: 600px) {
-        display: flex;
-        flex-direction: column;
-    }
+	display: flex;
+	gap: 8px;
+	@media screen and (max-width: 600px) {
+		display: flex;
+		flex-direction: column;
+	}
 }
 
 .inputSearch {
-    max-width: 396px;
+	max-width: 396px;
 }
 .cards {
-    display: flex;
-    flex-direction: column;
-    gap: 24px
+	display: flex;
+	flex-direction: column;
+	gap: 24px;
 }
 .pagination {
-    display: flex;
+	display: flex;
 }

@@ -22,8 +22,7 @@ export const Person: FC<PersonType> = ({
 					className={styles.iconLink}
 					style={{
 						backgroundImage: `url('${avatar}')`,
-					}}>
-				</div>
+					}}></div>
 			) : (
 				<div className={styles.iconLink}>
 					<Image src={PetIcon} className={styles.icon} alt="pet-icon" />

@@ -61,14 +61,20 @@ export const projectsApi = createApi({
 				method: 'DELETE',
 			}),
 		}),
-		requestParticipationInProjects: builder.mutation<IProjectsRequests,IProjectsRequests>({
+		requestParticipationInProjects: builder.mutation<
+			IProjectsRequests,
+			IProjectsRequests
+		>({
 			query: (projects) => ({
 				url: `/projects/requests/`,
 				method: 'POST',
 				body: projects,
 			}),
 		}),
-		addFavoriteProject: builder.mutation<FavoriteProjectType,FavoriteProjectType>({
+		addFavoriteProject: builder.mutation<
+			FavoriteProjectType,
+			FavoriteProjectType
+		>({
 			query: (project) => ({
 				url: `/projects/${project.id}/favorite/`,
 				method: 'POST',

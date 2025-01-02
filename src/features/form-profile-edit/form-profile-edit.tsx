@@ -16,7 +16,7 @@ import {
 	useGetSkillsQuery,
 } from '@/services/GeneralService';
 import { Loader } from '@/shared/ui';
-// import { DoesLookProfile } from '@/entities/does-look-profile/ui/does-look-profile';	
+// import { DoesLookProfile } from '@/entities/does-look-profile/ui/does-look-profile';
 import { Specialties } from '@/entities/specialties';
 import { Speciality, TSpeciality } from '@/shared/types/specialty';
 
@@ -42,8 +42,13 @@ export const FormProfileEditFeature: FC = () => {
 		},
 	] = useChangeSpecialtyMutation();
 
-	const [deleteSpecialty, { isSuccess: isSuccessDeleteSpecialty, isLoading:  isLoadingDeleteSpecialty}] =
-		useDeleteSpecialtyMutation();
+	const [
+		deleteSpecialty,
+		{
+			isSuccess: isSuccessDeleteSpecialty,
+			isLoading: isLoadingDeleteSpecialty,
+		},
+	] = useDeleteSpecialtyMutation();
 
 	const [
 		addSpecialty,
@@ -154,7 +159,7 @@ export const FormProfileEditFeature: FC = () => {
 			{isLoadingGetProfileSettings ||
 			isLoadingProfessions ||
 			isLoadingSkills ? (
-				<div style={{minWidth:'816px'}}>
+				<div style={{ minWidth: '816px' }}>
 					<Loader />
 				</div>
 			) : (

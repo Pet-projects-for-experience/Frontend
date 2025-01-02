@@ -115,7 +115,9 @@ export const FormProfileSettings: FC<FormProfileSettingsProps> = ({
 									checked={isSubscriptionProjects as boolean}
 									name={'subscribe_to_projects'}
 									id={'subscribe_to_projects'}
-									onChange={(evt) => setIsSubscriptionProjects(evt.target.checked)}
+									onChange={(evt) =>
+										setIsSubscriptionProjects(evt.target.checked)
+									}
 								/>
 							</div>
 						</div>

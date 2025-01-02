@@ -1,6 +1,6 @@
 export type VacancyCardType = {
 	idSpecialty: number;
-    name: string;
+	name: string;
 	title: string;
 	skills: { id: number; name: string }[];
 	count: number;
@@ -10,4 +10,4 @@ export type VacancyCardType = {
 		specialization: string;
 		speciality: string;
 	};
-}
+};

@@ -79,8 +79,7 @@
 	padding-right: 14px;
 	color: transparent;
 	&_type_active {
-		 fill: $--Colors-Pastel-Green;
-		
+		fill: $--Colors-Pastel-Green;
 	}
 
 	&_type_inactive {
@@ -209,4 +208,3 @@
 	flex-direction: column;
 	gap: 32px;
 }
-

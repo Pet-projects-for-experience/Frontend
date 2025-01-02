@@ -17,7 +17,7 @@ const FormChangePasswordSchema = z
 			.max(20, { message: 'Длина поля от 8 до 20 символов' })
 			.regex(passwordRegex, 'Проверьте правильность ввода'),
 
-			repeatNewPassword: z
+		repeatNewPassword: z
 			.string()
 			.min(1, { message: 'Поле обязательно для заполнения' })
 			.min(8, { message: 'Длина поля от 8 до 20 символов' })

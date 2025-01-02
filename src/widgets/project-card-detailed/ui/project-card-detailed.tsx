@@ -42,8 +42,10 @@ export const ProjectCardDetailed: FC<ProjectCardDetailType> = ({
 						<ActivityIcon
 							className={clsx(
 								styles.activeStateIcon,
-								project_status === 'Активен' && styles.activeStateIcon_type_active,
-								project_status === 'Завершен' && styles.activeStateIcon_type_inactive
+								project_status === 'Активен' &&
+									styles.activeStateIcon_type_active,
+								project_status === 'Завершен' &&
+									styles.activeStateIcon_type_inactive
 							)}
 						/>
 						<div className={styles.activeStateText}>

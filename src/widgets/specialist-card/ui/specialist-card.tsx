@@ -29,7 +29,7 @@ export const SpecialistCard: FC<SpecialistCardType> = ({
 							<div className={styles.info__personStatus}>
 								{readyToParticipate ? (
 									<>
-										<ActivityIcon className={styles.info__icon}/>
+										<ActivityIcon className={styles.info__icon} />
 										<p className={styles.info__statusTitle}>
 											готов(а) к участию в проекте
 										</p>
@@ -47,7 +47,7 @@ export const SpecialistCard: FC<SpecialistCardType> = ({
 							<p className={styles.info__nickname}>@{userName}</p>
 						</div>
 						<div className={styles.info__likeContainer}>
-						<SpecialistsToFavoritesFeature />
+							<SpecialistsToFavoritesFeature />
 						</div>
 					</div>
 

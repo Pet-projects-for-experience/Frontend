@@ -73,7 +73,7 @@ export const LikeButton: FC<LikeButtonProps> = ({
 				title={'Вход в систему'}
 				onClose={() => {
 					setIsPopupOpen(false);
-					}}>
+				}}>
 				<span className={styles.popupSubtitle}>
 					Чтобы совершить действие, необходимо войти в систему
 				</span>

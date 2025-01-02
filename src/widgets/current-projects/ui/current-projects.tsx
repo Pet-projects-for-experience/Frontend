@@ -35,7 +35,7 @@ export const CurrentProjects = () => {
 						item;
 					return (
 						<ProjectCard
-						    id={id}
+							id={id}
 							key={id}
 							started={started}
 							ended={ended}

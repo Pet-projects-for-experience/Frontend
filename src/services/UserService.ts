@@ -102,7 +102,7 @@ export const userApi = createApi({
 			}),
 		}),
 		deleteSpecialty: builder.mutation({
-			query: (id:number) => ({
+			query: (id: number) => ({
 				url: `/profiles/me/specialists/${id}/`,
 				method: 'DELETE',
 			}),
@@ -114,7 +114,6 @@ export const userApi = createApi({
 				body: specialty,
 			}),
 		}),
-
 	}),
 });
 

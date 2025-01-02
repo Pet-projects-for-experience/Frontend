@@ -1,1 +1,1 @@
-export {ListRequestsParticipants} from './ui/list-requests-participants';
+export { ListRequestsParticipants } from './ui/list-requests-participants';

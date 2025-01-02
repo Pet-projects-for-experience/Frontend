@@ -5,4 +5,4 @@ export type SelectWithSearchProps = {
 	label?: string;
 	selectedValue?: string | null;
 	onValueChange: (value: string) => void;
-}
+};

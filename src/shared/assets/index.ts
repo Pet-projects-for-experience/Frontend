@@ -27,10 +27,8 @@ import Numbers from './icons/Vector-7.svg';
 import Fills from './icons/Vector-8.svg';
 import Capitals from './icons/Vector-9.svg';
 import PetIcon from './images/pet.png';
-import  Tooltip from './icons/tooltip-polygon.svg';
+import Tooltip from './icons/tooltip-polygon.svg';
 import DeleteRedIcon from './icons/delete-red.svg';
-
-
 
 export {
 	Bold,

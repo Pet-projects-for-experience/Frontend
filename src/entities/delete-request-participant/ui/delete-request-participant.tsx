@@ -5,21 +5,18 @@ import { MainButton } from '@/shared/ui';
 import { PopUp } from '@/shared/ui';
 import styles from './delete-request-participant.module.scss';
 export const DeleteRequestParticipant = ({
-    id,
+	id,
 	handleDeleteButton,
-	
 }: {
-    id: number,
+	id: number;
 	handleDeleteButton: (id: number) => void;
-
 }) => {
 	const [isPopupOpen, setIsPopupOpen] = useState(false);
 
 	const handleDeleteRequestParticipant = () => {
 		handleDeleteButton(id);
-	    setIsPopupOpen(false);
-		
-	}
+		setIsPopupOpen(false);
+	};
 
 	return (
 		<>

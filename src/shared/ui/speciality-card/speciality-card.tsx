@@ -27,7 +27,7 @@ export const SpecialityCard: FC<SpecialityCardProps> = ({
 
 	useEffect(() => {
 		if (isSuccessСhangeSpecialty) {
-			setIsShowViewEdit(false)
+			setIsShowViewEdit(false);
 		}
 	}, [isSuccessСhangeSpecialty]);
 
@@ -83,8 +83,8 @@ export const SpecialityCard: FC<SpecialityCardProps> = ({
 	};
 
 	const isSkillsNotAdded = () => {
-		return (skills.length === 0)
-	}
+		return skills.length === 0;
+	};
 
 	const handleSubmit = () => {
 		handleSubmitChangeSpecialty({
@@ -92,11 +92,11 @@ export const SpecialityCard: FC<SpecialityCardProps> = ({
 			profession: profession.id,
 			skills: getSkillsforSubmit(skills),
 			id: data.id,
-		})
+		});
 	};
 
 	const handleDelete = () => {
-		handleDeleteSpecialty(data.id as number)
+		handleDeleteSpecialty(data.id as number);
 	};
 
 	return (

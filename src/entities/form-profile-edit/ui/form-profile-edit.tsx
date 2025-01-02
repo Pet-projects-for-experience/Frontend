@@ -51,22 +51,18 @@ export const FormProfileEdit: FC<FormProfileEditProps> = ({
 	const [country, setCountry] = useState<string | undefined>(userData.country);
 	const [city, setCity] = useState<string | undefined>(userData.city);
 	const [contacts, setContacts] = useState<TContact[]>([]);
-	const [
-		selectedOptionContactType,
-		setSelectedOptionContactType,
-	] = useState<TOption | null>(null);
+	const [selectedOptionContactType, setSelectedOptionContactType] =
+		useState<TOption | null>(null);
 	const [inputValueContact, setInputValueContact] = useState<string>('');
 
 	const [nickNameErrorText, setNickNameErrorText] = useState<string>();
 	const [nameErrorText, setNameErrorText] = useState<string>();
-	const [portfolioLinkErrorText, setPortfolioLinkErrorText] = useState<
-		string
-	>();
+	const [portfolioLinkErrorText, setPortfolioLinkErrorText] =
+		useState<string>();
 	const [isNameValid, setIsNameValid] = useState<boolean>(true);
 	const [isNickNameValid, setIsNickNameValid] = useState<boolean>(true);
-	const [isPortfolioLinkValid, setIsPortfolioLinkValid] = useState<boolean>(
-		true
-	);
+	const [isPortfolioLinkValid, setIsPortfolioLinkValid] =
+		useState<boolean>(true);
 	const [isReadySubmit, setIsReadySubmit] = useState<boolean>(true);
 	const [addContactErrorText, setAddContactErrorText] = useState<string>('');
 
@@ -381,14 +377,12 @@ export const FormProfileEdit: FC<FormProfileEditProps> = ({
 										(contact) => contact.value === event.target.value
 									)!
 								)
-							}
-						>
+							}>
 							{CONTACTS.map((option) => (
 								<option
 									className={styles.fields__addContactTypeListItem}
 									key={option.value}
-									value={option.value}
-								>
+									value={option.value}>
 									{option.label}
 								</option>
 							))}
@@ -431,8 +425,7 @@ export const FormProfileEdit: FC<FormProfileEditProps> = ({
 					onClick={handleAddContact}
 					variant="secondary"
 					width="regular"
-					IconLeft={Plus}
-				>
+					IconLeft={Plus}>
 					Добавить
 				</MainButton>
 				<div className={styles.fields__datePickerWrapper}>
@@ -480,8 +473,7 @@ export const FormProfileEdit: FC<FormProfileEditProps> = ({
 						// type="button"
 						variant={'primary'}
 						width={'regular'}
-						disabled={!isReadySubmit}
-					>
+						disabled={!isReadySubmit}>
 						Сохранить
 					</MainButton>
 				</div>
