@@ -2,7 +2,6 @@
 
 import './globals.css';
 import React from 'react';
-import { AntdRegistry } from '@ant-design/nextjs-registry';
 import { MainLayout } from '@/shared/layouts';
 import { Provider } from 'react-redux';
 import { store } from '@/store/store';
@@ -16,9 +15,7 @@ const RootLayout = ({
 		<html lang="ru">
 			<body>
 				<Provider store={store}>
-					<AntdRegistry>
-						<MainLayout>{children}</MainLayout>
-					</AntdRegistry>
+					<MainLayout>{children}</MainLayout>
 				</Provider>
 			</body>
 		</html>
