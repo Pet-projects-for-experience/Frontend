@@ -8,27 +8,29 @@ export const specialistsApi = createApi({
 	}),
 	endpoints: (builder) => ({
 		getAllSpecialistsData: builder.query({
-			query: ({
-				currentPage,
-				readyToParticipate,
-				level,
-				specialization,
-				skills,
-			}) => {
+			query: ({ currentPage, filters }) => {
+				const query: Array<string> = [];
+
+				if (filters.status !== undefined) {
+					query.push(`ready_to_participate=${filters.status}`);
+				}
+				if (filters.specialists !== undefined) {
+					query.push(`level=${filters.specialists}`);
+				}
+				if (filters.specialty !== undefined) {
+					query.push(
+						filters.specialty.map((item: number) => `&specialization=${item}`)
+					);
+				}
+				if (filters.skills !== undefined) {
+					query.push(filters.skills.map((item: number) => `&skills=${item}`));
+				}
+				if (filters.userSearch !== undefined) {
+					query.push(`&user_search=${filters.userSearch}`);
+				}
+
 				return {
-					url: `/profiles/?page=${currentPage}
-				${
-					readyToParticipate !== undefined
-						? `&ready_to_participate=${readyToParticipate}`
-						: ''
-				}
-				${level !== undefined ? `&level=${level}` : ''}
-				${
-					specialization !== undefined
-						? specialization.map((item) => `&specialization=${item}`)
-						: ''
-				}
-				${skills !== undefined ? skills.map((item) => `&skills=${item}`) : ''}`,
+					url: `/profiles/${query.length === 0 ? `?page=${currentPage}` : `?${query.join('&')}`}`,
 					method: 'GET',
 					providerTags: 'allSpecialist',
 				};
