@@ -54,11 +54,18 @@ export const Specialists = () => {
 		if (selectedOption !== undefined) {
 			selectedOptionValue = selectedOption.value === 1 ? true : false;
 		}
-		setFilters({
-			...filters,
+		setFilters((prev) => ({
+			...prev,
 			status: selectedOptionValue,
-		});
+		}));
+		setCurrentPage(1);
 		console.info('selected status: ', selectedOption);
+	};
+
+	const handleSearchChange = (query: string) => {
+		setFilters((prev) => ({ ...prev, searchQuery: query }));
+		setCurrentPage(1);
+		console.log(query);
 	};
 
 	// const handleQualificationChange = (selectedOptions: (string | Option)[]) => {
@@ -109,7 +116,7 @@ export const Specialists = () => {
 					<h1 className={styles.specialists__title}>Специалисты</h1>
 					<div className={styles.specialists__item}>
 						<div className={styles.specialists__inputSearch}>
-							<InputSearch search={() => {}} onChange={() => {}} />
+							<InputSearch search={handleSearchChange} />
 						</div>
 						<button
 							className={styles.specialists__filterButton}

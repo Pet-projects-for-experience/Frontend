@@ -18,19 +18,27 @@ export const specialistsApi = createApi({
 					query.push(`level=${filters.specialists}`);
 				}
 				if (filters.specialty !== undefined) {
-					query.push(
-						filters.specialty.map((item: number) => `&specialization=${item}`)
-					);
+					const specialtyArray = filters.specialty
+						.map((item: number) => `specialization=${item}`)
+						.join('&');
+					query.push(specialtyArray);
 				}
 				if (filters.skills !== undefined) {
-					query.push(filters.skills.map((item: number) => `&skills=${item}`));
+					const skillsArray = filters.skills
+						.map((item: number) => `skills=${item}`)
+						.join('&');
+					query.push(skillsArray);
 				}
-				if (filters.userSearch !== undefined) {
-					query.push(`&user_search=${filters.userSearch}`);
+				if (
+					filters.searchQuery !== undefined &&
+					filters.searchQuery.length > 0
+				) {
+					query.push(`user_search=${filters.searchQuery}`);
 				}
-
+				const url = `/profiles/?page=${currentPage}${query.length > 0 ? `&${query.join('&')}` : ''}`;
+				console.log(url);
 				return {
-					url: `/profiles/${query.length === 0 ? `?page=${currentPage}` : `?${query.join('&')}`}`,
+					url,
 					method: 'GET',
 					providerTags: 'allSpecialist',
 				};
