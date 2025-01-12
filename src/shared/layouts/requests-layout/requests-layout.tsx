@@ -11,7 +11,7 @@ export const RequestsLayout = ({
 }) => {
 	return (
 		<>
-			<ProfileLink title="Избранные" />
+			<ProfileLink title="Заявки" />
 			<div className={styles.requests}>
 				<NavigationMenu
 					linksArray={[

@@ -28,8 +28,8 @@ export const ProfileRequestsOrganizers = () => {
 		<section className={styles.container}>
 			{isLoading ? (
 				<Loader />
-			) : allRequestsOwner.results.length > 0 ? (
-				allRequestsOwner.results.map((card: RequestOrganizerCardType) => (
+			) : allRequestsOwner?.results.length > 0 ? (
+				allRequestsOwner?.results.map((card: RequestOrganizerCardType) => (
 					<RequestOrganizerCard
 						key={card.id}
 						cover_letter={card.cover_letter}

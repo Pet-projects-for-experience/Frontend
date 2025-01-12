@@ -33,14 +33,24 @@
 	}
 	&__person {
 		display: flex;
-		gap: 16px;
+		justify-content: space-between;
 		border-bottom: 1px solid $--Foreground-subtitle;
 		padding-bottom: 16px;
 		margin-bottom: 16px;
 		margin-top: 24px;
-
+	}
+	&__personData {
+		display: flex;
+		gap: 16px;
 		position: relative;
 	}
+	&__personLink {
+		text-decoration: none;
+		width: 100%;
+		height: 100%;
+		position: absolute;
+	}
+
 	&__personImage {
 		width: 92px;
 		height: 92px;
@@ -105,9 +115,6 @@
 		border: 1px solid $--border-default;
 	}
 	&__likeContainer {
-		position: absolute;
-		top: 0;
-		right: 0;
 		border-radius: 50%;
 		//	border: 1px solid $--border-default;
 		width: 40px;
@@ -116,6 +123,43 @@
 		justify-content: center;
 		align-items: center;
 	}
+}
+
+.hint {
+	position: absolute;
+	bottom: -60px;
+	left: 0;
+	visibility: hidden;
+	opacity: 0;
+	transition:
+		opacity 0.2s,
+		visibility 0.2s;
+}
+.hintOverlay {
+	min-width: 120px;
+	background-color: $--bg-card-hover;
+	padding: 16px;
+	border-radius: 12px;
+	position: relative;
+}
+.hintImage {
+	position: absolute;
+	top: -17px;
+	left: 40%;
+	width: 40px;
+	height: 20px;
+}
+.hintSpan {
+	font-family: $--open-sans-font;
+	font-weight: 400;
+	line-height: 19px;
+	font-size: 14px;
+	letter-spacing: 0.25px;
+	color: $--Foreground-default;
+}
+.info__personData:hover .hint {
+	visibility: visible;
+	opacity: 100%;
 }
 
 .menu {
@@ -188,11 +232,6 @@
 	}
 }
 @media screen and (max-width: 480px) {
-	.info {
-		&__person {
-			flex-direction: column;
-		}
-	}
 	.buttons {
 		flex-direction: column;
 	}
