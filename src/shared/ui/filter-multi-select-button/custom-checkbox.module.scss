@@ -1,0 +1,71 @@
+.customCheckbox {
+	position: absolute;
+	z-index: -1;
+	opacity: 0;
+}
+
+.customCheckbox + label {
+	display: inline-flex;
+	align-items: center;
+	user-select: none;
+}
+
+.customCheckbox + label::before {
+	content: '';
+	display: inline-block;
+	width: 1em;
+	height: 1em;
+	flex-shrink: 0;
+	flex-grow: 0;
+	border: 2px solid #e2e8f0;
+	border-radius: 0.25em;
+	margin-right: 0.5em;
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-color: white;
+}
+
+.customCheckbox:checked + label::before {
+	border-color: #5677fc;
+	background-color: #5677fc;
+	background-image: url(../../assets/icons/checkmark-icon.svg);
+}
+
+/* стили при наведении курсора на checkbox */
+.customCheckbox:not(:disabled):not(:checked) + label:hover::before {
+	border-color: #afbffe;
+}
+
+/* стили для активного состояния чекбокса (при нажатии на него) */
+.customCheckbox:not(:disabled):active + label::before {
+	background-color: #afbffe;
+	border-color: #afbffe;
+}
+
+/* стили для чекбокса, находящегося в фокусе */
+.customCheckbox:focus + label::before {
+	box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+/* стили для чекбокса, находящегося в фокусе и не находящегося в состоянии checked */
+.customCheckbox:focus:not(:checked) + label::before {
+	border-color: #afbffe;
+}
+
+/* стили для чекбокса, находящегося в состоянии disabled */
+.customCheckbox:disabled + label::before {
+	background-color: #e9ecef;
+}
+
+.disabledOption {
+	color: #ccc;
+	cursor: not-allowed;
+}
+
+.iconInformation {
+	display: none;
+
+	@media screen and (max-width: 1199px) {
+		display: flex;
+	}
+}

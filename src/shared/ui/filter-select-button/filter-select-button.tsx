@@ -15,16 +15,15 @@ export const FilterSelectButton: FC<FilterSelectButtonProps> = ({
 	const [selectedItem, setSelectedItem] = useState<Option | undefined>(value);
 	const containerRef = useRef<HTMLDivElement | null>(null);
 
+	const handleClickButton = () => {
+		setIsOpen((prev) => !prev);
+	};
 	const handleClickItem = (option: Option) => {
 		const newSelectedItem =
 			selectedItem && selectedItem.value === option.value ? undefined : option;
 		setSelectedItem(newSelectedItem);
 		onChange(newSelectedItem);
 		setIsOpen(false);
-	};
-
-	const handleClickButton = () => {
-		setIsOpen((prev) => !prev);
 	};
 
 	const handleClickOutside = (event: MouseEvent) => {

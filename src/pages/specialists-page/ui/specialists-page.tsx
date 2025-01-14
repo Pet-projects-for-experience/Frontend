@@ -3,7 +3,7 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { SpecialistCard } from '@/widgets/specialist-card';
 import { InputSearch } from '@/shared/ui/input-search/input-search';
 import { statusSpecialist } from '@/shared/constants/status-specialist/status-specialist';
-// import { qualification } from '@/shared/constants/qualification/qualification';
+import { qualification } from '@/shared/constants/qualification/qualification';
 // import { Tooltip } from '@/widgets/tooltip';
 // import { specialties } from '@/shared/constants/specialties/specialties';
 // import { skills } from '@/shared/constants/skills/skills';
@@ -20,6 +20,7 @@ import { SpecialistType } from './types';
 import { Loader } from '@/shared/ui';
 import { FilterSelectButton } from '@/shared/ui/filter-select-button/filter-select-button';
 import { Option } from '@/shared/ui/filter-select-button/type';
+import { FilterMultiSelectButton } from '@/shared/ui/filter-multi-select-button/filter-multi-select-button';
 
 export const Specialists = () => {
 	type Filters = {
@@ -49,6 +50,12 @@ export const Specialists = () => {
 		filters,
 	});
 
+	const handleSearchChange = (query: string) => {
+		setFilters((prev) => ({ ...prev, searchQuery: query }));
+		setCurrentPage(1);
+		console.log(query);
+	};
+
 	const handleStatusChange = (selectedOption: Option | undefined) => {
 		let selectedOptionValue = undefined;
 		if (selectedOption !== undefined) {
@@ -62,23 +69,17 @@ export const Specialists = () => {
 		console.info('selected status: ', selectedOption);
 	};
 
-	const handleSearchChange = (query: string) => {
-		setFilters((prev) => ({ ...prev, searchQuery: query }));
-		setCurrentPage(1);
-		console.log(query);
+	const handleQualificationChange = (selectedOptions: Option[] | undefined) => {
+		console.info('selected options: ', selectedOptions);
+		if (selectedOptions) {
+			const values = selectedOptions.map((option) => option.value);
+			setFilters({ ...filters, specialists: values });
+			console.info('selected levels: ', values);
+			// selectedOptions.forEach((element) => {
+			// 	console.log('label: ', element.label, 'value: ', element.value);
+			// });
+		}
 	};
-
-	// const handleQualificationChange = (selectedOptions: (string | Option)[]) => {
-	// 	// console.info('selected options: ', selectedOptions);
-	// 	if (selectedOptions) {
-	// 		const values = selectedOptions.map((option) => option.value);
-	// 		setFilters({ ...filters, specialists: values });
-	// 		console.info('selected levels: ', values);
-	// 		// selectedOptions.forEach((element) => {
-	// 		// 	console.log('label: ', element.label, 'value: ', element.value);
-	// 		// });
-	// 	}
-	// };
 
 	// const handleSpecialtiesChange = (selectedOptions: (string | Option)[]) => {
 	// 	if (selectedOptions) {
@@ -143,14 +144,16 @@ export const Specialists = () => {
 						label="Статус специалиста"
 						onChange={handleStatusChange}
 					/>
-
-					{/* <SingleSelectButton
-						name="select-status"
-						options={statusSpecialist}
-						buttonLabel="Статус специалиста"
-						// value={{ value: 'ready', label: 'Готов(а) к участию в проектах' }}
-						onChange={handleStatusChange}
+					<FilterMultiSelectButton
+						options={qualification}
+						value={filters.specialists?.map((item) => ({
+							value: item,
+							label: '',
+						}))}
+						label="Уровень квалификации"
+						onChange={handleQualificationChange}
 					/>
+					{/* 
 
 					<MultiSelectButton
 						name="select-months"

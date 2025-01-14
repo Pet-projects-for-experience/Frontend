@@ -15,7 +15,10 @@ export const specialistsApi = createApi({
 					query.push(`ready_to_participate=${filters.status}`);
 				}
 				if (filters.specialists !== undefined) {
-					query.push(`level=${filters.specialists}`);
+					const specialistsArray = filters.specialists
+						.map((item: number) => `level=${item}`)
+						.join('&');
+					query.push(specialistsArray);
 				}
 				if (filters.specialty !== undefined) {
 					const specialtyArray = filters.specialty

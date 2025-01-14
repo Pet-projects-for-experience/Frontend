@@ -6,6 +6,6 @@ export type FilterSelectButtonProps = {
 };
 
 export type Option = {
-	value: number | string;
+	value: number;
 	label: string;
 };
