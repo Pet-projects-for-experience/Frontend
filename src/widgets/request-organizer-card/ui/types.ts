@@ -26,5 +26,7 @@ export type RequestOrganizerCardType = HTMLAttributes<HTMLElement> & {
 		username: string;
 		user_id: number;
 	};
-	request_status?: string;
+	request_status?: string | number;
+    visible_status: number;
+    participation_request_id: number;
 };

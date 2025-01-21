@@ -9,7 +9,7 @@ import clsx from 'clsx';
 import { AvatarImage } from '@/entities/_avatar-image';
 import parse from 'html-react-parser';
 import { SpecialistsToFavoritesFeature } from '@/features';
-import { MainButton } from '@/shared/ui';
+import { AnswerRequestOrganizerFeature } from '@/features';
 import { RequestOrganizerCardType } from './types';
 import { Tooltip } from '@/shared/assets';
 import styles from './request-organizer-card.module.scss';
@@ -19,6 +19,9 @@ export const RequestOrganizerCard: FC<RequestOrganizerCardType> = ({
 	position,
 	project,
 	request_participants,
+	visible_status,
+	participation_request_id,
+	request_status,
 }) => {
 	const [isOpenMenu, setIsOpenMenu] = useState(false);
 
@@ -37,8 +40,7 @@ export const RequestOrganizerCard: FC<RequestOrganizerCardType> = ({
 								@{request_participants.username}
 							</p>
 						</div>
-						{/* Заменить на visible_status! */}
-						{request_participants.ready_to_participate === true ? (
+						{visible_status === 1 ? (
 							<Link
 								className={styles.info__personLink}
 								href={`/specialists/${request_participants.user_id}`}
@@ -78,14 +80,11 @@ export const RequestOrganizerCard: FC<RequestOrganizerCardType> = ({
 						<h4 className={styles.menuCover__text}>{parse(cover_letter)}</h4>
 					</div>
 				</div>
-				<div className={styles.buttons}>
-					<MainButton variant="primary" width="regular">
-						Принять
-					</MainButton>
-					<MainButton variant="secondary" width="regular">
-						Отклонить
-					</MainButton>
-				</div>
+				<AnswerRequestOrganizerFeature
+					id={participation_request_id}
+					participant_user_id={request_participants.user_id}
+					request_status={request_status as number}
+				/>
 			</div>
 		</article>
 	);

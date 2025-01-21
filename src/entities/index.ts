@@ -14,3 +14,4 @@ export { Pagination } from './pagination';
 export { ProjectFilter } from './project-filter/ui/project-filter';
 export { SideNav } from './side-nav';
 export { SpecialistsFilter } from './specialists-filter/ui/specialists-filter';
+export {AnswerRequestOrganizer} from './answer-request-organizer/ui/answer-request-organizer';

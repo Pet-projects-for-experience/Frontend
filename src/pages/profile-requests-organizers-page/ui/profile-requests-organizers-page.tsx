@@ -4,6 +4,7 @@ import { RequestOrganizerCard } from '@/widgets/request-organizer-card';
 import { useGetAllRequestsParticipationQuery } from '@/services/ProjectService';
 import { Loader } from '@/shared/ui';
 import { RequestOrganizerCardType } from '@/widgets/request-organizer-card/ui/types';
+import { Pagination } from '@/entities';
 import styles from './profile-requests-organizers-page.module.scss';
 
 export const ProfileRequestsOrganizers = () => {
@@ -12,9 +13,9 @@ export const ProfileRequestsOrganizers = () => {
 		role: string;
 		statusNumber: null | number;
 	};
-	//const pageSize = 7;
+	const pageSize = 7;
 
-	const [currentSettingsAllRequests /*setCurrentSettingsAllRequests*/] =
+	const [currentSettingsAllRequests, setCurrentSettingsAllRequests] =
 		useState<CurrentSettingsType>({
 			currentPage: 1,
 			role: 'owner',
@@ -36,6 +37,9 @@ export const ProfileRequestsOrganizers = () => {
 						request_participants={card.request_participants}
 						position={card.position}
 						project={card.project}
+						visible_status={card.visible_status}
+                        participation_request_id={card.participation_request_id}
+						
 					/>
 				))
 			) : (
@@ -46,6 +50,20 @@ export const ProfileRequestsOrganizers = () => {
 					</span>
 				</div>
 			)}
+			<div className={styles.pagination}>
+				<Pagination
+					onPageChange={(page) =>
+						setCurrentSettingsAllRequests({
+							currentPage: Number(page),
+							role: currentSettingsAllRequests.role,
+							statusNumber: currentSettingsAllRequests.statusNumber,
+						})
+					}
+					totalCount={allRequestsOwner && allRequestsOwner.count}
+					currentPage={currentSettingsAllRequests.currentPage}
+					pageSize={pageSize}
+				/>
+			</div>
 		</section>
 	);
 };

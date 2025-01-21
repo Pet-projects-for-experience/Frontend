@@ -203,11 +203,7 @@
 	height: 24px;
 	cursor: pointer;
 }
-.buttons {
-	margin-top: 24px;
-	display: flex;
-	gap: 16px;
-}
+
 
 @media screen and (max-width: 779px) {
 	.specialist {
@@ -229,10 +225,5 @@
 			width: 16px;
 			height: 16px;
 		}
-	}
-}
-@media screen and (max-width: 480px) {
-	.buttons {
-		flex-direction: column;
 	}
 }

@@ -139,7 +139,7 @@ export const ProjectCardDetailed: FC<ProjectCardDetailType> = ({
 										key={person.id}
 										id={person.user_id}
 										avatar={person.avatar}
-										visible_status={person.profession.visible_status}
+										visible_status={person.visible_status}
 									/>
 								);
 							})}

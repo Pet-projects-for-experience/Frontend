@@ -53,8 +53,8 @@ export type ProjectCardDetailType = HTMLAttributes<HTMLElement> & {
 				id: number;
 				speciality: string;
 				specialization: string;
-				visible_status: number;
 			};
+			visible_status: number;
 		},
 	];
 };
