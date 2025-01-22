@@ -3,6 +3,7 @@
 import React from 'react';
 import { AnswerRequestOrganizer } from '@/entities';
 import { useAnswerOrganizerOnRequestMutation } from '@/services/ProjectService';
+import { toaster } from '@/widgets/notification-toast';
 
 export const AnswerRequestOrganizerFeature = ({
 	id,
@@ -20,20 +21,38 @@ export const AnswerRequestOrganizerFeature = ({
 			answerOnRequest({ id, request_status: 2, participant_user_id })
 				.unwrap()
 				.then(() => {
-					console.log('успех');
+					toaster({
+						status: 'success',
+						title: 'Заявка принята',
+						subtitle: 'Участник приглашëн в проект',
+					});
 				})
 				.catch((error) => {
+					toaster({
+						status: 'error',
+						title: 'Ошибка отправки ответа',
+						subtitle: `${error.data?.already || 'Попробуй отправить ещё раз'}`,
+					});
 					console.log('errorCatch', error);
 				});
 		};
-		const handleAnswerOnRequestReject =
+	const handleAnswerOnRequestReject =
 		(/*{id, request_status}: {id: number, request_status: number}*/) => {
 			answerOnRequest({ id, request_status: 3, participant_user_id })
 				.unwrap()
 				.then(() => {
-					console.log('успех');
+					toaster({
+						status: 'success',
+						title: 'Заявка отклонена',
+						subtitle: 'Участник не присоединится к проекту',
+					});
 				})
 				.catch((error) => {
+					toaster({
+						status: 'error',
+						title: 'Ошибка отправки ответа',
+						subtitle: 'Попробуй отправить ещё раз',
+					});
 					console.log('errorCatch', error);
 				});
 		};
@@ -42,9 +61,7 @@ export const AnswerRequestOrganizerFeature = ({
 			handleAnswerAccept={handleAnswerOnRequestAccept}
 			handleAnswerReject={handleAnswerOnRequestReject}
 			id={id}
-			participant_user_id={
-				participant_user_id
-			} 
+			participant_user_id={participant_user_id}
 			request_status={request_status}
 		/>
 	);

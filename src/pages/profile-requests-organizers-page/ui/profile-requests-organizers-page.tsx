@@ -5,6 +5,7 @@ import { useGetAllRequestsParticipationQuery } from '@/services/ProjectService';
 import { Loader } from '@/shared/ui';
 import { RequestOrganizerCardType } from '@/widgets/request-organizer-card/ui/types';
 import { Pagination } from '@/entities';
+import { NotificationToastContainer } from '@/widgets/notification-toast';
 import styles from './profile-requests-organizers-page.module.scss';
 
 export const ProfileRequestsOrganizers = () => {
@@ -64,6 +65,7 @@ export const ProfileRequestsOrganizers = () => {
 					pageSize={pageSize}
 				/>
 			</div>
+			<NotificationToastContainer/>
 		</section>
 	);
 };
