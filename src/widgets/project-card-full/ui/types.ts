@@ -37,5 +37,5 @@ export type ProjectCardFullType = HTMLAttributes<HTMLElement> & {
 				is_required?: boolean;	
 		},
 	];
-
+	handleDeleteCard?: (arg: number) => void;
 };

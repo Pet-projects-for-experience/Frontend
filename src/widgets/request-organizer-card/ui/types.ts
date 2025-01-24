@@ -29,4 +29,5 @@ export type RequestOrganizerCardType = HTMLAttributes<HTMLElement> & {
 	request_status?: string | number;
     visible_status: number;
     participation_request_id: number;
+	handleDeleteCard: (arg: number) => void;
 };

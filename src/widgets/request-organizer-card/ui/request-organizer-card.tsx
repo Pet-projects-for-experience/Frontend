@@ -22,6 +22,7 @@ export const RequestOrganizerCard: FC<RequestOrganizerCardType> = ({
 	visible_status,
 	participation_request_id,
 	request_status,
+	handleDeleteCard,
 }) => {
 	const [isOpenMenu, setIsOpenMenu] = useState(false);
 
@@ -84,6 +85,7 @@ export const RequestOrganizerCard: FC<RequestOrganizerCardType> = ({
 					id={participation_request_id}
 					participant_user_id={request_participants.user_id}
 					request_status={request_status as number}
+					handleDeleteCard={handleDeleteCard}
 				/>
 			</div>
 		</article>

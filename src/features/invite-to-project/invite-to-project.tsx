@@ -67,7 +67,7 @@ export const InviteToProjectFeature = ({
 						toaster({
 							status: 'error',
 							title: 'Ошибка отправки',
-							subtitle: `${error.data?.unique_in_progress?.[0] || error.data?.cover_letter?.[0] || 'Попробуйте отправить ещё раз'}`,
+							subtitle: `${error.data?.unique_in_progress?.[0] || error.data?.cover_letter?.[0] || error.data?.project?.[0] || 'Попробуйте отправить ещё раз'}`,
 						});
 						console.log('errorCatch', error);
 					})

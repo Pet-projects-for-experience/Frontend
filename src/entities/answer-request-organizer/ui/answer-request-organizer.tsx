@@ -1,46 +1,29 @@
 /* eslint-disable camelcase */
 'use client';
-import React from 'react';
+import React, { FC } from 'react';
 import { MainButton } from '@/shared/ui';
+import { AnswerRequestOrganizerType } from './types';
 import styles from './answer-request-organizer.module.scss';
 
-export const AnswerRequestOrganizer = ({
+export const AnswerRequestOrganizer: FC<AnswerRequestOrganizerType> = ({
 	handleAnswerAccept,
 	handleAnswerReject,
 	id,
 	request_status,
 	participant_user_id,
-}: {
-	handleAnswerAccept: (arg: {
-		id: number;
-		request_status: number;
-		participant_user_id: number;
-	}) => void;
-	handleAnswerReject: (arg: {
-		id: number;
-		request_status: number;
-		participant_user_id: number;
-	}) => void;
-	id: number;
-	request_status: number;
-	participant_user_id: number;
 }) => {
+	const handleAccept = () => {
+		handleAnswerAccept({ id, request_status, participant_user_id });
+	};
+	const handleReject = () => {
+		handleAnswerReject({ id, request_status, participant_user_id });
+	};
 	return (
 		<div className={styles.buttons}>
-			<MainButton
-				variant="primary"
-				width="regular"
-				onClick={() =>
-					handleAnswerAccept({ id, request_status, participant_user_id })
-				}>
+			<MainButton variant="primary" width="regular" onClick={handleAccept}>
 				Принять
 			</MainButton>
-			<MainButton
-				variant="secondary"
-				width="regular"
-				onClick={() =>
-					handleAnswerReject({ id, request_status, participant_user_id })
-				}>
+			<MainButton variant="secondary" width="regular" onClick={handleReject}>
 				Отклонить
 			</MainButton>
 		</div>

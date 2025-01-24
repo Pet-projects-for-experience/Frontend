@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { RequestOrganizerCard } from '@/widgets/request-organizer-card';
 import { useGetAllRequestsParticipationQuery } from '@/services/ProjectService';
 import { Loader } from '@/shared/ui';
@@ -26,21 +26,35 @@ export const ProfileRequestsOrganizers = () => {
 	const { data: allRequestsOwner, isLoading } =
 		useGetAllRequestsParticipationQuery(currentSettingsAllRequests);
 
+	const [requests, setRequests] = useState<RequestOrganizerCardType[]>([]);
+
+	useEffect(() => {
+		if (allRequestsOwner?.results) {
+			setRequests(allRequestsOwner?.results);
+		}
+	}, [allRequestsOwner?.results]);
+
+	const handleDeleteCard = (id: number) => {
+		setRequests(
+			requests.filter((item) => item.participation_request_id !== id)
+		);
+	};
+
 	return (
 		<section className={styles.container}>
 			{isLoading ? (
 				<Loader />
-			) : allRequestsOwner?.results.length > 0 ? (
-				allRequestsOwner?.results.map((card: RequestOrganizerCardType) => (
+			) : requests?.length > 0 ? (
+				requests?.map((card: RequestOrganizerCardType) => (
 					<RequestOrganizerCard
-						key={card.id}
+						key={card.participation_request_id}
 						cover_letter={card.cover_letter}
 						request_participants={card.request_participants}
 						position={card.position}
 						project={card.project}
 						visible_status={card.visible_status}
-                        participation_request_id={card.participation_request_id}
-						
+						participation_request_id={card.participation_request_id}
+						handleDeleteCard={handleDeleteCard}
 					/>
 				))
 			) : (
@@ -65,7 +79,7 @@ export const ProfileRequestsOrganizers = () => {
 					pageSize={pageSize}
 				/>
 			</div>
-			<NotificationToastContainer/>
+			<NotificationToastContainer />
 		</section>
 	);
 };

@@ -38,4 +38,5 @@ export type LikeButtonType = {
 	variant: 'primary' | 'secondary' | 'trivial';
 	disabled?: boolean;
 	favorite: boolean;
+	handleDeleteCard?: (arg: number) => void;
 }
