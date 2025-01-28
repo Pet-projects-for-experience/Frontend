@@ -45,6 +45,7 @@ export const RequestOrganizerCard: FC<RequestOrganizerCardType> = ({
 							<Link
 								className={styles.info__personLink}
 								href={`/specialists/${request_participants.user_id}`}
+								target='_blank'
 							/>
 						) : (
 							<div className={styles.hint}>

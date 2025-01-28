@@ -79,6 +79,7 @@
 		font-size: 24px;
 		font-weight: 600;
 		line-height: 30px;
+		word-break: break-all;
 	}
 	&__icon {
 		fill: $--Colors-Pastel-Green;
@@ -89,6 +90,7 @@
 		font-weight: 700;
 		line-height: normal;
 		letter-spacing: 0.25px;
+		word-break: break-all
 	}
 	&__role {
 		@extend %baseText;
