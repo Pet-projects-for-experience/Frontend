@@ -1,15 +1,17 @@
+/* eslint-disable camelcase */
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { IProjectsRequests } from './models/IProjectsRequests';
 import { FavoriteProjectType } from './models/IFavoriteProject';
+import { AnswerOnRequestType } from './models/IAnswerOnRequest';
+
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 export const projectsApi = createApi({
 	reducerPath: 'projectsApi',
-	tagTypes: ['FavoritesProjects'],
 	baseQuery: fetchBaseQuery({
 		baseUrl: `https://${BASE_URL}/api/v1`,
 		prepareHeaders: async (headers) => {
-			const accessToken = localStorage.getItem('token');
+			const accessToken = localStorage.getItem('token'); 
 			if (accessToken) {
 				headers.set('Authorization', `Token ${accessToken}`);
 			}
@@ -34,7 +36,7 @@ export const projectsApi = createApi({
 				url: `/projects/?is_favorite=1&page=${currentPage}&search=${query}`,
 				method: 'GET',
 			}),
-			providesTags: ['FavoritesProjects'],
+			keepUnusedDataFor: 1,
 		}),
 		getProjectById: builder.query({
 			query: ({ id }) => ({
@@ -61,27 +63,39 @@ export const projectsApi = createApi({
 				method: 'DELETE',
 			}),
 		}),
-		requestParticipationInProjects: builder.mutation<IProjectsRequests,IProjectsRequests>({
+		requestParticipationInProjects: builder.mutation<IProjectsRequests, IProjectsRequests>({
 			query: (projects) => ({
 				url: `/projects/requests/`,
 				method: 'POST',
 				body: projects,
 			}),
 		}),
-		addFavoriteProject: builder.mutation<FavoriteProjectType,FavoriteProjectType>({
+		answerOrganizerOnRequest: builder.mutation<AnswerOnRequestType, AnswerOnRequestType> ({
+				query: ({
+					answer,
+					request_status,
+					id,
+					participant_user_id,
+				}
+			) => ({
+					url: `/projects/requests/${id}/${participant_user_id}/`,
+					method: 'PATCH',
+					body: { answer, request_status },
+				}),
+			}
+		),
+		addFavoriteProject: builder.mutation<FavoriteProjectType, FavoriteProjectType>({
 			query: (project) => ({
 				url: `/projects/${project.id}/favorite/`,
 				method: 'POST',
 				body: project,
 			}),
-			invalidatesTags: ['FavoritesProjects'],
 		}),
 		deleteFavoriteProject: builder.mutation({
 			query: (id) => ({
 				url: `/projects/${id}/favorite/`,
 				method: 'DELETE',
 			}),
-			invalidatesTags: ['FavoritesProjects'],
 		}),
 	}),
 });
@@ -96,4 +110,5 @@ export const {
 	useAddFavoriteProjectMutation,
 	useDeleteFavoriteProjectMutation,
 	useGetFavoriteProjectsQuery,
+	useAnswerOrganizerOnRequestMutation,
 } = projectsApi;

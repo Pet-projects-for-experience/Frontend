@@ -1,0 +1,231 @@
+@import '@/shared/style/variables.scss';
+
+%baseText {
+	color: $--Foreground-default;
+	font-family: $--open-sans-font;
+	margin: 0;
+	font-style: normal;
+}
+
+%secondaryText {
+	color: $--Foreground-muted;
+	font-family: $--open-sans-font;
+	margin: 0;
+	font-style: normal;
+}
+.specialist {
+	display: flex;
+	border-radius: 12px;
+	border: 1px solid $--border-default;
+	padding: 32px;
+
+	&__info {
+		display: flex;
+		flex-direction: column;
+		width: 100%;
+	}
+}
+.info {
+	&__link {
+		@extend %baseText;
+		width: 100%;
+		text-decoration: none;
+	}
+	&__person {
+		display: flex;
+		justify-content: space-between;
+		border-bottom: 1px solid $--Foreground-subtitle;
+		padding-bottom: 16px;
+		margin-bottom: 16px;
+		margin-top: 24px;
+	}
+	&__personData {
+		display: flex;
+		gap: 16px;
+		position: relative;
+	}
+	&__personLink {
+		text-decoration: none;
+		width: 100%;
+		height: 100%;
+		position: absolute;
+	}
+
+	&__personImage {
+		width: 92px;
+		height: 92px;
+	}
+	&__personDescription {
+		display: flex;
+		flex-direction: column;
+		gap: 8px;
+		flex-wrap: wrap;
+	}
+	&__personStatus {
+		display: flex;
+		gap: 8px;
+		align-items: center;
+	}
+	&__statusTitle {
+		@extend %baseText;
+		color: $--foreground-muted;
+		font-size: 14px;
+		font-weight: 400;
+		line-height: 19px;
+		letter-spacing: 0.25px;
+	}
+	&__name {
+		@extend %baseText;
+		font-size: 24px;
+		font-weight: 600;
+		line-height: 30px;
+		word-break: break-all;
+	}
+	&__icon {
+		fill: $--Colors-Pastel-Green;
+	}
+	&__nickname {
+		@extend %secondaryText;
+		font-size: 16px;
+		font-weight: 700;
+		line-height: normal;
+		letter-spacing: 0.25px;
+		word-break: break-all
+	}
+	&__role {
+		@extend %baseText;
+		font-size: 16px;
+		font-weight: 700;
+		line-height: normal;
+	}
+	&__skillsList {
+		display: flex;
+		flex-wrap: wrap;
+		padding: 12px 0 0;
+		margin: 0 0 16px 0;
+		list-style: none;
+	}
+	&__skill {
+		font-size: 14px;
+		font-weight: 400;
+		line-height: 19px;
+		letter-spacing: 0.25px;
+		margin: 8px 8px 0 0;
+		padding: 4px 13px;
+		white-space: nowrap;
+		border-radius: 20px;
+		border: 1px solid $--border-default;
+	}
+	&__likeContainer {
+		border-radius: 50%;
+		//	border: 1px solid $--border-default;
+		width: 40px;
+		height: 40px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+}
+
+.hint {
+	position: absolute;
+	bottom: -60px;
+	left: 0;
+	visibility: hidden;
+	opacity: 0;
+	transition:
+		opacity 0.2s,
+		visibility 0.2s;
+}
+.hintOverlay {
+	min-width: 120px;
+	background-color: $--bg-card-hover;
+	padding: 16px;
+	border-radius: 12px;
+	position: relative;
+}
+.hintImage {
+	position: absolute;
+	top: -17px;
+	left: 40%;
+	width: 40px;
+	height: 20px;
+}
+.hintSpan {
+	font-family: $--open-sans-font;
+	font-weight: 400;
+	line-height: 19px;
+	font-size: 14px;
+	letter-spacing: 0.25px;
+	color: $--Foreground-default;
+}
+.info__personData:hover .hint {
+	visibility: visible;
+	opacity: 100%;
+}
+
+.menu {
+	display: flex;
+	flex-direction: column;
+}
+.menuTitle {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+.titleCover {
+	font-size: 16px;
+	font-weight: 700;
+	line-height: normal;
+	letter-spacing: 0.25px;
+	margin: 0;
+	font-family: $--open-sans-font;
+}
+.menuCover {
+	display: none;
+	padding: 0;
+
+	&_visible {
+		display: flex;
+	}
+	&__text {
+		display: flex;
+		align-items: center;
+		font-size: 16px;
+		font-weight: 400;
+		line-height: 24pxpx;
+		letter-spacing: 0.25px;
+		margin: 0;
+		font-family: $--open-sans-font;
+		word-break: break-all;
+	}
+}
+.menuIcon {
+	width: 24px;
+	height: 24px;
+	cursor: pointer;
+}
+
+
+@media screen and (max-width: 779px) {
+	.specialist {
+		padding: 16px;
+	}
+	.info {
+		&__name {
+			font-size: 20px;
+			font-weight: 700;
+		}
+		&__person {
+			gap: 8px;
+		}
+		&__personImage {
+			width: 48px;
+			height: 48px;
+		}
+		&__likeIcon {
+			width: 16px;
+			height: 16px;
+		}
+	}
+}

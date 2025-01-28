@@ -30,6 +30,7 @@ export const ProjectCardFull: FC<ProjectCardFullType> = ({
 	telegram_nick,
 	email,
 	is_favorite,
+	handleDeleteCard,
 }) => {
 	const [isPopupOpen, setIsPopupOpen] = useState(false);
 	const isMobile = useMediaQuery('(max-width:779px)');
@@ -77,6 +78,7 @@ export const ProjectCardFull: FC<ProjectCardFullType> = ({
 						project_specialists={project_specialists}
 						project_status={project_status}
 						favorite={is_favorite}
+						handleDeleteCard={handleDeleteCard as () => void}
 					/>
 				</div>
 			</div>

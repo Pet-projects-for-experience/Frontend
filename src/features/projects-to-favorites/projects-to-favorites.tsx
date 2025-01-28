@@ -23,6 +23,7 @@ export const ProjectsToFavoritesFeature: FC<LikeButtonType> = ({
 	variant,
 	disabled,
 	favorite,
+	handleDeleteCard,
 }) => {
 	const [isActiveLike, setIsActiveLike] = useState(favorite);
 	const [isPopupOpen, setIsPopupOpen] = useState(false);
@@ -70,6 +71,9 @@ export const ProjectsToFavoritesFeature: FC<LikeButtonType> = ({
 			.unwrap()
 			.then(() => {
 				setIsActiveLike(false);
+				if (handleDeleteCard) {
+					handleDeleteCard(id);
+				}
 			})
 			.catch((error) => {
 				console.log('errorCatch', error);
